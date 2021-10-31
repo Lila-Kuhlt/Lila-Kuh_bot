@@ -1,7 +1,7 @@
 {
-  "name": "@elias.schaut/discord-bot-template",
-  "version": "1.0.0-beta.4",
-  "description": "A template for creating discord bots with node.js and discord.js! (See also https://github.com/EliasSchaut/Discord-Bot-Template)",
+  "name": "@lila.kuhlt/lila-kuh-bot",
+  "version": "1.0.0-beta.0",
+  "description": "Official bot of the Lila Pause",
   "main": "index.js",
   "devDependencies": {
     "@types/jest": "^23.3.12",
@@ -10,9 +10,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
-    "pm": "pm2 start index.js --name my-bot",
-    "pm-restart": "pm2 reload my-bot",
-    "pm-stop": "pm2 delete my-bot"
+    "pm": "pm2 start index.js --name lila-kuh-bot",
+    "pm-restart": "pm2 reload lila-kuh-bot",
+    "pm-stop": "pm2 delete lila-kuh-bot"
   },
   "dependencies": {
     "dayjs": "^1.10.7",
@@ -28,8 +28,8 @@
     "winston": "^3.3.3"
   },
   "keywords": [
-    "discord-bot-template"
+    "Lila Pause"
   ],
-  "author": "Elias Schaut",
+  "author": "Lila Kuhlt",
   "license": "MIT"
 }
