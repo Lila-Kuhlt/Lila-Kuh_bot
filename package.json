@@ -3,6 +3,10 @@
   "version": "1.0.0-beta.0",
   "description": "Official bot of the Lila Pause",
   "main": "index.js",
+  "devDependencies": {
+    "@types/jest": "^23.3.12",
+    "jest": "^27.0.6"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",

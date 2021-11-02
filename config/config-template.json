@@ -1,18 +1,18 @@
 {
-  "prefix": "<YOUR_PREFIX>",
-  "client_id": "<YOUR_CLIENT_ID>",
-  "token": "<YOUR_TOKEN>",
-  "enable_prefix_change": true,
+  "prefix": "-",
+  "client_id": "",
+  "token": "",
+  "enable_prefix_change": false,
 
   "enable_logging": true,
   "log_file_name": "combined.log",
 
-  "role_ids_admin": [ "" ],
-  "user_ids_admin": [ "" ],
+  "role_ids_admin": [ "864101464293244948" ],
+  "user_ids_admin": [ "501805867369496576" ],
 
   "enable_activity": true,
   "activity": {
-    "name": "<prefix>help",
+    "name": "-help",
     "type": "PLAYING"
   },
 
@@ -27,7 +27,7 @@
     "avatar_url": ""
   },
 
-  "default_lang": "en",
+  "default_lang": "de",
   "enable_lang_change": true,
   "lang_paths": {
     "de": "text_de.json",
