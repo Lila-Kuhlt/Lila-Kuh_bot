@@ -23,8 +23,9 @@
   },
 
   "embed": {
-    "color": "RANDOM",
-    "avatar_url": ""
+    "color": "PURPLE",
+    "author_name": "Lila Kuh",
+    "avatar_url": "https://cdn.discordapp.com/icons/690857486420541470/04bf514510b073a3ff01424cd1fa1f4d.webp"
   },
 
   "default_lang": "de",
