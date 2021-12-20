@@ -1,13 +1,20 @@
-const s = ""
-const dayjs = require('dayjs')
-const axios = require('axios')
 const { logger } = require("./logger")
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js')
+
+const dayjs = require('dayjs')
+const weekOfYear = require('dayjs/plugin/weekOfYear')
+dayjs.extend(weekOfYear)
+const axios = require('axios')
 
 const meal_api = {
     start: "https://openmensa.org/api/v2/canteens/31/days/",
     end: "/meals"
 }
+const sw_link = {
+    start: "https://www.sw-ka.de/de/essen/?kw=",
+    mid: "#fragment-c1-",
+}
+
 const mensa_channel_id = "695664840177352784"
 
 // ---------------------------------
@@ -33,6 +40,7 @@ async function send_fail(client) {
     const channel = client.channels.cache.get(mensa_channel_id)
     const embed = new MessageEmbed()
         .setColor(client.config.embed.color)
+        .setAuthor("Lila Pause", client.config.embed.avatar_url)
         .setTitle("Mensa Update Error")
         .setDescription("[Test 0]")
 
@@ -43,9 +51,10 @@ async function send_success(client, fields) {
     const channel = client.channels.cache.get(mensa_channel_id)
     const embed = new MessageEmbed()
         .setColor(client.config.embed.color)
+        .setAuthor(client.config.embed.author_name, client.config.embed.avatar_url)
         .setTitle("Mensa Update für " + get_date())
         .addFields(fields)
-        .setURL("https://www.sw-ka.de/de/essen/?kw=51#fragment-c1-2")
+        .setURL(get_sw_link())
 
     channel.send({ embeds: [embed] })
 }
@@ -92,12 +101,25 @@ function formatted_meals_to_fields(meals) {
 
 
 // ---------------------------------
-// API
+// Date
 // ---------------------------------
 function get_date() {
     return dayjs().add(1, 'day').format('YYYY-MM-DD')
 }
 
+function get_sw_link() {
+    const date = get_date()
+    const week = dayjs(date).subtract(7, 'day').week()
+    const day = dayjs(date).day()
+
+    return sw_link.start + week + sw_link.mid + day
+}
+// ---------------------------------
+
+
+// ---------------------------------
+// API
+// ---------------------------------
 function get_meal_api_link() {
     return meal_api.start + get_date() + meal_api.end
 }
@@ -116,3 +138,5 @@ async function get_meal_json(api_link) {
 // ---------------------------------
 
 module.exports = { post_mensa_plan }
+
+get_sw_link()
