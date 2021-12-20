@@ -42,7 +42,8 @@ async function send_fail(client) {
         .setColor(client.config.embed.color)
         .setAuthor("Lila Pause", client.config.embed.avatar_url)
         .setTitle("Mensa Update Error")
-        .setDescription("[Test 0]")
+        .setDescription("Keine Mensa Daten für heute :(")
+        .setFooter("Update immer So-Do um 15:00 Uhr für den Folgetag!")
 
     channel.send({ embeds: [embed] })
 }
@@ -55,6 +56,7 @@ async function send_success(client, fields) {
         .setTitle("Mensa Update für " + get_date())
         .addFields(fields)
         .setURL(get_sw_link())
+        .setFooter("Update immer So-Do um 15:00 Uhr für den Folgetag!")
 
     channel.send({ embeds: [embed] })
 }
@@ -138,5 +140,3 @@ async function get_meal_json(api_link) {
 // ---------------------------------
 
 module.exports = { post_mensa_plan }
-
-get_sw_link()

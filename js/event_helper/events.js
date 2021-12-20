@@ -19,8 +19,7 @@ async function event_create(msg) {
 // Inits
 // ----------------------------------
 function init_mensa_event(client) {
-    //schedule.scheduleJob('0 0 15 * * 0-4', mensa_event(client)) // Mo-Fr at 15:00 pm
-    mensa_event(client)
+    schedule.scheduleJob('0 0 15 * * 0-4', mensa_event(client)) // So-Do at 15:00 pm
 }
 // ----------------------------------
 
