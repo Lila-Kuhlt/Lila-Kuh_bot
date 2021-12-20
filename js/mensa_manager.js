@@ -1,5 +1,6 @@
 const { logger } = require("./logger")
 const { MessageEmbed } = require('discord.js')
+const mensa_channel_id = require('../config/config.json').mensa_channel_id
 
 const dayjs = require('dayjs')
 const weekOfYear = require('dayjs/plugin/weekOfYear')
@@ -14,8 +15,6 @@ const sw_link = {
     start: "https://www.sw-ka.de/de/essen/?kw=",
     mid: "#fragment-c1-",
 }
-
-const mensa_channel_id = "695664840177352784"
 
 // ---------------------------------
 // Export
