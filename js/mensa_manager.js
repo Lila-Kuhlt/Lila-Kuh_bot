@@ -11,8 +11,8 @@ const meal_api = {
     end: "/meals"
 }
 const sw_link = {
-    start: "https://www.sw-ka.de/de/essen/?kw=",
-    mid: "#fragment-c1-",
+    start: "https://www.sw-ka.de/de/essen/?d=",
+    end: "#fragment-c1-1",
 }
 
 // ---------------------------------
@@ -108,11 +108,7 @@ function get_date() {
 }
 
 function get_sw_link() {
-    const date = get_date()
-    const week = dayjs(date).subtract(7, 'day').week()
-    const day = dayjs(date).day()
-
-    return sw_link.start + week + sw_link.mid + day
+    return sw_link.start + get_date() + sw_link.end
 }
 // ---------------------------------
 
