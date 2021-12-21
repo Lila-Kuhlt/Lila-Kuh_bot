@@ -28,7 +28,9 @@ async function get_prefix(msg) {
 }
 
 function get_command_name_and_args(msg, prefix) {
-    const args = msg.content.slice(prefix.length).trim().split(/ +/)
+    const content = msg.content.slice(prefix.length).trim()
+
+    const args = content.match(/\w+|"[^"]+"/g)
     const command_name = args.shift().toLowerCase()
     return [command_name, args]
 }
