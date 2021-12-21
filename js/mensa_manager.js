@@ -87,8 +87,17 @@ function formatted_meals_to_fields(meals) {
     for (const category of Object.keys(meals)) {
         let field_values = []
         for (const value of meals[category]) {
-            const price = (value.price === null) ? 0.0 : value.price
-            field_values.push(`${value.name} (${price}€)`)
+            if (value.price === null) {
+                field_values.push(`${value.name}`)
+            } else {
+                if (/\d+\.\d\d/.test(value.price)) {
+                    field_values.push(`${value.name} (${value.price}€)`)
+                } else if (/\d+\.\d/.test(value.price)) {
+                    field_values.push(`${value.name} (${value.price}0€)`)
+                } else {
+                    field_values.push(`${value.name} (${value.price}€)`)
+                }
+            }
         }
         if (field_values.length === 0) continue
 
