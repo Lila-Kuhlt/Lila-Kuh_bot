@@ -31,6 +31,10 @@ function get_command_name_and_args(msg, prefix) {
     const content = msg.content.slice(prefix.length).trim()
 
     const args = content.match(/\w+|"[^"]+"/g)
+    for (let i = 0; i < args.length; i++) {
+        if (args[i].startsWith('"')) args[i] = args[i].slice(1)
+        if (args[i].endsWith('"')) args[i] = args[i].slice(0, args[i].length - 1)
+    }
     const command_name = args.shift().toLowerCase()
     return [command_name, args]
 }
