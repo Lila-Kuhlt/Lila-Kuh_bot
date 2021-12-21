@@ -1,11 +1,13 @@
+const { get_text: gt } = require("../../lang/lang_helper")
+const s = "commands.poll_edit."
+
 module.exports = {
     name: 'poll_edit',
-    description: '',
+    description: async function (msg) { return await gt(msg, s + "help") },
     aliases: ['pe', 'polle', 'polledit'],
     args_needed: true,
     args_min_length: 2,
-    usage: '[poll_msg_id] [question] [option1] [option2] ...',
-    need_permission: ['MANAGE_MESSAGES', 'ADD_REACTIONS', 'SEND_MESSAGES'],
+    usage: async function (msg) { return await gt(msg, s + "usage") },    need_permission: ['MANAGE_MESSAGES', 'ADD_REACTIONS', 'SEND_MESSAGES'],
     disabled: false,
     enable_slash: true,
     async execute(msg, args) {

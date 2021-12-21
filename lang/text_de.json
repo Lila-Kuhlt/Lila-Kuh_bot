@@ -84,6 +84,22 @@
       "too_long": "Der übergebene Prefix ist zu lang!",
       "get": "Der Prefix dieses Servers ist: %0",
       "set": "Der Prefix dieses Server wurde gesetzt auf: %0"
+    },
+    "poll": {
+      "help": "",
+      "usage": ""
+    },
+    "poll_private": {
+      "help": "",
+      "usage": ""
+    },
+    "poll_edit": {
+      "help": "",
+      "usage": ""
+    },
+    "poll_vote": {
+      "help": "",
+      "usage": ""
     }
   }
 }
