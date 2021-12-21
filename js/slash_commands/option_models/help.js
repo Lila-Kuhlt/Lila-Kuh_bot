@@ -1,4 +1,4 @@
-lmodule.exports = [
+module.exports = [
     {
         "name": "command",
         "description": "information for the specific command",
