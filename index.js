@@ -38,6 +38,7 @@ client.events = require("./js/event_helper/events")
 client.mod_getter = require("./js/cmd_modificator_getter")
 client.output = require("./js/dc_output")
 client.mod_man = require("./js/cmd_modifications/mod_manager")
+client.mensa_man = require("./js/mensa_manager")
 
 // helper fields
 const commands_path = "./commands"
@@ -67,10 +68,8 @@ client.command_tree = command_tree
 // ---------------------------------
 // when the client is ready (bot is ready)
 client.once('ready', async () => {
-    let problem_free_set_up = true
-
     // set mods
-    problem_free_set_up = client.mod_man.init(client)
+    const problem_free_set_up = client.mod_man.init(client)
 
     // set activity
     if (client.config.enable_activity) {

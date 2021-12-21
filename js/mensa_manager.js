@@ -1,4 +1,3 @@
-const { logger } = require("./logger")
 const { MessageEmbed } = require('discord.js')
 const mensa_channel_id = require('../config/config.json').mensa_channel_id
 
@@ -20,7 +19,7 @@ const sw_link = {
 // Export
 // ---------------------------------
 async function post_mensa_plan(client) {
-    const data = await get_meal_json(get_meal_api_link())
+    const data = await get_meal_json(client, get_meal_api_link())
 
     if (data === null) send_fail(client)
     else {
@@ -125,13 +124,13 @@ function get_meal_api_link() {
     return meal_api.start + get_date() + meal_api.end
 }
 
-async function get_meal_json(api_link) {
+async function get_meal_json(client, api_link) {
     let response
 
     try {
         response = await axios.get(api_link)
     } catch (error) {
-        logger.log("error", error)
+        client.logger.log("error", error)
     }
 
     return (response === undefined) ? null : response.data

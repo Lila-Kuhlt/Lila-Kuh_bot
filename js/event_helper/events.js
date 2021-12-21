@@ -19,7 +19,9 @@ async function event_create(msg) {
 // Inits
 // ----------------------------------
 function init_mensa_event(client) {
-    schedule.scheduleJob('0 0 15 * * 0-4', mensa_event(client)) // So-Do at 15:00 pm
+    schedule.scheduleJob('0 0 15 * * 0-4', function () {
+        mensa_event(client)
+    }) // So-Do at 15:00 pm
 }
 // ----------------------------------
 
@@ -28,7 +30,7 @@ function init_mensa_event(client) {
 // Events
 // ----------------------------------
 function mensa_event(client) {
-    return require("../mensa_manager").post_mensa_plan(client)
+    return client.mensa_man.post_mensa_plan(client)
 }
 // ----------------------------------
 
