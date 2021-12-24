@@ -114,4 +114,45 @@ async function set_lang(msg, new_lang) {
 }
 // -----------------------------------
 
-module.exports = { add_user: add_user_lang, get_lang, set_lang, get_prefix, set_prefix }
+
+// -----------------------------------
+// Poll
+// -----------------------------------
+async function add_poll(msg) {
+    try {
+        await msg.client.DB.Poll.create({
+            poll_id: msg.id,
+            msg: msg.toString()
+        })
+        return true
+    } catch (e) {
+        msg.client.logger.log("error", `Could not add poll with poll_id ${poll_id} in guild ${msg.guild.name} in channel ${msg.channel.name} from ${msg.author.username} in database 'Poll' (id: ${msg.author.id})`)
+        return false
+    }
+}
+
+async function set_poll(poll_id, msg) {
+    const new_tag = await msg.client.DB.Poll.update({ msg: msg.toString() }, { where: { poll_id: poll_id } })
+
+    if (new_tag) return true
+    else {
+        msg.client.logger.log("error", `Could not set msg with poll_id ${poll_id} in guild ${msg.guild.name} in channel ${msg.channel.name} from ${msg.author.username} in database 'Poll' (id: ${msg.author.id})`)
+        return false
+    }
+}
+
+async function get_poll(msg, poll_id) {
+    const tag = await msg.client.DB.Poll.findOne({ where: { poll_id: poll_id } })
+
+    if (tag) {
+        return JSON.parse(tag.msg)
+
+    } else {
+        msg.client.logger.log("info",`user ${msg.author.username} search non existent poll_id ${poll_id} in database 'Poll' (id: ${msg.author.id})'`)
+        return null
+    }
+}
+// -----------------------------------
+
+
+module.exports = { add_user: add_user_lang, get_lang, set_lang, get_prefix, set_prefix, get_poll, set_poll, add_poll }
