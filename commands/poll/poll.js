@@ -37,6 +37,7 @@ module.exports = {
 
         const new_msg = await msg.client.output.send(msg, {embeds: [embed]})
         this.react(new_msg, emojis)
+        await this.add_poll_to_db(new_msg)
         return new_msg
     },
     emojis: ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹', '🇺', '🇻', '🇼', '🇽', '🇾', '🇿'],
@@ -53,5 +54,8 @@ module.exports = {
         for (let i = 0; i < emojis.length; i++) {
             msg.react(this.emojis[i])
         }
+    },
+    async add_poll_to_db(new_msg) {
+        await new_msg.client.db_helper.add_poll(new_msg)
     }
 };
