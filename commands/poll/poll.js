@@ -18,15 +18,25 @@ module.exports = {
     need_permission: ['SEND_MESSAGES', 'ADD_REACTIONS'],
     disabled: false,
     enable_slash: true,
-    async execute(msg, args) {
+    async execute(msg, args, is_private) {
         const title = args.shift()
         const options = args
-
         const emojis = this.generate_emoji(options.length)
+
         const embed = this.generate_embed(msg, title, options, emojis)
-        const new_msg = await msg.client.output.send(msg, {embeds: [embed]})
-        this.react(new_msg, emojis)
-        await this.add_poll_to_db(new_msg)
+        let new_msg = await msg.client.output.send(msg, {embeds: [embed]})
+
+        if (is_private) {
+            embed.setFooter("This is a private voting. Use the **vote** command in your dm's\npoll_id: " + new_msg.id)
+            new_msg = await msg.client.output.edit(new_msg, {embeds: [embed]})
+            await this.add_poll_to_db(new_msg, true)
+
+        } else {
+            embed.setFooter("poll_id: " + new_msg.id)
+            new_msg = await msg.client.output.edit(new_msg, {embeds: [embed]})
+            await this.react(new_msg, emojis)
+            await this.add_poll_to_db(new_msg, false)
+        }
     },
     emojis: ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹', '🇺', '🇻', '🇼', '🇽', '🇾', '🇿'],
     generate_embed(msg, title, options, emojis) {

@@ -118,12 +118,13 @@ async function set_lang(msg, new_lang) {
 // -----------------------------------
 // Poll
 // -----------------------------------
-async function add_poll(msg) {
+async function add_poll(msg, is_private) {
     try {
         await msg.client.DB.Poll.create({
             poll_id: msg.id,
             guild_id: msg.guildId,
-            channel_id: msg.channelId
+            channel_id: msg.channelId,
+            private: is_private
         })
         return true
     } catch (e) {

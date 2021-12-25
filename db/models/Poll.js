@@ -6,6 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         guild_id: Sequelize.STRING,
         channel_id: Sequelize.STRING,
+        private: Sequelize.BOOLEAN
     }, {
         timestamp: false
     })

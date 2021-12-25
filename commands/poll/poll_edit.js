@@ -38,6 +38,8 @@ module.exports = {
         const options = args
         const emojis = poll_cmd.generate_emoji(options.length)
         const new_embed = poll_cmd.generate_embed(msg, title, options, emojis)
+        new_embed.setFooter("poll_id: " + poll_id)
         msg.client.output.edit(old_msg, { embeds: [new_embed] })
+        msg.client.output.send(msg, "success")
     },
 };
