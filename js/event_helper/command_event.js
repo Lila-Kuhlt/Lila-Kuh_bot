@@ -30,7 +30,7 @@ async function get_prefix(msg) {
 function get_command_name_and_args(msg, prefix) {
     const content = msg.content.slice(prefix.length).trim()
 
-    const args = content.match(/[\wäöüß:]+|"[^"]+"/g)
+    const args = content.match(/"[^"]+"|[^\s]+/g)
     for (let i = 0; i < args.length; i++) {
         if (args[i].startsWith('"')) args[i] = args[i].slice(1)
         if (args[i].endsWith('"')) args[i] = args[i].slice(0, args[i].length - 1)
