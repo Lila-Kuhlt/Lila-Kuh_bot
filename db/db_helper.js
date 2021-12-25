@@ -122,17 +122,22 @@ async function add_poll(msg) {
     try {
         await msg.client.DB.Poll.create({
             poll_id: msg.id,
-            msg: msg.toString()
+            guild_id: msg.guildId,
+            channel_id: msg.channelId
         })
         return true
     } catch (e) {
-        msg.client.logger.log("error", `Could not add poll with poll_id ${poll_id} in guild ${msg.guild.name} in channel ${msg.channel.name} from ${msg.author.username} in database 'Poll' (id: ${msg.author.id})`)
+        msg.client.logger.log("error", `Could not add poll with poll_id ${msg.id} in guild ${msg.guild.name} in channel ${msg.channel.name} from ${msg.author.username} in database 'Poll' (id: ${msg.author.id})`)
+        msg.client.logger.log("error", e)
         return false
     }
 }
 
 async function set_poll(poll_id, msg) {
-    const new_tag = await msg.client.DB.Poll.update({ msg: msg.toString() }, { where: { poll_id: poll_id } })
+    const new_tag = await msg.client.DB.Poll.update({
+        guild_id: msg.guildId,
+        channel_id: msg.channelId
+    }, { where: { poll_id: poll_id } })
 
     if (new_tag) return true
     else {
@@ -145,7 +150,7 @@ async function get_poll(msg, poll_id) {
     const tag = await msg.client.DB.Poll.findOne({ where: { poll_id: poll_id } })
 
     if (tag) {
-        return JSON.parse(tag.msg)
+        return tag
 
     } else {
         msg.client.logger.log("info",`user ${msg.author.username} search non existent poll_id ${poll_id} in database 'Poll' (id: ${msg.author.id})'`)

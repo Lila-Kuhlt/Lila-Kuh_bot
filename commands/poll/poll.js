@@ -12,7 +12,7 @@ module.exports = {
     aliases: ['p'],
     args_needed: true,
     args_min_length: 2,
-    args_max_length: 20,
+    args_max_length: 21,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     guild_only: true,
     need_permission: ['SEND_MESSAGES', 'ADD_REACTIONS'],
@@ -21,26 +21,27 @@ module.exports = {
     async execute(msg, args) {
         const title = args.shift()
         const options = args
-        const emojis = this.generate_emoji(options.length)
 
+        const emojis = this.generate_emoji(options.length)
+        const embed = this.generate_embed(msg, title, options, emojis)
+        const new_msg = await msg.client.output.send(msg, {embeds: [embed]})
+        this.react(new_msg, emojis)
+        await this.add_poll_to_db(new_msg)
+    },
+    emojis: ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹', '🇺', '🇻', '🇼', '🇽', '🇾', '🇿'],
+    generate_embed(msg, title, options, emojis) {
         emojis.map(function(emoji, index) {
             return [emoji + " " + options[index]];
         }).join("\n")
 
-        const embed = new MessageEmbed()
+        return new MessageEmbed()
             .setColor(msg.client.config.embed.color)
             .setAuthor(msg.client.config.embed.author_name, msg.client.config.embed.avatar_url)
             .setTitle(title)
             .addField("Options", emojis.map(function(emoji, index) {
                 return [emoji + " " + options[index]];
             }).join("\n"))
-
-        const new_msg = await msg.client.output.send(msg, {embeds: [embed]})
-        this.react(new_msg, emojis)
-        await this.add_poll_to_db(new_msg)
-        return new_msg
     },
-    emojis: ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹', '🇺', '🇻', '🇼', '🇽', '🇾', '🇿'],
     generate_emoji(count) {
         const emojis = []
         let char_counter = 'a'
