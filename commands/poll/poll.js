@@ -28,6 +28,7 @@ module.exports = {
 
         if (is_private) {
             embed.setFooter("This is a private voting. Use the **vote** command in your dm's\npoll_id: " + new_msg.id)
+            embed.addField("Score", new Array(options.length).fill("0").join("\n"), true)
             new_msg = await msg.client.output.edit(new_msg, {embeds: [embed]})
             await this.add_poll_to_db(new_msg, true)
 
@@ -50,7 +51,7 @@ module.exports = {
             .setTitle(title)
             .addField("Options", emojis.map(function(emoji, index) {
                 return [emoji + " " + options[index]];
-            }).join("\n"))
+            }).join("\n"), true)
     },
     generate_emoji(count) {
         const emojis = []
