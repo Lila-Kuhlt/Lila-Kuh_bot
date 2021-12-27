@@ -15,19 +15,19 @@ module.exports = {
     enable_slash: true,
     async execute(msg, args) {
         const poll_id = args.shift()
-        const old_poll = await msg.client.db_helper.get_poll(msg, poll_id)
+        const poll_tag = await msg.client.db_helper.get_poll(msg, poll_id)
 
-        if (old_poll === null) {
+        if (poll_tag === null) {
             msg.client.output.send(msg, "wrong poll id")
             return
-        } else if (old_poll.guild_id !== msg.guildId) {
+        } else if (poll_tag.guild_id !== msg.guildId) {
             msg.client.output.send(msg, "must execute in same guild")
             return
         }
 
         let old_msg
         try {
-            old_msg = await (await msg.guild.channels.fetch(old_poll.channel_id)).messages.fetch(poll_id)
+            old_msg = await (await msg.guild.channels.fetch(poll_tag.channel_id)).messages.fetch(poll_id)
         } catch (e) {
             msg.client.output.send(msg, "cannot access message")
             msg.client.logger.log("warn", e)
@@ -38,7 +38,15 @@ module.exports = {
         const options = args
         const emojis = poll_cmd.generate_emoji(options.length)
         const new_embed = poll_cmd.generate_embed(msg, title, options, emojis)
-        new_embed.setFooter("poll_id: " + poll_id)
+
+        if (poll_tag.private) {
+            new_embed.fields[1] = old_msg.embeds[0].fields[1]
+            new_embed.footer = old_msg.embeds[0].footer
+
+        } else {
+            new_embed.setFooter("poll_id: " + poll_id)
+        }
+
         msg.client.output.edit(old_msg, { embeds: [new_embed] })
         msg.client.output.send(msg, "success")
     },
