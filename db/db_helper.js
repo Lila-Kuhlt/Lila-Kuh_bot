@@ -124,25 +124,13 @@ async function add_poll(msg, is_private) {
             poll_id: msg.id,
             guild_id: msg.guildId,
             channel_id: msg.channelId,
+            author_id: msg.author.id,
             private: is_private
         })
         return true
     } catch (e) {
         msg.client.logger.log("error", `Could not add poll with poll_id ${msg.id} in guild ${msg.guild.name} in channel ${msg.channel.name} from ${msg.author.username} in database 'Poll' (id: ${msg.author.id})`)
         msg.client.logger.log("error", e)
-        return false
-    }
-}
-
-async function set_poll(poll_id, msg) {
-    const new_tag = await msg.client.DB.Poll.update({
-        guild_id: msg.guildId,
-        channel_id: msg.channelId
-    }, { where: { poll_id: poll_id } })
-
-    if (new_tag) return true
-    else {
-        msg.client.logger.log("error", `Could not set msg with poll_id ${poll_id} in guild ${msg.guild.name} in channel ${msg.channel.name} from ${msg.author.username} in database 'Poll' (id: ${msg.author.id})`)
         return false
     }
 }
@@ -161,4 +149,4 @@ async function get_poll(msg, poll_id) {
 // -----------------------------------
 
 
-module.exports = { add_user: add_user_lang, get_lang, set_lang, get_prefix, set_prefix, get_poll, set_poll, add_poll }
+module.exports = { add_user: add_user_lang, get_lang, set_lang, get_prefix, set_prefix, get_poll, add_poll }
