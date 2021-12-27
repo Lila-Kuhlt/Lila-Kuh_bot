@@ -71,7 +71,8 @@ module.exports = {
 
         // edit poll
         msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })
-        msg.client.output.send(msg, "success")
+        msg.client.output.send(msg, { embeds: [msg.client.commands.get('poll').generate_success_embed(old_msg.url)]})
+
     },
     increment_score(old_score, index) {
         const scores = old_score.split("\n")

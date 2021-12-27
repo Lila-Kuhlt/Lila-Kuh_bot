@@ -72,5 +72,9 @@ module.exports = {
     },
     async add_poll_to_db(new_msg, is_private) {
         await new_msg.client.db_helper.add_poll(new_msg, is_private)
+    },
+    generate_success_embed(url_to_msg) {
+        return new MessageEmbed()
+            .setDescription(`Success!\n[Link to poll](${url_to_msg})`)
     }
 };

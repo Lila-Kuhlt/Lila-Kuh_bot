@@ -48,6 +48,6 @@ module.exports = {
         }
 
         msg.client.output.edit(old_msg, { embeds: [new_embed] })
-        msg.client.output.send(msg, "success")
-    },
+        msg.client.output.send(msg, { embeds: [poll_cmd.generate_success_embed(old_msg.url)]})
+    }
 };
