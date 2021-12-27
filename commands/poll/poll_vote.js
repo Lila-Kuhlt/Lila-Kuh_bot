@@ -15,12 +15,19 @@ module.exports = {
     async execute(msg, args) {
         const poll_id = args.shift()
         const poll_to_vote = await msg.client.db_helper.get_poll(msg, poll_id)
+        let guild
+        let old_msg
 
+        // ---------------
+        // check a bunch of edge cases
+        // ---------------
+        // wrong poll id
         if (poll_to_vote === null) {
             msg.client.output.send(msg, "wrong poll id")
             return
         }
-        let guild
+
+        // check user is in same guild as the poll
         try {
             guild = await msg.client.guilds.fetch(poll_to_vote.guild_id)
             await guild.members.fetch(msg.author.id) // test, user is in guild
@@ -30,7 +37,13 @@ module.exports = {
             return
         }
 
-        let old_msg
+        // check, if poll is private
+        if (!poll_to_vote.private) {
+            msg.client.output.send(msg, "You can use this command only on private polls")
+            return
+        }
+
+        // get old message
         try {
             old_msg = await (await guild.channels.fetch(poll_to_vote.channel_id)).messages.fetch(poll_id)
         } catch (e) {
@@ -38,19 +51,25 @@ module.exports = {
             msg.client.logger.log("warn", e)
             return
         }
+
+        // check, if correct and valid vote_choice was given
         const score = old_msg.embeds[0].fields[1].value
         const index = this.get_index_from_choice(args[0])
-
         if (index === null) {
-            msg.client.output.send(msg, "vote choice must be [a-z] or :regional_indicator_[a-z]:")
+            msg.client.output.send(msg, "vote choice must be [a-z] or :regional\\_indicator\\_[a-z]:")
             return
+
         } else if ((index < 0) || (index >= score.split("\n").length)) {
             msg.client.output.send(msg, "you have to vote a exiting option")
             return
         }
+        // ---------------
+
+        // generate new solution
         const new_score = this.increment_score(score, index)
         old_msg.embeds[0].fields[1] = {name: "Score", value: new_score, inline: true}
 
+        // edit poll
         msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })
         msg.client.output.send(msg, "success")
     },
