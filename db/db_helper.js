@@ -148,5 +148,49 @@ async function get_poll(msg, poll_id) {
 }
 // -----------------------------------
 
+// -----------------------------------
+// Poll
+// -----------------------------------
+async function add_poll_voted(msg, poll_id, user_id, choices) {
+    try {
+        await msg.client.DB.Poll_Voted.create({
+            poll_id: poll_id,
+            user_id: user_id,
+            choices: choices
+        })
+        return true
+    } catch (e) {
+        msg.client.logger.log("error", `Could not add poll_voted with poll_id ${poll_id} with user ${user_id} with choices ${choices} in database 'Poll_Voted'`)
+        msg.client.logger.log("error", e)
+        return false
+    }
+}
 
-module.exports = { add_user: add_user_lang, get_lang, set_lang, get_prefix, set_prefix, get_poll, add_poll }
+async function set_poll_voted(msg, poll_id, user_id, choices) {
+    const new_tag = await msg.client.DB.Poll_Voted.update({ choices: choices }, { where: { poll_id: poll_id, user_id: user_id } })
+
+    if (new_tag) {
+        return true
+
+    } else {
+        msg.client.logger.log("error", `Could not set choices for poll_id ${poll_id} and user_id ${user_id} in database 'Poll_Voted'`)
+        return false
+    }
+}
+
+async function get_poll_voted(msg, poll_id, user_id) {
+    const tag = await msg.client.DB.Poll_Voted.findOne({ where: { poll_id: poll_id, user_id: user_id } })
+
+    if (tag) {
+        return tag
+
+    } else {
+        msg.client.logger.log("info",`Could not get choices with poll_id ${poll_id} and user_id ${user_id} in database 'Poll_Voted'`)
+        return null
+    }
+}
+// -----------------------------------
+
+
+module.exports = { add_user: add_user_lang, get_lang, set_lang, get_prefix, set_prefix, get_poll, add_poll,
+                    add_poll_voted, set_poll_voted, get_poll_voted }
