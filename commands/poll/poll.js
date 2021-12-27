@@ -19,6 +19,7 @@ module.exports = {
     disabled: false,
     enable_slash: true,
     async execute(msg, args, is_private) {
+        // get needed values
         const title = args.shift()
         const options = args
         const emojis = this.generate_emoji(options.length)
@@ -26,6 +27,8 @@ module.exports = {
         const embed = this.generate_embed(msg, title, options, emojis)
         let new_msg = await msg.client.output.send(msg, {embeds: [embed]})
 
+        // private means executed with poll_private
+        // this messages only can be
         if (is_private) {
             embed.setFooter("This is a private voting. Use the **vote** command in your dm's\npoll_id: " + new_msg.id)
             embed.addField("Score", new Array(options.length).fill("0").join("\n"), true)
@@ -67,7 +70,7 @@ module.exports = {
             msg.react(this.emojis[i])
         }
     },
-    async add_poll_to_db(new_msg) {
-        await new_msg.client.db_helper.add_poll(new_msg)
+    async add_poll_to_db(new_msg, is_private) {
+        await new_msg.client.db_helper.add_poll(new_msg, is_private)
     }
 };
