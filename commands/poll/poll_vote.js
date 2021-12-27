@@ -63,11 +63,29 @@ module.exports = {
             msg.client.output.send(msg, "you have to vote a exiting option")
             return
         }
+
+        // check, if author of command already voted for this option
+        const poll_voted_tag = await msg.client.db_helper.get_poll_voted(msg, poll_id, msg.author.id)
+        if (poll_voted_tag && (poll_voted_tag.choices[index])) {
+            msg.client.output.send(msg, "You already voted this option")
+            return
+        }
         // ---------------
 
         // generate new solution
         const new_score = this.increment_score(score, index)
         old_msg.embeds[0].fields[1] = {name: "Score", value: new_score, inline: true}
+
+        // set vote in database
+        if (poll_voted_tag) {
+            poll_voted_tag.choices[index] = true
+            await msg.client.db_helper.set_poll_voted(msg, poll_id, msg.author.id, poll_voted_tag.choices)
+
+        } else {
+            const choices = Array(score.length).fill(false)
+            choices[index] = true
+            await msg.client.db_helper.add_poll_voted(msg, poll_id, msg.author.id, choices)
+        }
 
         // edit poll
         msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })

@@ -156,7 +156,7 @@ async function add_poll_voted(msg, poll_id, user_id, choices) {
         await msg.client.DB.Poll_Voted.create({
             poll_id: poll_id,
             user_id: user_id,
-            choices: choices
+            choices: JSON.stringify(choices)
         })
         return true
     } catch (e) {
@@ -167,13 +167,13 @@ async function add_poll_voted(msg, poll_id, user_id, choices) {
 }
 
 async function set_poll_voted(msg, poll_id, user_id, choices) {
-    const new_tag = await msg.client.DB.Poll_Voted.update({ choices: choices }, { where: { poll_id: poll_id, user_id: user_id } })
+    const new_tag = await msg.client.DB.Poll_Voted.update({ choices: JSON.stringify(choices) }, { where: { poll_id: poll_id, user_id: user_id } })
 
     if (new_tag) {
         return true
 
     } else {
-        msg.client.logger.log("error", `Could not set choices for poll_id ${poll_id} and user_id ${user_id} in database 'Poll_Voted'`)
+        msg.client.logger.log("warn", `Could not set choices for poll_id ${poll_id} and user_id ${user_id} in database 'Poll_Voted'`)
         return false
     }
 }
@@ -182,6 +182,7 @@ async function get_poll_voted(msg, poll_id, user_id) {
     const tag = await msg.client.DB.Poll_Voted.findOne({ where: { poll_id: poll_id, user_id: user_id } })
 
     if (tag) {
+        tag.choices = JSON.parse(tag.choices)
         return tag
 
     } else {
