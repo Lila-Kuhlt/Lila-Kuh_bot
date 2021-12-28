@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { get_text: gt } = require("../../lang/lang_helper")
 const s = "commands.poll."
+const sp = "commands.poll_private."
 const text = {
     prefix: ":regional_indicator_",
     suffix: ":"
@@ -24,26 +25,26 @@ module.exports = {
         const options = args
         const emojis = this.generate_emoji(options.length)
 
-        const embed = this.generate_embed(msg, title, options, emojis)
+        const embed = await this.generate_embed(msg, title, options, emojis)
         let new_msg = await msg.client.output.send(msg, {embeds: [embed]})
 
         // private means executed with poll_private
         // this messages only can be
         if (is_private) {
-            embed.setFooter("This is a private voting. Use the **vote** command in your dm's\npoll_id: " + new_msg.id)
-            embed.addField("Score", new Array(options.length).fill("0").join("\n"), true)
+            embed.setFooter(await gt(msg, `${sp}embed_footer`, await msg.client.db_helper.get_prefix(msg), new_msg.id))
+            embed.addField(await gt(msg, `${sp}score`), new Array(options.length).fill("0").join("\n"), true)
             new_msg = await msg.client.output.edit(new_msg, {embeds: [embed]})
             await this.add_poll_to_db(new_msg, true)
 
         } else {
-            embed.setFooter("poll_id: " + new_msg.id)
+            embed.setFooter(await gt(msg, `${s}embed_footer`, new_msg.id))
             new_msg = await msg.client.output.edit(new_msg, {embeds: [embed]})
             await this.react(new_msg, emojis)
             await this.add_poll_to_db(new_msg, false)
         }
     },
     emojis: ['🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹', '🇺', '🇻', '🇼', '🇽', '🇾', '🇿'],
-    generate_embed(msg, title, options, emojis) {
+    async generate_embed(msg, title, options, emojis) {
         emojis.map(function(emoji, index) {
             return [emoji + " " + options[index]];
         }).join("\n")
@@ -52,7 +53,7 @@ module.exports = {
             .setColor(msg.client.config.embed.color)
             .setAuthor(msg.client.config.embed.author_name, msg.client.config.embed.avatar_url)
             .setTitle(title)
-            .addField("Options", emojis.map(function(emoji, index) {
+            .addField(await gt(msg, `${s}options`), emojis.map(function(emoji, index) {
                 return [emoji + " " + options[index]];
             }).join("\n"), true)
     },
@@ -73,8 +74,8 @@ module.exports = {
     async add_poll_to_db(new_msg, is_private) {
         await new_msg.client.db_helper.add_poll(new_msg, is_private)
     },
-    generate_success_embed(url_to_msg) {
+    async generate_success_embed(msg, url_to_msg) {
         return new MessageEmbed()
-            .setDescription(`Success!\n[Link to poll](${url_to_msg})`)
+            .setDescription(await gt(msg, `${s}success`, url_to_msg))
     }
 };

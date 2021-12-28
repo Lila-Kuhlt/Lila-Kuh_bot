@@ -1,5 +1,6 @@
 const { get_text: gt } = require("../../lang/lang_helper")
 const s = "commands.poll_vote."
+const sf = "commands.poll_vote.fail"
 
 module.exports = {
     name: 'poll_vote',
@@ -23,7 +24,7 @@ module.exports = {
         // ---------------
         // wrong poll id
         if (poll_to_vote === null) {
-            msg.client.output.send(msg, "wrong poll id")
+            msg.client.output.reply(msg, await gt(msg, `${sf}poll_id`))
             return
         }
 
@@ -33,13 +34,13 @@ module.exports = {
             await guild.members.fetch(msg.author.id) // test, user is in guild
 
         } catch (e) {
-            msg.client.output.send(msg, "You have to be in the same guild as the poll")
+            msg.client.output.reply(msg, await gt(msg, `${sf}guild`))
             return
         }
 
         // check, if poll is private
         if (!poll_to_vote.private) {
-            msg.client.output.send(msg, "You can use this command only on private polls")
+            msg.client.output.reply(msg, await gt(msg, `${sf}not_private`))
             return
         }
 
@@ -47,7 +48,7 @@ module.exports = {
         try {
             old_msg = await (await guild.channels.fetch(poll_to_vote.channel_id)).messages.fetch(poll_id)
         } catch (e) {
-            msg.client.output.send(msg, "cannot access message")
+            msg.client.output.reply(msg, await gt(msg, `${sf}access`))
             msg.client.logger.log("warn", e)
             return
         }
@@ -56,25 +57,25 @@ module.exports = {
         const score = old_msg.embeds[0].fields[1].value
         const index = this.get_index_from_choice(args[0])
         if (index === null) {
-            msg.client.output.send(msg, "vote choice must be [a-z] or :regional\\_indicator\\_[a-z]:")
+            msg.client.output.reply(msg, await gt(msg, `${sf}choice`))
             return
 
         } else if ((index < 0) || (index >= score.split("\n").length)) {
-            msg.client.output.send(msg, "you have to vote a exiting option")
+            msg.client.output.reply(msg, await gt(msg, `${sf}choice_out_of_bounce`))
             return
         }
 
         // check, if author of command already voted for this option
         const poll_voted_tag = await msg.client.db_helper.get_poll_voted(msg, poll_id, msg.author.id)
         if (poll_voted_tag && (poll_voted_tag.choices[index])) {
-            msg.client.output.send(msg, "You already voted this option")
+            msg.client.output.reply(msg, await gt(msg, `${sf}voted`))
             return
         }
         // ---------------
 
         // generate new solution
         const new_score = this.increment_score(score, index)
-        old_msg.embeds[0].fields[1] = {name: "Score", value: new_score, inline: true}
+        old_msg.embeds[0].fields[1] = {name: await gt(msg, "commands.poll_private.score"), value: new_score, inline: true}
 
         // set vote in database
         if (poll_voted_tag) {
@@ -89,7 +90,7 @@ module.exports = {
 
         // edit poll
         msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })
-        msg.client.output.send(msg, { embeds: [msg.client.commands.get('poll').generate_success_embed(old_msg.url)]})
+        msg.client.output.send(msg, { embeds: [await msg.client.commands.get('poll').generate_success_embed(msg, old_msg.url)]})
 
     },
     increment_score(old_score, index) {

@@ -86,20 +86,38 @@
       "set": "Der Prefix dieses Server wurde gesetzt auf: %0"
     },
     "poll": {
-      "help": "",
-      "usage": ""
+      "help": "Erstelle eine Umfrage im schönen Embed-Stil. Passend dazu werden automatisch Reaktionen erzeugt, mit denen andere dann abstimmten können.",
+      "usage": "[Title] [Option1] [Option2] ...",
+      "options": "Optionen",
+      "embed_footer": "Umfrage-Id: %0",
+      "success": "Erfolg!\n[Link zur Umfrage](%0)"
     },
     "poll_private": {
-      "help": "",
-      "usage": ""
+      "help": "Erstelle eine private Umfrage im schönen Embed-Stil. Abstimmen kann man dann nicht mehr mit Reaktionen sondern nur mithilfe des vote-Befehls aus den DMs",
+      "usage": "[Title] [Option1] [Option2] ...",
+      "score": "Ergebnis",
+      "embed_footer": "Dies ist eine private Umfrage. Benutze %0poll_vote im privaten Chat mit diesem Bot um abzustimmen!\nUmfrage-Id: %1"
     },
     "poll_edit": {
-      "help": "",
-      "usage": ""
+      "help": "Bearbeite eine Umfrage (egal welcher Art), indem du einfach nochmal den Titel und die Optionen übergibst.\nBeachte jedoch, dass nur der Author einer Umfrage oder der Server-Admin Umfragen bearbeiten können und dass die Ergebnisse nicht neu generiert werden (falls mehr/weniger Optionen angegeben werden).",
+      "usage": "[Title] [Option1] [Option2] ...",
+      "fail": {
+        "guild": "Du musst diesen Befehl auf dem Server ausführen auf dem sich die Umfrage befindet!",
+        "authorised": "Du bist nicht berechtigt, diese Umfrage zu bearbeiten.\nNur der Author einer Umfrage oder der Server-Admin darf eine Umfrage bearbeiten!"
+      }
     },
     "poll_vote": {
-      "help": "",
-      "usage": ""
+      "help": "Stimme für private Umfragen ab. Übergebe dafür zunächst die Id-Nummer der Poll und dann den Buchstaben, für den du Stimmen willst.\nDu kannst für jede Option maximal einmal Stimmen!",
+      "usage": "[poll_id] [Options_Buchstabe]",
+      "fail": {
+        "poll_id": "Die Umfrage mit übergebener Id-Nummer existiert nicht!",
+        "guild": "Du musst dem Server beigetreten sein, auf dem diese Umfrage existiert!",
+        "not_private": "Du kannst diesen Befehl nur für private Umfragen benutzen!",
+        "access": "Error: Ich kann die Umfragen-Nachricht nicht erreichen!",
+        "choice": "Der das zweite Argument muss ein Buchstabe zwischen a bis z sein!",
+        "choice_out_of_bounce": "Du musst eine Option wählen, die auch existiert!",
+        "voted": "Du hast bereits für diese Option abgestimmt!"
+      }
     }
   }
 }
