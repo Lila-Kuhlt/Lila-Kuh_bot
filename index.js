@@ -35,10 +35,12 @@ client.slash_event = require("./js/event_helper/slash_event")
 client.menu_event = require("./js/event_helper/menu_event")
 client.button_event = require("./js/event_helper/button_event")
 client.events = require("./js/event_helper/events")
-client.mod_getter = require("./js/cmd_modificator_getter")
-client.output = require("./js/dc_output")
+client.output = require("./js/output")
 client.mod_man = require("./js/cmd_modifications/mod_manager")
-client.mensa_man = require("./js/mensa_manager")
+client.mensa_man = require("./js/event_helper/events_events/mensa_manager")
+
+// set mods
+const problem_free_set_up = client.mod_man.init(client)
 
 // helper fields
 const commands_path = "./commands"
@@ -51,9 +53,9 @@ for (const folder of commandFolders) {
     const commandFiles = fs.readdirSync(`${commands_path}/${folder}`).filter(file => file.endsWith('.js'))
     for (const file of commandFiles) {
         const command = require(`${commands_path}/${folder}/${file}`)
-        const name = client.mod_getter.get_name(command)
+        const name = client.mods.name.get(null, command)
 
-        if (client.mod_getter.get_disabled(command)) continue
+        if (client.mods.disabled.get(null, command)) continue
         client.commands.set(name, command)
         command_tree[folder][name] = command
     }
@@ -68,9 +70,6 @@ client.command_tree = command_tree
 // ---------------------------------
 // when the client is ready (bot is ready)
 client.once('ready', async () => {
-    // set mods
-    const problem_free_set_up = client.mod_man.init(client)
-
     // set activity
     if (client.config.enable_activity) {
         await client.user.setActivity(client.config.activity.name, { type: client.config.activity.type })
