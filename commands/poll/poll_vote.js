@@ -55,7 +55,7 @@ module.exports = {
 
         // check, if correct and valid vote_choice was given
         const score = old_msg.embeds[0].fields[1].value
-        const index = this.get_index_from_choice(args[0])
+        const index = this.get_index_from_choice(msg, args[0])
         if (index === null) {
             msg.client.output.reply(msg, await gt(msg, `${sf}choice`))
             return
@@ -98,7 +98,8 @@ module.exports = {
         scores[index] = (Number.parseInt(scores[index]) + 1) + ""
         return scores.join("\n")
     },
-    get_index_from_choice(choice) {
+    get_index_from_choice(msg, choice) {
+        const emojis = msg.client.commands.get('poll').emojis
         choice = choice.toLowerCase()
         let char
         if (/:regional_indicator_[a-z]:/.test(choice) && (choice.length === 22)) {
@@ -106,6 +107,9 @@ module.exports = {
 
         } else if (/[a-z]/.test(choice) && (choice.length === 1)) {
             char = choice
+
+        } else if (emojis.includes(choice)) {
+            return emojis.indexOf(choice)
 
         } else {
             return null
