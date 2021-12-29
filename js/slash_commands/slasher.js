@@ -75,12 +75,12 @@ async function create_options(client, command) {
     if (client.config.auto_slash_options && args_min_length) {
         let i = 0
         for (i; i < args_min_length; i++) {
-            options.push(create_option(`${i}`, `${i}`, true))
+            options.push(create_option(`${i}`, `${i}`, true, []))
         }
 
         if (args_max_length) {
             for (let j = i; j < args_max_length; j++) {
-                options.push(create_option(`${j}`, `${j}`, false))
+                options.push(create_option(`${j}`, `${j}`, false, []))
             }
         }
         return options
