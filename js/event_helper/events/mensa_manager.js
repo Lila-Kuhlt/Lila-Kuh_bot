@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const mensa_channel_id = require('../config/config.json').mensa_channel_id
+const mensa_channel_id = require('../../../config/config.json').mensa_channel_id
 
 const dayjs = require('dayjs')
 const weekOfYear = require('dayjs/plugin/weekOfYear')
