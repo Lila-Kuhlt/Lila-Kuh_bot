@@ -88,8 +88,8 @@ module.exports = {
         const data = []
         const embed_msg = new Discord.MessageEmbed().setColor(msg.client.config.embed.color)
 
-        const name = msg.client.mods.name.get(msg, command)
-        const aliases = msg.client.mods.aliases.get(msg, command)
+        const name = await msg.client.mods.name.get(msg, command)
+        const aliases = await msg.client.mods.aliases.get(msg, command)
         const description = await msg.client.mods.description.get(msg, command)
         const usage = await msg.client.mods.usage.get(msg, command)
         if (aliases.length) data.push(`${await gt(msg, s + "success.aliases")}\n${aliases.join(', ')}\n\n`)
@@ -113,7 +113,7 @@ module.exports = {
 
         for (const command of msg.client.commands) {
             if (msg.client.config.help.show_only_permitted_commands && !msg.client.helper.is_permitted(msg, command[1])) continue
-            let name = msg.client.mods.name.get(msg, command[1])
+            let name = await msg.client.mods.name.get(msg, command[1])
             let description = msg.client.helper.trim_text(await msg.client.mods.description.get(msg, command[1]), 50, true)
 
             options.push({

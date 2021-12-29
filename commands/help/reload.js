@@ -30,7 +30,7 @@ module.exports = {
 
         const commandFolders = fs.readdirSync(commands_path);
         const folderName = commandFolders.find(folder => fs.readdirSync(`${commands_path}/${folder}`).includes(`${commandName}.js`));
-        const name = msg.client.mods.name.get(null, command)
+        const name = await msg.client.mods.name.get(msg, command)
 
         delete require.cache[require.resolve(`../${folderName}/${name}.js`)];
 

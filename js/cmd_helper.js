@@ -25,8 +25,8 @@ function is_nsfw_channel(msg) {
 }
 
 // checks structural correctness of given args (by now only command length)
-function check_args(msg, command, args) {
-    const args_min_length = msg.client.mods.args_min_length.get(null, command)
+async function check_args(msg, command, args) {
+    const args_min_length = await msg.client.mods.args_min_length.get(null, command)
     return !args_min_length || args.length >= args_min_length
 }
 

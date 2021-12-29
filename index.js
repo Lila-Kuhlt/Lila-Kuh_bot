@@ -37,30 +37,27 @@ client.button_event = require("./js/event_helper/button_event")
 client.events = require("./js/event_helper/events")
 client.output = require("./js/output")
 client.mod_man = require("./js/cmd_modifications/mod_manager")
-client.mensa_man = require("./js/event_helper/events_events/mensa_manager")
-
-// set mods
-const problem_free_set_up = client.mod_man.init(client)
-
-// helper fields
-const commands_path = "./commands"
+client.mensa_man = require("./js/event_helper/events/mensa_manager")
 
 // dynamically retrieve all command files and additionally save it into message.client.command_tree
-let command_tree = {}
-const commandFolders = fs.readdirSync(commands_path)
-for (const folder of commandFolders) {
-    command_tree[folder] = {}
-    const commandFiles = fs.readdirSync(`${commands_path}/${folder}`).filter(file => file.endsWith('.js'))
-    for (const file of commandFiles) {
-        const command = require(`${commands_path}/${folder}/${file}`)
-        const name = client.mods.name.get(null, command)
+async function load_commands(client) {
+    let command_tree = {}
+    const commands_path = "./commands"
+    const commandFolders = fs.readdirSync(commands_path)
+    for (const folder of commandFolders) {
+        command_tree[folder] = {}
+        const commandFiles = fs.readdirSync(`${commands_path}/${folder}`).filter(file => file.endsWith('.js'))
+        for (const file of commandFiles) {
+            const command = require(`${commands_path}/${folder}/${file}`)
+            if (await client.mods.disabled.get(null, command)) continue
 
-        if (client.mods.disabled.get(null, command)) continue
-        client.commands.set(name, command)
-        command_tree[folder][name] = command
+            const name = await client.mods.name.get(null, command)
+            await client.commands.set(name, command)
+            command_tree[folder][name] = command
+        }
     }
+    client.command_tree = command_tree
 }
-client.command_tree = command_tree
 // ---------------------------------
 
 
@@ -70,6 +67,12 @@ client.command_tree = command_tree
 // ---------------------------------
 // when the client is ready (bot is ready)
 client.once('ready', async () => {
+    // set mods
+    const problem_free_set_up = client.mod_man.init(client)
+
+    // load commands
+    await load_commands(client)
+
     // set activity
     if (client.config.enable_activity) {
         await client.user.setActivity(client.config.activity.name, { type: client.config.activity.type })

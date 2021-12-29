@@ -33,7 +33,7 @@ async function get_slash_commands(client) {
     const slash_commands = []
 
     for (const command of client.commands) {
-        if (check_slash(client, command[1])) slash_commands.push(await create_slash_command(client, command[1]))
+        if (await check_slash(client, command[1])) slash_commands.push(await create_slash_command(client, command[1]))
     }
 
     return slash_commands.map(command => command.toJSON());
@@ -41,7 +41,7 @@ async function get_slash_commands(client) {
 
 async function create_slash_command(client, command) {
     const fake_msg = {author: {id: "-1", username: "slash_command"}, client: client}
-    const name = client.mods.name.get(null, command)
+    const name = await client.mods.name.get(null, command)
     const description = await client.mods.description.get(fake_msg, command)
 
     const data = new SlashCommandBuilder()
@@ -60,9 +60,9 @@ async function create_slash_command(client, command) {
 
 async function create_options(client, command) {
     const options = []
-    const name = client.mods.name.get(null, command)
-    const args_min_length = client.mods.args_min_length.get(null, command)
-    const args_max_length = client.mods.args_max_length.get(null, command)
+    const name = await client.mods.name.get(null, command)
+    const args_min_length = await client.mods.args_min_length.get(null, command)
+    const args_max_length = await client.mods.args_max_length.get(null, command)
 
     if (fs.existsSync(`./js/slash_commands/option_models/${name}.js`)) {
         const option_model = require(`./option_models/${name}.js`)
@@ -106,8 +106,8 @@ function create_option(name, description, required, choices) {
 // ----------------------------
 // Checker
 // ----------------------------
-function check_slash(client, command) {
-    return client.mods.enable_slash.get(null, command)
+async function check_slash(client, command) {
+    return await client.mods.enable_slash.get(null, command)
 }
 // ----------------------------
 
