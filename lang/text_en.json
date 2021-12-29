@@ -89,8 +89,8 @@
       "help": "Create a poll in a beautiful embed style. Reactions are automatically generated so others can use them to vote.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",
       "options": "Options",
-      "embed_footer": "poll_id: %0",
-      "success": "success!\n[link to survey](%0)"
+      "embed_footer": "Poll-id: %0",
+      "success": "Success!\n[Link to survey](%0)"
     },
     "poll_private": {
       "help": "Create a private poll in a nice embed style. You can then no longer vote with reactions but only with the help of the vote command from the DMs.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
