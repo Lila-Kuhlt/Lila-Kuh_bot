@@ -26,7 +26,7 @@ module.exports = {
         const emojis = this.generate_emoji(options.length)
 
         const embed = await this.generate_embed(msg, title, options, emojis)
-        let new_msg = await msg.client.output.send(msg, {embeds: [embed]})
+        let new_msg = await msg.client.output.send(msg, {embeds: [embed], fetchReply: true})
 
         // private means executed with poll_private
         // this messages only can be
