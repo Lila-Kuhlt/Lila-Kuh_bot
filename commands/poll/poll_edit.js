@@ -18,7 +18,7 @@ module.exports = {
     enable_slash: true,
     async execute(msg, args) {
         const poll_id = args.shift()
-        const poll_tag = await msg.client.db_helper.get_poll(msg, poll_id)
+        const poll_tag = await msg.client.DB.Poll.get(msg, poll_id)
         let old_msg
 
         // ---------------
