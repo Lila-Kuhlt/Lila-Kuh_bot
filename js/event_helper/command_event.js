@@ -24,7 +24,7 @@ async function message_create(msg) {
 // Getter
 // ----------------------------------
 async function get_prefix(msg) {
-    return msg.client.config.enable_prefix_change ? await msg.client.db_helper.get_prefix(msg) : msg.client.config.prefix
+    return msg.client.config.enable_prefix_change ? await msg.client.DB.Guild.get_prefix(msg) : msg.client.config.prefix
 }
 
 function get_command_name_and_args(msg, prefix) {

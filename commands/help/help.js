@@ -66,7 +66,7 @@ module.exports = {
 
     async create_embed_all_commands(msg) {
         const s = "commands.help."
-        const prefix = await msg.client.db_helper.get_prefix(msg)
+        const prefix = await msg.client.DB.Guild.get_prefix(msg)
         const data = []
         const embed_msg = new Discord.MessageEmbed().setColor(msg.client.config.embed.color)
         embed_msg.setThumbnail(msg.client.config.embed.avatar_url)
@@ -84,7 +84,7 @@ module.exports = {
 
     async create_embed_specific_command(msg, command) {
         const s = "commands.help."
-        const prefix = await msg.client.db_helper.get_prefix(msg)
+        const prefix = await msg.client.DB.Guild.get_prefix(msg)
         const data = []
         const embed_msg = new Discord.MessageEmbed().setColor(msg.client.config.embed.color)
 

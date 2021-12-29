@@ -25,7 +25,6 @@ client.commands = new Discord.Collection()
 client.config = require('./config/config.json')
 client.helper = require('./js/cmd_helper')
 client.lang_helper = require("./lang/lang_helper")
-client.db_helper = require('./db/db_helper')
 client.DB = require('./db/db_init').DB
 client.sequelize = require('./db/db_init').sequelize
 client.logger = require("./js/logger").logger

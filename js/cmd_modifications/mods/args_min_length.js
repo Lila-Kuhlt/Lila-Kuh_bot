@@ -22,7 +22,7 @@ async function send_check_fail(msg, command, args) {
     let err = await msg.client.lang_helper.get_text(msg, error_key, await get(msg, command), args.length)
 
     const cmd_usage = await msg.client.mods.usage.get(msg, command)
-    const prefix = msg.client.config.enable_prefix_change ? await msg.client.db_helper.get_prefix(msg) : msg.client.config.prefix
+    const prefix = msg.client.config.enable_prefix_change ? await msg.client.DB.Guild.get_prefix(msg) : msg.client.config.prefix
     if (cmd_usage) {
         err += "\n" + await msg.client.lang_helper.get_text(msg, "error.missing_args_proper_use", `${prefix}${command.name} ${cmd_usage}`)
     }

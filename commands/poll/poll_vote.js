@@ -15,7 +15,7 @@ module.exports = {
     enable_slash: false,
     async execute(msg, args) {
         const poll_id = args.shift()
-        const poll_to_vote = await msg.client.db_helper.get_poll(msg, poll_id)
+        const poll_to_vote = await msg.client.DB.Poll.get(msg, poll_id)
         let guild
         let old_msg
 
@@ -66,7 +66,7 @@ module.exports = {
         }
 
         // check, if author of command already voted for this option
-        const poll_voted_tag = await msg.client.db_helper.get_poll_voted(msg, poll_id, msg.author.id)
+        const poll_voted_tag = await msg.client.DB.Poll_Voted.get(msg, poll_id, msg.author.id)
         if (poll_voted_tag && (poll_voted_tag.choices[index])) {
             msg.client.output.reply(msg, await gt(msg, `${sf}voted`))
             return
@@ -80,12 +80,12 @@ module.exports = {
         // set vote in database
         if (poll_voted_tag) {
             poll_voted_tag.choices[index] = true
-            await msg.client.db_helper.set_poll_voted(msg, poll_id, msg.author.id, poll_voted_tag.choices)
+            await msg.client.DB.Poll_Voted.set(msg, poll_id, msg.author.id, poll_voted_tag.choices)
 
         } else {
             const choices = Array(score.length).fill(false)
             choices[index] = true
-            await msg.client.db_helper.add_poll_voted(msg, poll_id, msg.author.id, choices)
+            await msg.client.DB.Poll_Voted.add(msg, poll_id, msg.author.id, choices)
         }
 
         // edit poll

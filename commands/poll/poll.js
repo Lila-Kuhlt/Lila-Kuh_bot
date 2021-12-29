@@ -31,7 +31,7 @@ module.exports = {
         // private means executed with poll_private
         // this messages only can be
         if (is_private) {
-            embed.setFooter(await gt(msg, `${sp}embed_footer`, await msg.client.db_helper.get_prefix(msg), new_msg.id))
+            embed.setFooter(await gt(msg, `${sp}embed_footer`, await msg.client.DB.Guild.get_prefix(msg), new_msg.id))
             embed.addField(await gt(msg, `${sp}score`), new Array(options.length).fill("0").join("\n"), true)
             new_msg = await msg.client.output.edit(new_msg, {embeds: [embed]})
             await this.add_poll_to_db(new_msg, true)
@@ -72,7 +72,7 @@ module.exports = {
         }
     },
     async add_poll_to_db(new_msg, is_private) {
-        await new_msg.client.db_helper.add_poll(new_msg, is_private)
+        await new_msg.client.DB.Poll.add(new_msg, is_private)
     },
     async generate_success_embed(msg, url_to_msg) {
         return new MessageEmbed()
