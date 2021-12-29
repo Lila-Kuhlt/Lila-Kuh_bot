@@ -86,20 +86,20 @@
       "set": "The prefix of this server has been set to: %0"
     },
     "poll": {
-      "help": "Create a poll in a beautiful embed style. Reactions are automatically generated so others can use them to vote.",
+      "help": "Create a poll in a beautiful embed style. Reactions are automatically generated so others can use them to vote.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",
       "options": "Options",
       "embed_footer": "poll_id: %0",
       "success": "success!\n[link to survey](%0)"
     },
     "poll_private": {
-      "help": "Create a private poll in a nice embed style. You can then no longer vote with reactions but only with the help of the vote command from the DMs.",
+      "help": "Create a private poll in a nice embed style. You can then no longer vote with reactions but only with the help of the vote command from the DMs.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",
       "score": "Score",
       "embed_footer": "This is a private poll. Use %0poll_vote in private chat (DMs) with this bot to vote!\nPoll-Id: %1"
     },
     "poll_edit": {
-      "help": "Edit a poll (of any type) by simply passing the title and options again.\nBut note that only the author of a poll or the server admin can edit polls and the reactions/scores will not be regenerated (if more/less options are given).",
+      "help": "Edit a poll (of any type) by simply passing the title and options again.\nBut note that only the author of a poll or the server admin can edit polls and the reactions/scores will not be regenerated (if more/less options are given).\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",
       "fail": {
         "guild": "You must run this command on the server where the poll is located!",
