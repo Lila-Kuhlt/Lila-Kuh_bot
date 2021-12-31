@@ -1,3 +1,4 @@
+![version_from_package.json](https://img.shields.io/github/package-json/v/Lila-Kuhlt/Lila-Kuh-bot/main?color=purple&label=version)
 
 # Lila-Kuh-bot
 Official bot of the Lila Pause
