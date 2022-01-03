@@ -118,6 +118,26 @@
         "choice_out_of_bounce": "Du musst eine Option wählen, die auch existiert!",
         "voted": "Du hast bereits für diese Option abgestimmt!"
       }
+    },
+    "mensa_set_channel": {
+      "help": "Setzte den Kanal, in dem du Mensa-Updates erhalten möchtest.\nDer angegebene Kanal muss dabei in diesem Server liegen!",
+      "usage": "[Kanal-Id]",
+      "success": "Der Kanal wurde erfolgreich gesetzt!",
+      "fail": {
+        "no_number": "Das übergebene Argument ist keine Zahl!",
+        "wrong_id": "Die übergebene Kanal-Id entspricht keinem Kanal auf diesem Server!"
+      }
+    },
+    "mensa_enable": {
+      "help": "Aktiviere die Mensa-Updates.\nBeachte dabei, dass der Mensa Kanal mithilfe des Befehls `mensa_set_channel` gesetzt sein muss!",
+      "success": "Die Mensa-Updates wurden erfolgreich aktiviert!",
+      "fail": {
+        "channel_not_set": "Der Mensa-Update-Kanal wurde noch mit gesetzt!\nBenutzte dafür bitte den Befehl `mensa_set_channel`!"
+      }
+    },
+    "mensa_disable": {
+      "help": "Deaktiviere die Mensa-Updates.",
+      "success": "Die Mensa-Updates wurden erfolgreich deaktiviert!"
     }
   }
 }
