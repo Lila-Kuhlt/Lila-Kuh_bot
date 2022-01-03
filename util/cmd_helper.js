@@ -94,7 +94,7 @@ function link_to_message(msg, text = "") {
     } else if (from_guild(msg)) {
         link = `https://discord.com/channels/${msg.channel.guild.id}/${msg.channel.id}/${msg.id}`
     }
-    if (text !== "") link = custom_text_to_link(link, text)
+    if (text !== "") link = "\n" + custom_text_to_link(link, text)
     return link
 }
 
@@ -103,7 +103,7 @@ async function create_embed_to_dm(msg) {
     return new Discord.MessageEmbed()
         .setDescription(`<@${msg.author.id}> ${await gt(msg, s + "dm.success")} ${msg.client.helper.link_to_dm(msg, await gt(msg, s + "jump_to_dm"))}!`)
         .setColor(msg.client.config.embed.color)
-        .setThumbnail(msg.client.config.embed.avatar_url)
+        .setAuthor({ name: msg.client.config.embed.author_name, iconURL: msg.client.config.embed.avatar_url})
 }
 
 function check_interaction_custom_id(interaction, custom_id) {
