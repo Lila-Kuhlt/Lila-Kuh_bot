@@ -81,7 +81,9 @@ client.once('ready', async () => {
     await client.sequelize.sync()
 
     // sync slash commands
-    await client.slasher.register(client)
+    if (client.config.enable_slash_commands) {
+        await client.slasher.register(client)
+    }
 
     // set up events
     await client.events.init(client)

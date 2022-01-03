@@ -14,25 +14,25 @@ module.exports = {
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
-        const id = args[0]
+        const new_mensa_channel_id = args[0]
 
         // args is a number
-        if (id.match(/[^0-9]/)) {
-            msg.client.output.reply(msg, await gt(msg, s + "fail.no_number"))
+        if (new_mensa_channel_id.match(/[^0-9]/)) {
+            await msg.client.output.reply(msg, await gt(msg, s + "fail.no_number"))
             return
         }
 
         // channel exists in same guild#
         let channel
         try {
-            channel = await msg.guild.channels.fetch(id)
+            channel = await msg.guild.channels.fetch(new_mensa_channel_id)
 
         } catch (e) {
-            msg.client.output.reply(msg, await gt(msg, s + "fail.wrong_id"))
+            await msg.client.output.reply(msg, await gt(msg, s + "fail.wrong_id"))
             return
         }
 
-        await msg.client.DB.Guild.mensa_set_channel_id(msg, id)
-        msg.client.output.send(msg, await gt(msg, s + "success"))
+        await msg.client.DB.Guild.set_mensa_channel_id(msg.client, msg.member.guild.id, new_mensa_channel_id)
+        await msg.client.output.send(msg, await gt(msg, s + "success"))
     },
 };

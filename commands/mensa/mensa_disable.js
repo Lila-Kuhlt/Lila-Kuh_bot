@@ -13,7 +13,7 @@ module.exports = {
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
-        await msg.client.DB.Guild.mensa_disable(msg)
-        msg.client.output.send(msg, await gt(msg, s + "success"))
+        await msg.client.DB.Guild.set_mensa_disable(msg.client, msg.member.guild.id)
+        await msg.client.output.send(msg, await gt(msg, s + "success"))
     },
 };

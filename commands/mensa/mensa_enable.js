@@ -13,12 +13,12 @@ module.exports = {
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
-        if (!await msg.client.DB.Guild.mensa_get_channel_id(msg)) {
-            msg.client.output.reply(msg, await gt(msg, s + "fail.channel_not_set"))
+        if (!await msg.client.DB.Guild.get_mensa_channel_id(msg.client, msg.member.guild.id)) {
+            await msg.client.output.reply(msg, await gt(msg, s + "fail.channel_not_set"))
             return
         }
 
-        await msg.client.DB.Guild.mensa_enable(msg)
-        msg.client.output.send(msg, await gt(msg, s + "success"))
+        await msg.client.DB.Guild.set_mensa_enable(msg.client, msg.member.guild.id)
+        await msg.client.output.send(msg, await gt(msg, s + "success"))
     },
 };
