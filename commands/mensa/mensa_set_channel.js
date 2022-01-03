@@ -17,14 +17,17 @@ module.exports = {
         const id = args[0]
 
         // args is a number
-        if (!id.match(/[0-9]+/)) {
+        if (id.match(/[^0-9]/)) {
             msg.client.output.reply(msg, await gt(msg, s + "fail.no_number"))
             return
         }
 
-        // channel exists in same guild
-        const channel = await msg.guild.channels.fetch(id)
-        if (!channel) {
+        // channel exists in same guild#
+        let channel
+        try {
+            channel = await msg.guild.channels.fetch(id)
+
+        } catch (e) {
             msg.client.output.reply(msg, await gt(msg, s + "fail.wrong_id"))
             return
         }
