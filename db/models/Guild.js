@@ -12,7 +12,12 @@ const _TABLE = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             unique: true,
         },
-        mensa_enabled: Sequelize.BOOLEAN
+        mensa_enabled: Sequelize.BOOLEAN,
+        bday_channel_id: {
+            type: Sequelize.STRING,
+            unique: true,
+        },
+        bday_enabled: Sequelize.BOOLEAN
     }, {
         timestamp: false
     })
@@ -32,7 +37,9 @@ async function add(msg) {
             guild_id: msg.member.guild.id,
             prefix: msg.client.config.prefix,
             mensa_channel_id: null,
-            mensa_enabled: false
+            mensa_enabled: false,
+            bday_channel_id: null,
+            bday_enabled: false
         })
         msg.client.logger.log("info",`guild ${msg.member.guild.name} successfully added to database 'Guild'`)
 
