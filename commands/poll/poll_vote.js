@@ -1,6 +1,6 @@
 const { get_text: gt } = require("../../lang/lang_helper")
 const s = "commands.poll_vote."
-const sf = "commands.poll_vote.fail"
+const sf = "commands.poll_vote.fail."
 
 module.exports = {
     name: 'poll_vote',
