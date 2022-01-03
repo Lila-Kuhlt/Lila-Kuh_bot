@@ -23,20 +23,20 @@ const client = new Discord.Client({ intents: [
 // get required methods and fields and save it into client. This will always be accessible with message.client
 client.commands = new Discord.Collection()
 client.config = require('./config/config.json')
-client.helper = require('./js/cmd_helper')
+client.helper = require('./util/cmd_helper')
 client.lang_helper = require("./lang/lang_helper")
 client.DB = require('./db/db_init').DB
 client.sequelize = require('./db/db_init').sequelize
-client.logger = require("./js/logger").logger
-client.slasher = require("./js/slash_commands/slasher")
-client.command_event = require("./js/event_helper/command_event")
-client.slash_event = require("./js/event_helper/slash_event")
-client.menu_event = require("./js/event_helper/menu_event")
-client.button_event = require("./js/event_helper/button_event")
-client.events = require("./js/event_helper/events")
-client.output = require("./js/output")
-client.mod_man = require("./js/cmd_modifications/mod_manager")
-client.mensa_man = require("./js/event_helper/events/mensa_manager")
+client.logger = require("./util/logger").logger
+client.slasher = require("./handler/slash_commands/slasher")
+client.command_event = require("./handler/event_handler/command_event")
+client.slash_event = require("./handler/event_handler/slash_event")
+client.menu_event = require("./handler/event_handler/menu_event")
+client.button_event = require("./handler/event_handler/button_event")
+client.events = require("./handler/event_handler/events")
+client.output = require("./util/output")
+client.mod_man = require("./handler/cmd_modifications/mod_manager")
+client.mensa_man = require("./handler/event_handler/events/mensa_manager")
 
 // dynamically retrieve all command files and additionally save it into message.client.command_tree
 async function load_commands(client) {
