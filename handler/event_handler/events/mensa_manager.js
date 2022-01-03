@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js')
-const mensa_channel_id = require('../../../config/config.json').mensa_channel_id
 
 const dayjs = require('dayjs')
 const weekOfYear = require('dayjs/plugin/weekOfYear')
@@ -19,13 +18,17 @@ const sw_link = {
 // Export
 // ---------------------------------
 async function post_mensa_plan(client) {
-    const data = await get_meal_json(client, get_meal_api_link())
+    const guild_ids = await client.DB.Guild.get_guild_ids(client)
+    if (!guild_ids.length) return
 
-    if (data === null) send_fail(client)
+    const data = await get_meal_json(client, get_meal_api_link())
+    let embed
+    if (data === null) embed = generate_embed_fail(client)
     else {
         const fields = formatted_meals_to_fields(format_meals(data))
-        send_success(client, fields)
+        embed = generate_embed_success(client, fields)
     }
+    await send_all_success(client, guild_ids, embed)
 }
 // ---------------------------------
 
@@ -34,29 +37,42 @@ async function post_mensa_plan(client) {
 // ---------------------------------
 // Send
 // ---------------------------------
-async function send_fail(client) {
-    const channel = client.channels.cache.get(mensa_channel_id)
-    const embed = new MessageEmbed()
+async function send_all_success(client, guild_ids, embed) {
+    for (const guild_id of guild_ids) {
+        const enabled = await client.DB.Guild.get_mensa_enabled(client, guild_id)
+        if (!enabled) continue
+
+        const mensa_channel_id = await client.DB.Guild.get_mensa_channel_id(client, guild_id)
+        if (!mensa_channel_id) continue
+
+        try {
+            const mensa_channel = await client.channels.fetch(mensa_channel_id)
+            mensa_channel.send({ embeds: [embed] })
+        } catch (e) {}
+    }
+}
+// ---------------------------------
+
+// ---------------------------------
+// Embeds
+// ---------------------------------
+function generate_embed_fail(client) {
+    return new MessageEmbed()
         .setColor(client.config.embed.color)
-        .setAuthor("Lila Pause", client.config.embed.avatar_url)
+        .setAuthor({ name: "Lila Pause", iconURL: client.config.embed.avatar_url })
         .setTitle("Mensa Update Error")
         .setDescription("Keine Mensa Daten für heute :(")
-        .setFooter("Update immer So-Do um 15:00 Uhr für den Folgetag!")
-
-    channel.send({ embeds: [embed] })
+        .setFooter({ text: "Update immer So-Do um 15:00 Uhr für den Folgetag!" })
 }
 
-async function send_success(client, fields) {
-    const channel = client.channels.cache.get(mensa_channel_id)
-    const embed = new MessageEmbed()
+function generate_embed_success(client, fields) {
+    return new MessageEmbed()
         .setColor(client.config.embed.color)
-        .setAuthor(client.config.embed.author_name, client.config.embed.avatar_url)
+        .setAuthor({ name: client.config.embed.author_name, iconURL: client.config.embed.avatar_url })
         .setTitle("Mensa Update für " + get_date())
         .addFields(fields)
         .setURL(get_sw_link())
-        .setFooter("Update immer So-Do um 15:00 Uhr für den Folgetag!")
-
-    channel.send({ embeds: [embed] })
+        .setFooter({ text: "Update immer So-Do um 15:00 Uhr für den Folgetag!" })
 }
 // ---------------------------------
 

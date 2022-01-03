@@ -1,4 +1,4 @@
-// event_helper fields
+// event_handler fields
 const s = "command_create."
 
 // ---------------------------------

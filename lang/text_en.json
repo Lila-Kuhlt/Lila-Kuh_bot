@@ -118,6 +118,26 @@
         "choice_out_of_bounce": "You must choose an option that exists!",
         "voted": "You have already voted for this option!"
       }
+    },
+    "mensa_set_channel": {
+      "help": "Set the channel in which you want to receive mensa updates.\nThe specified channel must be in this server!",
+      "usage": "[channel id]",
+      "success": "The channel was set successfully!",
+      "fail": {
+        "no_number": "The passed argument is not a number!",
+        "wrong_id": "The passed channel id does not correspond to any channel on this server!"
+      }
+    },
+    "mensa_enable": {
+      "help": "Activate the mensa updates.\nNote that the mensa channel must be set by using the command `mensa_set_channel`!",
+      "success": "Mensa updates have been successfully activated!",
+      "fail": {
+        "channel_not_set": "The mensa update channel has not been set yet!\nPlease use the command `mensa_set_channel` to set it!"
+      }
+    },
+    "mensa_disable": {
+      "help": "Disable the Mensa updates.",
+      "success": "Mensa updates have been successfully disabled!"
     }
   }
 }
