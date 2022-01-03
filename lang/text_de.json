@@ -84,6 +84,60 @@
       "too_long": "Der übergebene Prefix ist zu lang!",
       "get": "Der Prefix dieses Servers ist: %0",
       "set": "Der Prefix dieses Server wurde gesetzt auf: %0"
+    },
+    "poll": {
+      "help": "Erstelle eine Umfrage im schönen Embed-Stil. Passend dazu werden automatisch Reaktionen erzeugt, mit denen andere dann abstimmten können.\nTipp: Du kannst Wörter in \"\" schreiben, dann zählt es als ein Argument (statt dem Leerzeichen) (z.B. \"Ich bin der Titel\")",
+      "usage": "[Title] [Option1] [Option2] ...",
+      "options": "Optionen",
+      "embed_footer": "Umfrage-Id: %0",
+      "success": "Erfolg!\n[Link zur Umfrage](%0)"
+    },
+    "poll_private": {
+      "help": "Erstelle eine private Umfrage im schönen Embed-Stil. Abstimmen kann man dann nicht mehr mit Reaktionen sondern nur mithilfe des poll_vote-Befehls aus den DMs\nTipp: Du kannst Wörter in \"\" schreiben, dann zählt es als ein Argument (statt dem Leerzeichen) (z.B. \"Ich bin der Titel\")",
+      "usage": "[Title] [Option1] [Option2] ...",
+      "score": "Ergebnis",
+      "embed_footer": "Dies ist eine private Umfrage. Benutze %0poll_vote im privaten Chat mit diesem Bot um abzustimmen!\nUmfrage-Id: %1"
+    },
+    "poll_edit": {
+      "help": "Bearbeite eine Umfrage (egal welcher Art), indem du einfach nochmal den Titel und die Optionen übergibst.\nBeachte jedoch, dass nur der Author einer Umfrage oder der Server-Admin Umfragen bearbeiten können und dass die Ergebnisse nicht neu generiert werden (falls mehr/weniger Optionen angegeben werden).\nTipp: Du kannst Wörter in \"\" schreiben, dann zählt es als ein Argument (statt dem Leerzeichen) (z.B. \"Ich bin der Titel\")",
+      "usage": "[Title] [Option1] [Option2] ...",
+      "fail": {
+        "guild": "Du musst diesen Befehl auf dem Server ausführen auf dem sich die Umfrage befindet!",
+        "authorised": "Du bist nicht berechtigt, diese Umfrage zu bearbeiten.\nNur der Author einer Umfrage oder der Server-Admin darf eine Umfrage bearbeiten!"
+      }
+    },
+    "poll_vote": {
+      "help": "Stimme für private Umfragen ab. Übergebe dafür zunächst die Id-Nummer der Poll und dann den Buchstaben, für den du Stimmen willst.\nDu kannst für jede Option maximal einmal Stimmen!",
+      "usage": "[poll_id] [Options_Buchstabe]",
+      "fail": {
+        "poll_id": "Die Umfrage mit übergebener Id-Nummer existiert nicht!",
+        "guild": "Du musst dem Server beigetreten sein, auf dem diese Umfrage existiert!",
+        "not_private": "Du kannst diesen Befehl nur für private Umfragen benutzen!",
+        "access": "Error: Ich kann die Umfragen-Nachricht nicht erreichen!",
+        "choice": "Der das zweite Argument muss ein Buchstabe zwischen a bis z sein!",
+        "choice_out_of_bounce": "Du musst eine Option wählen, die auch existiert!",
+        "voted": "Du hast bereits für diese Option abgestimmt!"
+      }
+    },
+    "mensa_set_channel": {
+      "help": "Setzte den Kanal, in dem du Mensa-Updates erhalten möchtest.\nDer angegebene Kanal muss dabei in diesem Server liegen!",
+      "usage": "[Kanal-Id]",
+      "success": "Der Kanal wurde erfolgreich gesetzt!",
+      "fail": {
+        "no_number": "Das übergebene Argument ist keine Zahl!",
+        "wrong_id": "Die übergebene Kanal-Id entspricht keinem Kanal auf diesem Server!"
+      }
+    },
+    "mensa_enable": {
+      "help": "Aktiviere die Mensa-Updates.\nBeachte dabei, dass der Mensa Kanal mithilfe des Befehls `mensa_set_channel` gesetzt sein muss!",
+      "success": "Die Mensa-Updates wurden erfolgreich aktiviert!",
+      "fail": {
+        "channel_not_set": "Der Mensa-Update-Kanal wurde noch mit gesetzt!\nBenutzte dafür bitte den Befehl `mensa_set_channel`!"
+      }
+    },
+    "mensa_disable": {
+      "help": "Deaktiviere die Mensa-Updates.",
+      "success": "Die Mensa-Updates wurden erfolgreich deaktiviert!"
     }
   }
 }
