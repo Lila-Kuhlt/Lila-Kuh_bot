@@ -14,6 +14,22 @@ module.exports = {
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
+        const id = args[0]
 
+        // args is a number
+        if (!id.match(/[0-9]+/)) {
+            msg.client.output.reply(msg, await gt(msg, s + "fail.no_number"))
+            return
+        }
+
+        // channel exists in same guild
+        const channel = await msg.guild.channels.fetch(id)
+        if (!channel) {
+            msg.client.output.reply(msg, await gt(msg, s + "fail.wrong_id"))
+            return
+        }
+
+        await msg.client.DB.Guild.mensa_set_channel_id(msg, id)
+        msg.client.output.send(msg, await gt(msg, s + "success"))
     },
 };

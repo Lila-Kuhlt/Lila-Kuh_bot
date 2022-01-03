@@ -8,12 +8,12 @@ module.exports = {
     args_needed: false,
     args_min_length: 0,
     args_max_length: 0,
-    usage: async function (msg) { return await gt(msg, s + "usage") },
     guild_only: true,
     need_permission: ['ADMINISTRATOR'],
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
-
+        await msg.client.DB.Guild.mensa_disable(msg)
+        msg.client.output.send(msg, await gt(msg, s + "success"))
     },
 };
