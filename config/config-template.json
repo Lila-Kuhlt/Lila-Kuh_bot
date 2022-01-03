@@ -37,7 +37,5 @@
 
   "enable_standard_commands": true,
   "enable_slash_commands": true,
-  "auto_slash_options": false,
-
-  "mensa_channel_id": "900087023338151946"
+  "auto_slash_options": false
 }
