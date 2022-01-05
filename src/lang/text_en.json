@@ -90,13 +90,14 @@
       "usage": "[Title] [Option1] [Option2] ...",
       "options": "Options",
       "embed_footer": "Poll-id: %0",
-      "success": "Success!\n[Link to survey](%0)"
+      "success_add": "Successfully added vote!\n[Link to survey](%0)",
+      "success_remove": "Successfully removed vote!\n[Link to survey](%0)"
     },
     "poll_private": {
       "help": "Create a private poll in a nice embed style. You can then no longer vote with reactions but only with the help of the vote command from the DMs.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",
       "score": "Score",
-      "embed_footer": "This is a private poll. Use %0poll_vote in private chat (DMs) with this bot or the buttons to vote!\nPoll-Id: %1"
+      "embed_footer": "This is a private poll. Use %0poll_vote in private chat (DMs) with this bot or the buttons to vote!\nYou can remove your vote with poll_unvote or by repeatedly pressing a button.\nPoll-Id: %1"
     },
     "poll_edit": {
       "help": "Edit a poll (of any type) by simply passing the title and options again.\nBut note that only the author of a poll or the server admin can edit polls and the reactions/scores will not be regenerated (if more/less options are given).\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
@@ -117,8 +118,13 @@
         "access": "Error: I can't access the poll message!",
         "choice": "The second argument must be a letter between a to z!",
         "choice_out_of_bounce": "You must choose an option that exists!",
-        "voted": "You have already voted for this option!"
+        "voted": "You have already voted for this option!",
+        "not_voted": "You have not yet voted for this option!"
       }
+    },
+    "poll_unvote": {
+      "help": "Remove your vote for private polls. To do this, first pass the poll id number and then the letter where you want to remove your vote.",
+      "usage": "[poll_id] [option_letter]"
     },
     "mensa_set_channel": {
       "help": "Set the channel in which you want to receive mensa updates.\nThe specified channel must be in this server!",

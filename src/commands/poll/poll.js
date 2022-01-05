@@ -56,14 +56,19 @@ module.exports = {
     },
     async react(msg, emojis) {
         for (let i = 0; i < emojis.length; i++) {
-            msg.react(this.emojis[i])
+            await msg.react(this.emojis[i])
         }
     },
     async add_poll_to_db(new_msg, is_private) {
         await new_msg.client.DB.Poll.add(new_msg, is_private)
     },
-    async generate_success_embed(msg, url_to_msg) {
-        return new MessageEmbed()
-            .setDescription(await gt(msg, `${s}success`, url_to_msg))
+    async generate_success_embed(msg, url_to_msg, add_vote) {
+        if (add_vote) {
+            return new MessageEmbed().setDescription(await gt(msg, `${s}success_add`, url_to_msg))
+
+        } else {
+            return new MessageEmbed().setDescription(await gt(msg, `${s}success_remove`, url_to_msg))
+        }
+
     }
 };

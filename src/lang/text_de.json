@@ -90,13 +90,14 @@
       "usage": "[Title] [Option1] [Option2] ...",
       "options": "Optionen",
       "embed_footer": "Umfrage-Id: %0",
-      "success": "Erfolg!\n[Link zur Umfrage](%0)"
+      "success_add": "Erfolgreich Stimme hinzugefügt!\n[Link zur Umfrage](%0)",
+      "success_remove": "Erfolgreich Stimme entfernt!\n[Link zur Umfrage](%0)"
     },
     "poll_private": {
       "help": "Erstelle eine private Umfrage im schönen Embed-Stil. Abstimmen kann man dann nicht mehr mit Reaktionen sondern nur mithilfe des poll_vote-Befehls aus den DMs\nTipp: Du kannst Wörter in \"\" schreiben, dann zählt es als ein Argument (statt dem Leerzeichen) (z.B. \"Ich bin der Titel\")",
       "usage": "[Title] [Option1] [Option2] ...",
       "score": "Ergebnis",
-      "embed_footer": "Dies ist eine private Umfrage. Benutze %0poll_vote im privaten Chat mit diesem Bot oder die Buttons um abzustimmen!\nUmfrage-Id: %1"
+      "embed_footer": "Dies ist eine private Umfrage. Benutze %0poll_vote im privaten Chat mit diesem Bot oder die Buttons um abzustimmen!\nMit poll_unvote oder wiederholtem Drücken auf einen Button kannst du deine Stimme entfernen\nUmfrage-Id: %1"
     },
     "poll_edit": {
       "help": "Bearbeite eine Umfrage (egal welcher Art), indem du einfach nochmal den Titel und die Optionen übergibst.\nBeachte jedoch, dass nur der Author einer Umfrage oder der Server-Admin Umfragen bearbeiten können und dass die Ergebnisse nicht neu generiert werden (falls mehr/weniger Optionen angegeben werden).\nTipp: Du kannst Wörter in \"\" schreiben, dann zählt es als ein Argument (statt dem Leerzeichen) (z.B. \"Ich bin der Titel\")",
@@ -117,8 +118,13 @@
         "access": "Error: Ich kann die Umfragen-Nachricht nicht erreichen!",
         "choice": "Der das zweite Argument muss ein Buchstabe zwischen a bis z sein!",
         "choice_out_of_bounce": "Du musst eine Option wählen, die auch existiert!",
-        "voted": "Du hast bereits für diese Option abgestimmt!"
+        "voted": "Du hast bereits für diese Option abgestimmt!",
+        "not_voted": "Du hast noch nicht für diese Option abgestimmt!"
       }
+    },
+    "poll_unvote": {
+      "help": "Entferne deine bereits abgegebene Stimme für private Umfragen. Übergebe dafür zunächst die Id-Nummer der Poll und dann den Buchstaben, bei dem du deine Stimme entfernen willst.",
+      "usage": "[poll_id] [Options_Buchstabe]"
     },
     "mensa_set_channel": {
       "help": "Setzte den Kanal, in dem du Mensa-Updates erhalten möchtest.\nDer angegebene Kanal muss dabei in diesem Server liegen!",
