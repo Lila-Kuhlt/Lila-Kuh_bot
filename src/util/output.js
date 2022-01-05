@@ -29,7 +29,7 @@ async function edit(msg_to_edit, new_content) {
 // Check Slash
 // ----------------------------
 function check_slash(msg) {
-    return (msg.type === 'APPLICATION_COMMAND') && (!Object.keys(msg).includes("interaction"))
+    return ((msg.type === 'APPLICATION_COMMAND') && (!Object.keys(msg).includes("interaction"))) || (msg.type === 'MESSAGE_COMPONENT')
 }
 // ----------------------------
 
