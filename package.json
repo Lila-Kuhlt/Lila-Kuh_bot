@@ -1,12 +1,12 @@
 {
   "name": "@lila.kuhlt/lila-kuh-bot",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Official bot of the Lila Pause",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
-    "pm": "pm2 start index.js --name lila-kuh-bot",
+    "pm": "pm2 start src/index.js --name lila-kuh-bot",
     "pm-restart": "pm2 reload lila-kuh-bot",
     "pm-stop": "pm2 delete lila-kuh-bot"
   },
