@@ -13,9 +13,10 @@ module.exports = {
     dm_only: true,
     disabled: false,
     enable_slash: false,
-    async execute(msg, args) {
+    async execute(msg, args, is_unvote) {
         const poll_id = args.shift()
         const poll_to_vote = await msg.client.DB.Poll.get(msg, poll_id)
+        const msg_is_button = msg.type === 'MESSAGE_COMPONENT'
         let guild
         let old_msg
 
@@ -67,19 +68,24 @@ module.exports = {
 
         // check, if author of command already voted for this option
         const poll_voted_tag = await msg.client.DB.Poll_Voted.get(msg, poll_id, msg.author.id)
-        if (poll_voted_tag && (poll_voted_tag.choices[index])) {
+        const poll_tag_user_choice = poll_voted_tag && poll_voted_tag.choices[index]
+        if (poll_voted_tag && !msg_is_button && !is_unvote && poll_tag_user_choice) {
             msg.client.output.reply(msg, { content: await gt(msg, `${sf}voted`), ephemeral: true })
+            return
+
+        } else if (poll_voted_tag && !msg_is_button && is_unvote && !poll_tag_user_choice) {
+            msg.client.output.reply(msg, { content: await gt(msg, `${sf}not_voted`), ephemeral: true })
             return
         }
         // ---------------
 
         // generate new solution
-        const new_score = this.increment_score(score, index)
+        const new_score = poll_tag_user_choice ? this.decrement_score(score, index) : this.increment_score(score, index)
         old_msg.embeds[0].fields[1] = {name: await gt(msg, "commands.poll_private.score"), value: new_score, inline: true}
 
         // set vote in database
         if (poll_voted_tag) {
-            poll_voted_tag.choices[index] = true
+            poll_voted_tag.choices[index] = !poll_tag_user_choice
             await msg.client.DB.Poll_Voted.set(msg, poll_id, msg.author.id, poll_voted_tag.choices)
 
         } else {
@@ -90,11 +96,19 @@ module.exports = {
 
         // edit poll
         msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })
-        msg.client.output.send(msg, { embeds: [await msg.client.commands.get('poll').generate_success_embed(msg, old_msg.url)], ephemeral: true })
+
+        // send success
+        msg.client.output.send(msg, { embeds: [await msg.client.commands.get('poll').generate_success_embed(msg, old_msg.url, !poll_tag_user_choice)], ephemeral: true })
+
     },
     increment_score(old_score, index) {
         const scores = old_score.split("\n")
         scores[index] = (Number.parseInt(scores[index]) + 1) + ""
+        return scores.join("\n")
+    },
+    decrement_score(old_score, index) {
+        const scores = old_score.split("\n")
+        scores[index] = (Number.parseInt(scores[index]) - 1) + ""
         return scores.join("\n")
     },
     get_index_from_choice(msg, choice) {
