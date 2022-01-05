@@ -61,7 +61,7 @@ module.exports = {
             new_embed.footer = old_msg.embeds[0].footer
 
         } else {
-            new_embed.setFooter(await gt(msg, `${sp}embed_footer`, poll_id))
+            new_embed.setFooter({ text: await gt(msg, `${sp}embed_footer`, poll_id) })
         }
 
         msg.client.output.edit(old_msg, { embeds: [new_embed] })

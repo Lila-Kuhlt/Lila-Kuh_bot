@@ -24,7 +24,7 @@ module.exports = {
         // ---------------
         // wrong poll id
         if (poll_to_vote === null) {
-            msg.client.output.reply(msg, await gt(msg, `${sf}poll_id`))
+            msg.client.output.reply(msg, { content: await gt(msg, `${sf}poll_id`), ephemeral: true })
             return
         }
 
@@ -34,13 +34,13 @@ module.exports = {
             await guild.members.fetch(msg.author.id) // test, user is in guild
 
         } catch (e) {
-            msg.client.output.reply(msg, await gt(msg, `${sf}guild`))
+            msg.client.output.reply(msg, { content: gt(msg, `${sf}guild`), ephemeral: true })
             return
         }
 
         // check, if poll is private
         if (!poll_to_vote.private) {
-            msg.client.output.reply(msg, await gt(msg, `${sf}not_private`))
+            msg.client.output.reply(msg, { content: await gt(msg, `${sf}not_private`), ephemeral: true })
             return
         }
 
@@ -48,7 +48,7 @@ module.exports = {
         try {
             old_msg = await (await guild.channels.fetch(poll_to_vote.channel_id)).messages.fetch(poll_id)
         } catch (e) {
-            msg.client.output.reply(msg, await gt(msg, `${sf}access`))
+            msg.client.output.reply(msg, { content: await gt(msg, `${sf}access`), ephemeral: true })
             msg.client.logger.log("warn", e)
             return
         }
@@ -57,18 +57,18 @@ module.exports = {
         const score = old_msg.embeds[0].fields[1].value
         const index = this.get_index_from_choice(msg, args[0])
         if (index === null) {
-            msg.client.output.reply(msg, await gt(msg, `${sf}choice`))
+            msg.client.output.reply(msg, { content: await gt(msg, `${sf}choice`), ephemeral: true })
             return
 
         } else if ((index < 0) || (index >= score.split("\n").length)) {
-            msg.client.output.reply(msg, await gt(msg, `${sf}choice_out_of_bounce`))
+            msg.client.output.reply(msg, { content: await gt(msg, `${sf}choice_out_of_bounce`), ephemeral: true })
             return
         }
 
         // check, if author of command already voted for this option
         const poll_voted_tag = await msg.client.DB.Poll_Voted.get(msg, poll_id, msg.author.id)
         if (poll_voted_tag && (poll_voted_tag.choices[index])) {
-            msg.client.output.reply(msg, await gt(msg, `${sf}voted`))
+            msg.client.output.reply(msg, { content: await gt(msg, `${sf}voted`), ephemeral: true })
             return
         }
         // ---------------
@@ -90,8 +90,7 @@ module.exports = {
 
         // edit poll
         msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })
-        msg.client.output.send(msg, { embeds: [await msg.client.commands.get('poll').generate_success_embed(msg, old_msg.url)]})
-
+        msg.client.output.send(msg, { embeds: [await msg.client.commands.get('poll').generate_success_embed(msg, old_msg.url)], ephemeral: true })
     },
     increment_score(old_score, index) {
         const scores = old_score.split("\n")

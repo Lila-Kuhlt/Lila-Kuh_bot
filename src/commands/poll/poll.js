@@ -26,7 +26,7 @@ module.exports = {
 
         const embed = await this.generate_embed(msg, title, options, emojis)
         let new_msg = await msg.client.output.send(msg, {embeds: [embed], fetchReply: true})
-        embed.setFooter(await gt(msg, `${s}embed_footer`, new_msg.id))
+        embed.setFooter({ text: await gt(msg, `${s}embed_footer`, new_msg.id) })
         new_msg = await msg.client.output.edit(new_msg, {embeds: [embed]})
         await this.react(new_msg, emojis)
         await this.add_poll_to_db(new_msg, false)

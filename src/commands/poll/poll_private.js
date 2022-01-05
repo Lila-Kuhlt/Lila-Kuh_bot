@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageButton, MessageActionRowComponentResolvable } = require('discord.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
 
 const { get_text: gt } = require("../../lang/lang_man")
 const s = "commands.poll_private."
@@ -45,7 +45,7 @@ module.exports = {
 
             buttons.push(new MessageButton()
                 .setEmoji(emojis[i])
-                .setCustomId("poll-" + i)
+                .setCustomId("poll-" + String.fromCharCode(65 + i))
                 .setStyle('SECONDARY')
             )
         }

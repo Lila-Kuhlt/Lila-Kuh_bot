@@ -21,8 +21,6 @@ async function interaction_create(interaction) {
 // ---------------------------------
 function interaction_to_message(interaction) {
     interaction.author = interaction.user
-
-
     return interaction
 }
 // ---------------------------------
@@ -61,4 +59,4 @@ function get_command(interaction, command_name) {
 
 // ----------------------------------
 
-module.exports = { interaction_create }
+module.exports = { interaction_create, interaction_to_message }
