@@ -96,7 +96,7 @@
       "help": "Create a private poll in a nice embed style. You can then no longer vote with reactions but only with the help of the vote command from the DMs.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",
       "score": "Score",
-      "embed_footer": "This is a private poll. Use %0poll_vote in private chat (DMs) with this bot to vote!\nPoll-Id: %1"
+      "embed_footer": "This is a private poll. Use %0poll_vote in private chat (DMs) with this bot or the buttons to vote!\nPoll-Id: %1"
     },
     "poll_edit": {
       "help": "Edit a poll (of any type) by simply passing the title and options again.\nBut note that only the author of a poll or the server admin can edit polls and the reactions/scores will not be regenerated (if more/less options are given).\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
@@ -109,6 +109,7 @@
     "poll_vote": {
       "help": "Vote for private polls. To do so, first pass the poll id number and then the letter you want to vote for.\nYou can vote for each option a maximum of once!",
       "usage": "[poll_id] [option_letter]",
+      "success": "Success!",
       "fail": {
         "poll_id": "The poll with passed id number does not exist!",
         "guild": "You must have joined the server where this poll exists!",
