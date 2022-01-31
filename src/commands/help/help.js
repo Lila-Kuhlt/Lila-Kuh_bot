@@ -23,7 +23,7 @@ module.exports = {
 
         // help information for all command
         if (!args.length) {
-            return this.send_all_commands(msg)
+            return await this.send_all_commands(msg)
 
         // help information for a specific command
         } else {
@@ -73,8 +73,8 @@ module.exports = {
     // create an embed with information about all commands
     async create_embed_all_commands(msg) {
         const prefix = await msg.client.DB.Guild.get_prefix(msg)
-        const description = await gt(msg, s + "intro", msg.client.helper.commands_to_string(msg),
-                `\`${prefix}${this.name} ${await this.usage(msg)}\``)
+        const description = await gt(msg, s + "intro", await msg.client.helper.commands_to_string(msg),
+            `\`${prefix}${this.name} ${await this.usage(msg)}\``)
 
         return await this.create_embed_help_format(msg, this.name, description)
     },
@@ -91,17 +91,18 @@ module.exports = {
         if (aliases.length) description.push(`${await gt(msg, s + "success.aliases")}\n${aliases.join(', ')}\n`)
         if (cmd_description) description.push(`${await gt(msg, s + "success.description")}\n${cmd_description}\n`)
         if (usage) description.push(`${await gt(msg, s + "success.usage")}\n\`${prefix}${name} ${usage}\``)
-        if (msg.client.config.help.show_cmd_modifications) description.push(`\n${(await msg.client.mod_man.get_mods_for_help(msg, command)).join("\n")}`)
+        if (msg.client.config.help.show_cmd_modifications) description.push(`${(await msg.client.mod_man.get_mods_for_help(msg, command)).join("\n")}`)
 
         return await this.create_embed_help_format(msg, name, description.join("\n"))
     },
 
     // actually generates an embed_msg in help format
-    async create_embed_help_format(msg, title, description) {
+    async create_embed_help_format(msg, title, description, fields = []) {
         const embed_msg = new Discord.MessageEmbed()
             .setColor(msg.client.config.embed.color)
             .setTitle(`${title.toUpperCase()} ${(await gt(msg, s + "command")).toUpperCase()}`)
             .setDescription(description)
+            .addFields(fields)
             .setThumbnail(msg.client.config.embed.avatar_url)
 
         // add link connection between dm msg and server msg
@@ -121,7 +122,7 @@ module.exports = {
         }]
 
         for (const command of msg.client.commands) {
-            if (msg.client.config.help.show_only_permitted_commands && !msg.client.helper.is_permitted(msg, command[1])) continue
+            if (msg.client.config.help.show_only_permitted_commands && !await msg.client.helper.is_permitted(msg, command[1])) continue
             let name = await msg.client.mods.name.get(msg, command[1])
             let description = msg.client.helper.trim_text(await msg.client.mods.description.get(msg, command[1]), 50, true)
 

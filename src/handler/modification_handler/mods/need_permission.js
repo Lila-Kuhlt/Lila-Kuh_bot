@@ -34,7 +34,7 @@ function is_valid(command) {
 }
 
 async function get(msg, command) {
-    return (is_in(command)) ? command[name] : false
+    return (is_in(command)) ? command[name] : []
 }
 
 async function get_help(msg, command) {
