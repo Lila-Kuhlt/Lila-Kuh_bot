@@ -19,7 +19,6 @@ async function help_menu(interaction) {
     const clicker_msg = menu_msg
     clicker_msg.author = interaction.user
     const footer_field = interaction.message.embeds[0].fields
-    console.log(footer_field)
 
     if (val === 'all') {
         await interaction.update({
