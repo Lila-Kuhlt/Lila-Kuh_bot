@@ -95,7 +95,7 @@ module.exports = {
         }
 
         // edit poll
-        msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })
+        await msg.client.output.edit(old_msg, { embeds: [old_msg.embeds[0]] })
 
         // send success
         msg.client.output.send(msg, { embeds: [await msg.client.commands.get('poll').generate_success_embed(msg, old_msg.url, !poll_tag_user_choice)], ephemeral: true })
