@@ -15,7 +15,15 @@ const _TABLE = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        "bdate": { // YYYY-MM-DD
+        "year": {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        "month": {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        "day": {
             type: Sequelize.STRING,
             allowNull: false
         },
@@ -29,13 +37,20 @@ const _TABLE = (sequelize, Sequelize) => {
 // ---------------------------------------------
 // Helper
 // ---------------------------------------------
+// get all user_ids for a specific guild_id
+async function get_user_ids(client, guild_id) {
+    return await client.DB["Bday"].TABLE.findAll({attributes: ["user_id"], where: { "guild_id": guild_id }})
+}
+
 // add stuff to database
-async function add(client, guild_id, user_id, bdate) {
+async function add(client, guild_id, user_id, year, month, day) {
     try {
         await client.DB["Bday"].TABLE.create({
             "guild_id": guild_id,
             "user_id": user_id,
-            "bdate": bdate
+            "year": year,
+            "month": month,
+            "day": day
         })
 
     } catch (e) {
@@ -63,8 +78,9 @@ async function get(client, guild_id, user_id) {
 
 
 // set stuff in database
-async function set(client, guild_id, user_id, bdate) {
-    const new_tag = await client.DB["Bday"].TABLE.update({ "bdate": bdate }, { where: { "guild_id": guild_id, "user_id": user_id } })
+async function set(client, guild_id, user_id, year, month, day) {
+    const new_tag = await client.DB["Bday"].TABLE.update({ "year": year, "month": month, "day": day },
+        { where: { "guild_id": guild_id, "user_id": user_id } })
 
     if (new_tag) {
         return true
@@ -90,4 +106,4 @@ async function remove(client, guild_id, user_id) {
 // ---------------------------------------------
 
 
-module.exports = { _TABLE, add, get, set, remove }
+module.exports = { _TABLE, get_user_ids, add, get, set, remove }
