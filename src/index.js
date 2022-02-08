@@ -36,6 +36,7 @@ client.events = require("./handler/event_handler/events")
 client.output = require("./util/output")
 client.mod_man = require("./handler/modification_handler/mod_manager")
 client.mensa_man = require("./handler/event_handler/events/mensa_event")
+client.bday_event = require("./handler/event_handler/events/bday_event")
 
 // dynamically retrieve all command files and additionally save it into msg.client.command_tree
 async function load_commands(client) {
