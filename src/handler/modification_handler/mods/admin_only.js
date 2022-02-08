@@ -15,7 +15,7 @@ const help_key = "mods_help." + name
 // ----------------------------------
 async function check(msg, command, args) {
     const mod = await get(msg, command)
-    return !mod || !mod.length || msg.client.helper.is_admin(msg)
+    return !mod || msg.client.helper.is_admin(msg)
 }
 
 async function send_check_fail(msg, command, args) {
