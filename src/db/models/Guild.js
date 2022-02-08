@@ -170,8 +170,72 @@ async function get_mensa_enabled(client, guild_id) {
     return (tag) ? tag.mensa_enabled : false
 }
 // -------------
+
+
+// -------------
+// Bday
+// -------------
+// get bday_channel_id of the guild. If guild doesn't exist in database, the guild will add it into the database
+async function get_bday_channel_id(client, guild_id) {
+    const tag = await client.DB.Guild.TABLE.findOne({ where: { guild_id: guild_id } })
+
+    if (tag) {
+        return tag.bday_channel_id
+
+    } else {
+        client.logger.log("warn",`guild ${guild_id} not in database 'Guild'`)
+        await add(client, guild_id)
+        return await get_bday_channel_id(client, guild_id)
+    }
+}
+
+async function set_bday_channel_id(client, guild_id, new_channel_id) {
+    const old_channel_id = await get_bday_channel_id(client, guild_id)
+    const new_tag = await client.DB.Guild.TABLE.update({ bday_channel_id: new_channel_id }, { where: { guild_id: guild_id } })
+
+    if (new_tag) {
+        return true
+
+    } else {
+        client.logger.log("error", `Could not set bday_channel_id from ${old_channel_id} to ${new_channel_id} of guild ${guild_id} in database 'Guild'`)
+        return false
+    }
+}
+
+async function set_bday_enable(client, guild_id) {
+    const new_tag = await client.DB.Guild.TABLE.update({ bday_enabled: true }, { where: { guild_id: guild_id } })
+
+    if (new_tag) {
+        return true
+
+    } else {
+        client.logger.log("warn",`guild ${guild_id} not in database 'Guild'`)
+        await add(client, guild_id)
+        return await set_bday_enable(client)
+    }
+}
+
+async function set_bday_disable(client, guild_id) {
+    const new_tag = await client.DB.Guild.TABLE.update({ bday_enabled: false }, { where: { guild_id: guild_id } })
+
+    if (new_tag) {
+        return true
+
+    } else {
+        client.logger.log("warn",`guild ${guild_id} not in database 'Guild'`)
+        await add(client, guild_id)
+        return await set_bday_disable(client, guild_id)
+    }
+}
+
+async function get_bday_enabled(client, guild_id) {
+    const tag = await client.DB.Guild.TABLE.findOne({ where: { guild_id: guild_id } })
+    return (tag) ? tag.bday_enabled : false
+}
+// -------------
 // ---------------------------------------------
 
 
 module.exports = { _TABLE, add, get_guild_ids, get_prefix, set_prefix,
-    get_mensa_channel_id, set_mensa_channel_id, set_mensa_disable, set_mensa_enable, get_mensa_enabled }
+    get_mensa_channel_id, set_mensa_channel_id, set_mensa_disable, set_mensa_enable, get_mensa_enabled,
+    get_bday_channel_id, set_bday_channel_id, set_bday_enable, set_bday_disable, get_bday_enabled }
