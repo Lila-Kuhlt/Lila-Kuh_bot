@@ -5,6 +5,7 @@
 // ---------------------------------------------
 // Model
 // ---------------------------------------------
+//TODO: Add guild_id
 const _TABLE = (sequelize, Sequelize) => {
     return sequelize.define('Bday', {
         "user_id": {
