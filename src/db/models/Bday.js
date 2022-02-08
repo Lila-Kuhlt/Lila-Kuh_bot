@@ -39,7 +39,22 @@ const _TABLE = (sequelize, Sequelize) => {
 // ---------------------------------------------
 // get all user_ids for a specific guild_id
 async function get_user_ids(client, guild_id) {
-    return await client.DB["Bday"].TABLE.findAll({attributes: ["user_id"], where: { "guild_id": guild_id }})
+    const tag = await client.DB["Bday"].TABLE.findAll({attributes: ["user_id"], where: { "guild_id": guild_id }})
+    return (tag) ? tag.map(function (e) {
+        return e.dataValues.user_id
+    }) : []
+}
+
+// get all user_ids x guild_ids x year with matching month and date
+async function get_guild_user_ids_and_year(client, guild_id, month, date) {
+    const tag = await client.DB["Bday"].TABLE.findAll({attributes: ["guild_id", "user_id", "year"], where: { "month": month, "date": date }})
+    return (tag) ? tag.map(function (e) {
+        return {
+            guild_id: e.dataValues.guild_id,
+            channel_id: e.dataValues.user_id,
+            year: e.dataValues.year
+        }
+    }) : []
 }
 
 // add stuff to database
@@ -106,4 +121,4 @@ async function remove(client, guild_id, user_id) {
 // ---------------------------------------------
 
 
-module.exports = { _TABLE, get_user_ids, add, get, set, remove }
+module.exports = { _TABLE, get_user_ids, get_guild_user_ids_and_year, add, get, set, remove }
