@@ -85,6 +85,7 @@
       "get": "The prefix of this server is: %0",
       "set": "The prefix of this server has been set to: %0"
     },
+
     "poll": {
       "help": "Create a poll in a beautiful embed style. Reactions are automatically generated so others can use them to vote.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",
@@ -126,6 +127,7 @@
       "help": "Remove your vote for private polls. To do this, first pass the poll id number and then the letter where you want to remove your vote.",
       "usage": "[poll_id] [option_letter]"
     },
+
     "mensa_set_channel": {
       "help": "Set the channel in which you want to receive mensa updates.\nThe specified channel must be in this server!",
       "usage": "[channel id]",
@@ -145,6 +147,34 @@
     "mensa_disable": {
       "help": "Disable the Mensa updates.",
       "success": "Mensa updates have been successfully disabled!"
+    },
+
+    "bady": {
+      "help": ""
+    },
+    "bday_all": {
+      "help": ""
+    },
+    "bday_disable": {
+      "help": ""
+    },
+    "bday_enable": {
+      "help": ""
+    },
+    "bday_get": {
+      "help": "",
+      "usage": ""
+    },
+    "bday_opt_in": {
+      "help": "",
+      "usage": ""
+    },
+    "bday_opt_out": {
+      "help": ""
+    },
+    "bday_set_channel": {
+      "help": "",
+      "usage": ""
     }
   }
 }

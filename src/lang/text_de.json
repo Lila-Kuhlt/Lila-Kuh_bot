@@ -85,6 +85,7 @@
       "get": "Der Prefix dieses Servers ist: %0",
       "set": "Der Prefix dieses Server wurde gesetzt auf: %0"
     },
+
     "poll": {
       "help": "Erstelle eine Umfrage im schönen Embed-Stil. Passend dazu werden automatisch Reaktionen erzeugt, mit denen andere dann abstimmten können.\nTipp: Du kannst Wörter in \"\" schreiben, dann zählt es als ein Argument (statt dem Leerzeichen) (z.B. \"Ich bin der Titel\")",
       "usage": "[Title] [Option1] [Option2] ...",
@@ -126,6 +127,7 @@
       "help": "Entferne deine bereits abgegebene Stimme für private Umfragen. Übergebe dafür zunächst die Id-Nummer der Poll und dann den Buchstaben, bei dem du deine Stimme entfernen willst.",
       "usage": "[poll_id] [Options_Buchstabe]"
     },
+
     "mensa_set_channel": {
       "help": "Setzte den Kanal, in dem du Mensa-Updates erhalten möchtest.\nDer angegebene Kanal muss dabei in diesem Server liegen!",
       "usage": "[Kanal-Id]",
@@ -145,6 +147,34 @@
     "mensa_disable": {
       "help": "Deaktiviere die Mensa-Updates.",
       "success": "Die Mensa-Updates wurden erfolgreich deaktiviert!"
+    },
+
+    "bady": {
+      "help": ""
+    },
+    "bday_all": {
+      "help": ""
+    },
+    "bday_disable": {
+      "help": ""
+    },
+    "bday_enable": {
+      "help": ""
+    },
+    "bday_get": {
+      "help": "",
+      "usage": ""
+    },
+    "bday_opt_in": {
+      "help": "",
+      "usage": ""
+    },
+    "bday_opt_out": {
+      "help": ""
+    },
+    "bday_set_channel": {
+      "help": "",
+      "usage": ""
     }
   }
 }
