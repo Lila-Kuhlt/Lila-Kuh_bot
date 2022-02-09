@@ -16,6 +16,25 @@ module.exports = {
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
+        const new_bday_channel_id = args[0]
 
+        // args is a number
+        if (new_bday_channel_id.match(/[^0-9]/)) {
+            await msg.client.output.reply(msg, await gt(msg, s + "fail.no_number"))
+            return
+        }
+
+        // channel exists in same guild
+        let channel
+        try {
+            channel = await msg.guild.channels.fetch(new_bday_channel_id)
+
+        } catch (e) {
+            await msg.client.output.reply(msg, await gt(msg, s + "fail.wrong_id"))
+            return
+        }
+
+        await msg.client.DB.Guild.set_bday_channel_id(msg.client, msg.member.guild.id, new_bday_channel_id)
+        await msg.client.output.send(msg, await gt(msg, s + "success"))
     },
 };

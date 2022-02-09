@@ -15,6 +15,12 @@ module.exports = {
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
+        if (!await msg.client.DB.Guild.get_bday_channel_id(msg.client, msg.member.guild.id)) {
+            await msg.client.output.reply(msg, await gt(msg, s + "fail.channel_not_set"))
+            return
+        }
 
+        await msg.client.DB.Guild.set_bday_enable(msg.client, msg.member.guild.id)
+        await msg.client.output.send(msg, await gt(msg, s + "success"))
     },
 };
