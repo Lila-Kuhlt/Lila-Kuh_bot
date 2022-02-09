@@ -138,10 +138,10 @@
       }
     },
     "mensa_enable": {
-      "help": "Aktiviere die Mensa-Updates.\nBeachte dabei, dass der Mensa Kanal mithilfe des Befehls `mensa_set_channel` gesetzt sein muss!",
+      "help": "Aktiviere die Mensa-Updates.\nBeachte dabei, dass der Mensa-Kanal mithilfe des Befehls `mensa_set_channel` gesetzt sein muss!",
       "success": "Die Mensa-Updates wurden erfolgreich aktiviert!",
       "fail": {
-        "channel_not_set": "Der Mensa-Update-Kanal wurde noch mit gesetzt!\nBenutzte dafür bitte den Befehl `mensa_set_channel`!"
+        "channel_not_set": "Der Mensa-Update-Kanal wurde noch nicht gesetzt!\nBenutzte dafür bitte den Befehl `mensa_set_channel`!"
       }
     },
     "mensa_disable": {
@@ -156,15 +156,20 @@
       "help": ""
     },
     "bday_disable": {
-      "help": ""
+      "help": "Deaktiviere die Geburtstags-Updates.",
+      "success": "Die Geburtstags-Updates wurden erfolgreich deaktiviert!"
     },
     "bday_enable": {
-      "help": ""
+      "help": "Aktiviere die Geburtstags-Updates.\nBeachte dabei, dass der Geburtstags-Kanal mithilfe des Befehls `bday_set_channel` gesetzt sein muss!",
+      "success": "Die Geburtstags-Updates wurden erfolgreich aktiviert!",
+      "fail": {
+        "channel_not_set": "Der Geburtstags-Update-Kanal wurde noch nicht gesetzt!\nBenutzte dafür bitte den Befehl `bday_set_channel`!"
+      }
     },
     "bday_get": {
       "help": "",
-      "usage": "User_Id or @User",
-      "success": "User <@%0> hat am **%1** Geburtstag und ist **%2** Jahre alt!",
+      "usage": "user_id oder @User",
+      "success": "<@%0> hat am **%1** Geburtstag und ist **%2** Jahre alt!",
       "fail": {
         "wrong_format": "Dein Argument hat das falsche Format!",
         "unknown_user": "Dieser User ist nicht auf diesem Server!",
@@ -172,7 +177,7 @@
       }
     },
     "bday_opt_in": {
-      "help": "",
+      "help": "Opt in die Geburtstagsliste. Wer opt in ist, willigt ein, dass andere Mitglied dieses Server Zugriff auf den Namen und das Geburtsdatum erhalten. Zudem wird am Tag des Geburtstags (sofern aktiviert) eine kleine Glückwunschs-Nachricht auf diesen Server verschickt.",
       "usage": "DD.MM.YYYY",
       "success": "Erfolg!",
       "fail": {
@@ -181,15 +186,20 @@
       }
     },
     "bday_opt_out": {
-      "help": "",
+      "help": "Opt aus der Geburtstagsliste. Dein Geburtstag wird aus der Liste gelöscht und ist nicht mehr auffindbar. Es gibt auch keine Glückwunschs-Nachricht an deinem Geburtstag mehr!",
       "success": "Erfolg!",
       "fail": {
         "not_opt_in": "Du bist bereits opt out!"
       }
     },
     "bday_set_channel": {
-      "help": "",
-      "usage": ""
+      "help": "Setzte den Kanal, in dem du Geburtstags-Updates erhalten möchtest.\nDer angegebene Kanal muss dabei in diesem Server liegen!",
+      "usage": "[Kanal-Id]",
+      "success": "Der Kanal wurde erfolgreich gesetzt!",
+      "fail": {
+        "no_number": "Das übergebene Argument ist keine Zahl!",
+        "wrong_id": "Die übergebene Kanal-Id entspricht keinem Kanal auf diesem Server!"
+      }
     }
   }
 }
