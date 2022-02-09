@@ -11,8 +11,8 @@ module.exports = {
     name: 'bday_get',
     description: async function (msg) { return await gt(msg, s + "help") },
     aliases: ['bdayg', 'bdg'],
-    args_needed: true,
-    args_min_length: 1,
+    args_needed: false,
+    args_min_length: 0,
     args_max_length: 1,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     guild_only: true,
@@ -21,7 +21,10 @@ module.exports = {
     enable_slash: false,
     async execute(msg, args) {
         let member_id
-        if (/^<@!?\d+>$/.test(args[0])) {
+        if (args.length === 0) {
+            member_id = msg.author.id
+
+        } else if (/^<@!?\d+>$/.test(args[0])) {
             member_id = args[0].match(/\d+/)[0]
 
         } else if (/\d+/.test(args[0])) {
@@ -31,9 +34,8 @@ module.exports = {
             return await msg.client.output.reply(msg, await gt(msg, `${s}fail.wrong_format`))
         }
 
-        let member
         try {
-            member = await msg.guild.members.fetch(member_id)
+            await msg.guild.members.fetch(member_id)
         } catch (e) {
             return await msg.client.output.reply(msg, await gt(msg, `${s}fail.unknown_user`))
         }
@@ -41,14 +43,14 @@ module.exports = {
         const bday_tag = await msg.client.DB.Bday.get(msg.client, msg.guildId, member_id)
         if (bday_tag === null) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.user_opt_out`))
 
-        const embed = await this.post_embed_success(msg, member, bday_tag.year, bday_tag.month, bday_tag.day)
+        const embed = await this.post_embed_success(msg, member_id, bday_tag.year, bday_tag.month, bday_tag.day)
         await msg.client.output.send(msg, { embeds: [embed] })
     },
-    async post_embed_success(msg, bday_member, year, month, day) {
+    async post_embed_success(msg, bday_member_id, year, month, day) {
         const date = dayjs(new Date(year, month, day))
         const age = dayjs.duration(dayjs().diff(date)).years()
         return new MessageEmbed()
-            .setDescription(await gt(msg, `${s}success`, bday_member.id, date.format("DD.MM.YYYY"), age))
+            .setDescription(await gt(msg, `${s}success`, bday_member_id, date.format("DD.MM.YYYY"), age))
             .setColor(msg.client.config.embed.color)
     }
 };
