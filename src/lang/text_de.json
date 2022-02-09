@@ -167,7 +167,12 @@
     },
     "bday_opt_in": {
       "help": "",
-      "usage": ""
+      "usage": "YYYY-MM-DD",
+      "success": "Erfolg!",
+      "fail": {
+        "wrong_format": "Du hast das falsche Format für das Datum abgegeben!",
+        "in_future": "Das angegebene Zeitformat muss in der Vergangenheit liegen!"
+      }
     },
     "bday_opt_out": {
       "help": ""
