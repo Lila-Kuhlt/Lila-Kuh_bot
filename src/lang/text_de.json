@@ -147,8 +147,8 @@
       "success": "Die Mensa-Updates wurden erfolgreich deaktiviert!"
     },
     "bday": {
-      "help": "Zeigt dir Interessantes zu deinem Geburtstag oder Geburtstagen der Server-Mitglieder. Gib kein Argument an für nur deinen Geburtstag oder eine User_Id für eine bestimmten User!",
-      "usage": "user_id oder @User",
+      "help": "Zeigt dir Interessantes zu deinem Geburtstag oder Geburtstagen der Server-Mitglieder. Gib kein Argument an für nur deinen Geburtstag oder eine user_ids für einen bestimmten Benutzer!",
+      "usage": "[user_id] oder [@User]",
       "success": "<@%0> hat am **%1** Geburtstag und ist **%2** Jahre alt!",
       "fail": {
         "wrong_format": "Dein Argument hat das falsche Format!",
@@ -244,8 +244,8 @@
       }
     },
     "bday_opt_in": {
-      "help": "Opt in die Geburtstagsliste. Wer opt in ist, willigt ein, dass andere Mitglied dieses Server Zugriff auf den Namen und das angegebene Geburtsdatum erhalten. Zudem wird am Tag des Geburtstags (sofern vom Admin aktiviert und man noch Servermitglied) eine kleine Glückwunschs-Nachricht auf diesem Server verschickt.",
-      "usage": "DD.MM.YYYY",
+      "help": "Opt in die Geburtstagsliste. Wer opt in ist, willigt ein, dass andere Mitglieder dieses Servers Zugriff auf den Namen in Verbindung mit dem angegebenen Geburtsdatum erhalten. Zudem wird am Tag des Geburtstags (sofern vom Admin aktiviert und man noch Servermitglied) eine kleine Glückwunschs-Nachricht auf diesem Server verschickt.",
+      "usage": "[DD.MM.YYYY]",
       "success": "Erfolg!",
       "fail": {
         "wrong_format": "Du hast das falsche Format für das Datum abgegeben!",
