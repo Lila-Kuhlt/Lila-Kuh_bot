@@ -11,9 +11,8 @@ module.exports = {
     args_min_length: 0,
     args_max_length: 0,
     guild_only: true,
-    need_permission: [],
     disabled: false,
-    enable_slash: false,
+    enable_slash: true,
     async execute(msg, args) {
         if (await msg.client.DB.Bday.remove(msg.client, msg.guildId, msg.author.id)) {
             await msg.client.output.send(msg, await gt(msg, `${s}success`))

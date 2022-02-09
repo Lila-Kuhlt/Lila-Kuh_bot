@@ -15,9 +15,8 @@ module.exports = {
     args_max_length: 1,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     guild_only: true,
-    need_permission: [],
     disabled: false,
-    enable_slash: false,
+    enable_slash: true,
     async execute(msg, args) { // args: DD.MM.YYYY
         if (!/^\d{2}.\d{2}.\d{4}$/.test(args[0])) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.wrong_format`))
 

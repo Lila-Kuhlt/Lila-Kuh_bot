@@ -149,11 +149,25 @@
       "success": "Die Mensa-Updates wurden erfolgreich deaktiviert!"
     },
 
-    "bady": {
-      "help": ""
+    "bday": {
+      "help": "Zeigt dir Interessantes zu deinem Geburtstag oder Geburtstagen der Server-Mitglieder. Gib kein Argument an für nur deinen Geburtstag oder eine User_Id für eine bestimmten User!",
+      "usage": "user_id oder @User",
+      "success": "<@%0> hat am **%1** Geburtstag und ist **%2** Jahre alt!",
+      "fail": {
+        "wrong_format": "Dein Argument hat das falsche Format!",
+        "unknown_user": "Dieser User ist nicht auf diesem Server!",
+        "user_opt_out": "Dieser User ist nicht opt in!"
+      }
+    },
+    "bday_next": {
+      "help": "Gibt den nächsten Geburtstag aus!",
+      "embed": {
+        "description_pl": "<@%0> hat in **%1** Tagen als nächstes Geburtstag und wird **%2** Jahre alt.\nDas Geburtsdatum ist der **%3**!",
+        "description_sg": "<@%0> hat **morgen** als nächstes Geburtstag und wird **%1** Jahre alt.\nDas Geburtsdatum ist der **%2**!"
+      }
     },
     "bday_all": {
-      "help": "",
+      "help": "Gibt alle eingetragenen Geburtstage aus!",
       "embed": {
         "title": "Liste aller Geburtstage",
         "bday_entry": "%0 - <@%1>"
@@ -182,16 +196,6 @@
       "success": "Die Geburtstags-Updates wurden erfolgreich aktiviert!",
       "fail": {
         "channel_not_set": "Der Geburtstags-Update-Kanal wurde noch nicht gesetzt!\nBenutzte dafür bitte den Befehl `bday_set_channel`!"
-      }
-    },
-    "bday_get": {
-      "help": "",
-      "usage": "user_id oder @User",
-      "success": "<@%0> hat am **%1** Geburtstag und ist **%2** Jahre alt!",
-      "fail": {
-        "wrong_format": "Dein Argument hat das falsche Format!",
-        "unknown_user": "Dieser User ist nicht auf diesem Server!",
-        "user_opt_out": "Dieser User ist nicht opt in!"
       }
     },
     "bday_opt_in": {

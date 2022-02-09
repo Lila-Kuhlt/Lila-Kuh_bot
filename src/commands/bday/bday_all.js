@@ -1,7 +1,9 @@
 // See also: https://github.com/EliasSchaut/Discord-Bot-Template/wiki/How-to-command
 
 const { get_text: gt } = require("../../lang/lang_man")
-const dayjs = require("dayjs");
+const dayjs = require("dayjs")
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat)
 const s = "commands.bday_all."
 const { MessageEmbed } = require("discord.js")
 
@@ -13,9 +15,8 @@ module.exports = {
     args_min_length: 0,
     args_max_length: 0,
     guild_only: true,
-    need_permission: [],
     disabled: false,
-    enable_slash: false,
+    enable_slash: true,
     async execute(msg, args) {
         const user_ids = await msg.client.DB.Bday.get_user_ids(msg.client, msg.guildId)
         const months = new Array(12).fill(0).map(() => { return [] })
@@ -30,9 +31,7 @@ module.exports = {
             if (tag === null) continue
 
             const bdate = dayjs(new Date(tag.year, tag.month, tag.day)).format(msg.client.config.date.format)
-            console.log(months)
             months[tag.month].push(await gt(msg, `${s}embed.bday_entry`, bdate, user_id))
-            console.log(months)
         }
 
         const embed = new MessageEmbed()
