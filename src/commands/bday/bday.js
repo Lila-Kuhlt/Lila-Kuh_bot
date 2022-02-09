@@ -61,8 +61,8 @@ module.exports = {
             .setTitle(await gt(msg, `${s}embed.title`))
             .addFields(
                     await this.generate_general_field(msg, bday_member_id, year, month, day),
-                    await this.generate_star_sign_field(msg, bday_member_id, month, day),
-                    await this.generate_time_calcs_field(msg, year, month, day),
+                    await this.generate_star_sign_field(msg, month, day),
+                    await this.generate_time_calcs_field(msg, bday_member_id, year, month, day),
                 )
     },
     async generate_general_field(msg, bday_member_id, year, month, day) {
@@ -74,7 +74,7 @@ module.exports = {
             value: await gt(msg, `${s}success`, bday_member_id, date.format(format), age)
         }
     },
-    async generate_star_sign_field(msg, bday_member_id, month, day) {
+    async generate_star_sign_field(msg, month, day) {
         const sign = horoscope.getSign({ month: (month + 1), day: day })
         const output_sign = await gt(msg, `${s}zodiac.signs.${sign}`)
         const description = await gt(msg, `${s}zodiac.sign_descriptions.${sign}`)
@@ -83,7 +83,7 @@ module.exports = {
             value: description
         }
     },
-    async generate_time_calcs_field(msg, year, month, day) {
+    async generate_time_calcs_field(msg, bday_member_id, year, month, day) {
         const date = dayjs({ year: year, month: month, day: day })
         const now = dayjs()
         const diff = dayjs.duration(now.diff(date))
@@ -94,7 +94,7 @@ module.exports = {
 
         return {
             name: await gt(msg, `${s}embed.fields.time_calcs.title`),
-            value: await gt(msg, `${s}embed.fields.time_calcs.value`, [days, h, ms].join(join))
+            value: await gt(msg, `${s}embed.fields.time_calcs.value`, bday_member_id, [days, h, ms].join(join))
         }
     }
 };

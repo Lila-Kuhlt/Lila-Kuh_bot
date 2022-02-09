@@ -162,7 +162,7 @@
           "zodiac": "Sternzeichen: %0",
           "time_calcs": {
             "title": "Zeitrechnungen",
-            "value": "Du lebst schon:\n%0",
+            "value": "<@%0> lebt schon:\n%1",
             "days": "`%0d`",
             "h": "`%0h`",
             "ms": "`%0ms`",
