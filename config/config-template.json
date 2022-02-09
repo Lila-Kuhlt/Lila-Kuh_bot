@@ -40,7 +40,7 @@
   "auto_slash_options": false,
 
   "date": {
-    "localisation": "en",
-    "format": "YYYY-MM-DD"
+    "localisation": "de",
+    "format": "DD.MM.YYYY"
   }
 }
