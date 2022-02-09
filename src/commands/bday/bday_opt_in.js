@@ -21,7 +21,9 @@ module.exports = {
     async execute(msg, args) { // args: DD.MM.YYYY
         if (!/^\d{2}.\d{2}.\d{4}$/.test(args[0])) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.wrong_format`))
 
-        const date = dayjs(args[0], "DD.MM.YYYY", "de", true)
+        const format = msg.client.config.date.format
+        const localisation = msg.client.config.date.localisation
+        const date = dayjs(args[0], format, localisation, true)
         if (!date.isValid) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.wrong_format`))
         if (dayjs().isBefore(date)) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.in_future`))
 

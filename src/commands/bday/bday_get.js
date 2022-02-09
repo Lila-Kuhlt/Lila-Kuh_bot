@@ -49,8 +49,9 @@ module.exports = {
     async post_embed_success(msg, bday_member_id, year, month, day) {
         const date = dayjs(new Date(year, month, day))
         const age = dayjs.duration(dayjs().diff(date)).years()
+        const format = msg.client.config.date.format
         return new MessageEmbed()
-            .setDescription(await gt(msg, `${s}success`, bday_member_id, date.format("DD.MM.YYYY"), age))
+            .setDescription(await gt(msg, `${s}success`, bday_member_id, date.format(format), age))
             .setColor(msg.client.config.embed.color)
     }
 };
