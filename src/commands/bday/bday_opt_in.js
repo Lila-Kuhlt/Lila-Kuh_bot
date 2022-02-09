@@ -2,6 +2,8 @@
 
 const { get_text: gt } = require("../../lang/lang_man")
 const dayjs = require("dayjs");
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat)
 const s = "commands.bday_opt_in."
 
 module.exports = {
@@ -16,13 +18,12 @@ module.exports = {
     need_permission: [],
     disabled: false,
     enable_slash: false,
-    async execute(msg, args) { // args: YYYY-MM-DD
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(args[0])) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.wrong_format`))
+    async execute(msg, args) { // args: DD.MM.YYYY
+        if (!/^\d{2}.\d{2}.\d{4}$/.test(args[0])) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.wrong_format`))
 
-        const date = dayjs(args[0], "YYYY-MM-DD")
+        const date = dayjs(args[0], "DD.MM.YYYY", "de", true)
         if (!date.isValid) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.wrong_format`))
         if (dayjs().isBefore(date)) return await msg.client.output.reply(msg, await gt(msg, `${s}fail.in_future`))
-
 
         if (!await msg.client.DB.Bday.set(msg.client, msg.guildId, msg.author.id, date.year(), date.month(), date.date())) {
             await msg.client.DB.Bday.add(msg.client, msg.guildId, msg.author.id, date.year(), date.month(), date.date())

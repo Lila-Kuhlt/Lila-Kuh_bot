@@ -163,11 +163,17 @@
     },
     "bday_get": {
       "help": "",
-      "usage": ""
+      "usage": "User_Id or @User",
+      "success": "User <@%0> hat am **%1** Geburtstag und ist **%2** Jahre alt!",
+      "fail": {
+        "wrong_format": "Dein Argument hat das falsche Format!",
+        "unknown_user": "Dieser User ist nicht auf diesem Server!",
+        "user_opt_out": "Dieser User ist nicht opt in!"
+      }
     },
     "bday_opt_in": {
       "help": "",
-      "usage": "YYYY-MM-DD",
+      "usage": "DD.MM.YYYY",
       "success": "Erfolg!",
       "fail": {
         "wrong_format": "Du hast das falsche Format für das Datum abgegeben!",

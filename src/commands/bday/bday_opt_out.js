@@ -16,7 +16,7 @@ module.exports = {
     enable_slash: false,
     async execute(msg, args) {
         if (await msg.client.DB.Bday.remove(msg.client, msg.guildId, msg.author.id)) {
-            await msg.client.output.reply(msg, await gt(msg, `${s}success`))
+            await msg.client.output.send(msg, await gt(msg, `${s}success`))
 
         } else {
             await msg.client.output.reply(msg, await gt(msg, `${s}fail.not_opt_in`))

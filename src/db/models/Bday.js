@@ -16,15 +16,15 @@ const _TABLE = (sequelize, Sequelize) => {
             allowNull: false
         },
         "year": {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         "month": {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         "day": {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
     }, {
@@ -46,8 +46,8 @@ async function get_user_ids(client, guild_id) {
 }
 
 // get all user_ids x guild_ids x year with matching month and date
-async function get_guild_user_ids_and_year(client, guild_id, month, date) {
-    const tag = await client.DB["Bday"].TABLE.findAll({attributes: ["guild_id", "user_id", "year"], where: { "month": month, "date": date }})
+async function get_guild_user_ids_and_year(client, month, day) {
+    const tag = await client.DB["Bday"].TABLE.findAll({attributes: ["guild_id", "user_id", "year"], where: { "month": month, "day": day }})
     return (tag) ? tag.map(function (e) {
         return {
             guild_id: e.dataValues.guild_id,
@@ -80,15 +80,8 @@ async function add(client, guild_id, user_id, year, month, day) {
 
 // get stuff from database
 async function get(client, guild_id, user_id) {
-    const tag = await client.DB["Bday"].TABLE.findOne({ where: { "user_id": user_id } })
-
-    if (tag) {
-        return tag.lang
-
-    } else {
-        client.logger.log("warn",`${guild_id} x ${user_id} not in database Bday!`)
-        return null
-    }
+    const tag = await client.DB["Bday"].TABLE.findOne({ where: { "guild_id": guild_id, "user_id": user_id } })
+    return (tag) ? tag.dataValues : null
 }
 
 
@@ -97,11 +90,11 @@ async function set(client, guild_id, user_id, year, month, day) {
     const new_tag = await client.DB["Bday"].TABLE.update({ "year": year, "month": month, "day": day },
         { where: { "guild_id": guild_id, "user_id": user_id } })
 
-    if (new_tag) {
+    if (new_tag[0]) {
         return true
 
     } else {
-        client.logger.log("error", `Could not set ${guild_id} x ${user_id} in database Bday!`)
+        client.logger.log("warn", `Could not set ${guild_id} x ${user_id} in database Bday!`)
         return false
     }
 }
