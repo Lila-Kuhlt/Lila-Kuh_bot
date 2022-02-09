@@ -153,7 +153,25 @@
       "help": ""
     },
     "bday_all": {
-      "help": ""
+      "help": "",
+      "embed": {
+        "title": "Liste aller Geburtstage",
+        "bday_entry": "%0 - <@%1>"
+      },
+      "months": [
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ]
     },
     "bday_disable": {
       "help": "Deaktiviere die Geburtstags-Updates.",
