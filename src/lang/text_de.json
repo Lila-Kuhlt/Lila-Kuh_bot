@@ -175,7 +175,11 @@
       }
     },
     "bday_opt_out": {
-      "help": ""
+      "help": "",
+      "success": "Erfolg!",
+      "fail": {
+        "not_opt_in": "Du bist bereits opt out!"
+      }
     },
     "bday_set_channel": {
       "help": "",
