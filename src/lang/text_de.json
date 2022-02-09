@@ -164,6 +164,9 @@
       "embed": {
         "description_pl": "<@%0> hat in **%1** Tagen als nächstes Geburtstag und wird **%2** Jahre alt.\nDas Geburtsdatum ist der **%3**!",
         "description_sg": "<@%0> hat **morgen** als nächstes Geburtstag und wird **%1** Jahre alt.\nDas Geburtsdatum ist der **%2**!"
+      },
+      "fail": {
+        "nothing_found": "Ich konnte keinen nächsten Geburtstag finden!"
       }
     },
     "bday_all": {
@@ -199,7 +202,7 @@
       }
     },
     "bday_opt_in": {
-      "help": "Opt in die Geburtstagsliste. Wer opt in ist, willigt ein, dass andere Mitglied dieses Server Zugriff auf den Namen und das Geburtsdatum erhalten. Zudem wird am Tag des Geburtstags (sofern aktiviert) eine kleine Glückwunschs-Nachricht auf diesen Server verschickt.",
+      "help": "Opt in die Geburtstagsliste. Wer opt in ist, willigt ein, dass andere Mitglied dieses Server Zugriff auf den Namen und das angegebene Geburtsdatum erhalten. Zudem wird am Tag des Geburtstags (sofern vom Admin aktiviert und man noch Servermitglied) eine kleine Glückwunschs-Nachricht auf diesem Server verschickt.",
       "usage": "DD.MM.YYYY",
       "success": "Erfolg!",
       "fail": {

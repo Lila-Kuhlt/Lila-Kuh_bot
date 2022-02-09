@@ -4,8 +4,10 @@ const { get_text: gt } = require("../../lang/lang_man")
 const dayjs = require("dayjs")
 const duration = require('dayjs/plugin/duration')
 dayjs.extend(duration)
-const objectSupport = require("dayjs/plugin/objectSupport");
-dayjs.extend(objectSupport);
+const isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
+dayjs.extend(isSameOrBefore)
+const objectSupport = require("dayjs/plugin/objectSupport")
+dayjs.extend(objectSupport)
 const { MessageEmbed } = require("discord.js")
 const s = "commands.bday_next."
 
@@ -21,7 +23,8 @@ module.exports = {
     enable_slash: true,
     async execute(msg, args) {
         const user_ids = await msg.client.DB.Bday.get_user_ids(msg.client, msg.guildId)
-        const min = { day_distance: 367, user_ids: [-1] }
+        const min = { day_distance: 400, user_ids: [-1] } // M = 400
+        const now = dayjs()
 
         for (const user_id of user_ids) {
             try {
@@ -33,23 +36,25 @@ module.exports = {
             if (tag === null) continue
 
             const bdate = dayjs({ day: tag.day, month: tag.month })
-            const day_distance = parseInt(dayjs.duration(bdate.diff(dayjs())).asDays())
+            const day_distance = dayjs.duration(bdate.diff(dayjs(now))).asDays()
             if (day_distance < 0) continue
 
-            if (day_distance < min.day_distance) {
-                min.day_distance = day_distance
+            const day_distance_int = parseInt(day_distance)
+            if (day_distance_int < min.day_distance) {
+                min.day_distance = day_distance_int
                 min.user_ids = [user_id]
 
-            } else if (day_distance === min.day_distance) {
+            } else if (day_distance_int === min.day_distance) {
                 min.user_ids.push(user_id)
             }
         }
 
+        if (min.user_ids === [-1]) return await msg.client.output.send(msg, await gt(msg, `${s}fail.nothing_found`))
         for (const user_id of min.user_ids) {
             const format = msg.client.config.date.format
             const tag = await msg.client.DB.Bday.get(msg.client, msg.guildId, user_id)
             const bdate = dayjs({ day: tag.day, month: tag.month, year: tag.year })
-            const new_age = Math.round(dayjs.duration(dayjs().diff(bdate)).asYears())
+            const new_age = dayjs().year() - tag.year - dayjs().isSameOrBefore({ month: tag.month, day: tag.day }) + 1
 
             const embed = new MessageEmbed()
                 .setColor(msg.client.config.embed.color)

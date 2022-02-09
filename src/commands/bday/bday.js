@@ -3,14 +3,16 @@
 const { get_text: gt } = require("../../lang/lang_man")
 const s = "commands.bday."
 const dayjs = require("dayjs")
-const duration = require('dayjs/plugin/duration')
-dayjs.extend(duration)
+const isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
+dayjs.extend(isSameOrBefore)
+const objectSupport = require("dayjs/plugin/objectSupport")
+dayjs.extend(objectSupport)
 const { MessageEmbed } = require("discord.js")
 
 module.exports = {
     name: 'bday',
     description: async function (msg) { return await gt(msg, s + "help") },
-    aliases: ['bdayg', 'bdg'],
+    aliases: ['bd'],
     args_needed: false,
     args_min_length: 0,
     args_max_length: 1,
@@ -47,7 +49,7 @@ module.exports = {
     },
     async post_embed_success(msg, bday_member_id, year, month, day) {
         const date = dayjs(new Date(year, month, day))
-        const age = dayjs.duration(dayjs().diff(date)).years()
+        const age = dayjs().year() - year - dayjs().isSameOrBefore({ month :month, day :day })
         const format = msg.client.config.date.format
         return new MessageEmbed()
             .setDescription(await gt(msg, `${s}success`, bday_member_id, date.format(format), age))
