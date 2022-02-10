@@ -1,8 +1,10 @@
+// See also: https://github.com/EliasSchaut/Discord-Bot-Template/wiki/How-to-modification
+
 // ----------------------------------
 // config values
 // ----------------------------------
-const name = "admin_only"
-const type = "boolean"
+const name = "<Name>"
+const type = "<type>"
 const required = false
 // ----------------------------------
 const error_key = "error." + name
@@ -15,7 +17,7 @@ const help_key = "mods_help." + name
 // ----------------------------------
 async function check(msg, command, args) {
     const mod = await get(msg, command)
-    return !mod || msg.client.helper.is_admin(msg)
+    return !mod || msg.client.helper.from_dm(msg)
 }
 
 async function send_check_fail(msg, command, args) {

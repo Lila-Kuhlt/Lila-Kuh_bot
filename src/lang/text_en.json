@@ -145,6 +145,128 @@
     "mensa_disable": {
       "help": "Disable the Mensa updates.",
       "success": "Mensa updates have been successfully disabled!"
+    },
+    "bday": {
+      "help": "Shows you interesting things about your birthday or the birthdays of server members. Do not give an argument for only your birthday or a user_ids for a specific user!",
+      "usage": "[user_id] oder [@User]",
+      "success": "<@%0> has birthday on **%1** and he is **%2** years old!",
+      "fail": {
+        "wrong_format": "Your argument has the wrong format!",
+        "unknown_user": "This user is not on this server!",
+        "user_opt_out": "This user is not opt in!"
+      },
+      "embed": {
+        "title": "Bday Infos",
+        "fields": {
+          "general": "General",
+          "zodiac": "Zodiac-Sign: %0",
+          "time_calcs": {
+            "title": "Time-Calculations",
+            "value": "<@%0> already lives:\n%1",
+            "days": "`%0d`",
+            "h": "`%0h`",
+            "ms": "`%0ms`",
+            "or": " or\n"
+          }
+        }
+      },
+      "zodiac": {
+        "signs": {
+          "Aries": "Aries",
+          "Taurus": "Taurus",
+          "Gemini": "Gemini",
+          "Cancer": "Cancer",
+          "Leo": "Leo",
+          "Virgo": "Virgo",
+          "Libra": "Libra",
+          "Scorpio": "Scorpio",
+          "Sagittarius": "Sagittarius",
+          "Capricorn": "Capricorn",
+          "Aquarius": "Aquarius",
+          "Pisces": "Pisces"
+        },
+        "sign_descriptions": {
+          "Aries": "Aries is full of energy and owes this to its impulsive, spontaneous and at times somewhat rash nature.",
+          "Taurus": "The Taurus is a very down-to-earth zodiac sign known for its reliability. Taurus is one of the most patient signs of the zodiac, but if he sees his good nature taken or his way of life threatened, he can also become very uncomfortable.",
+          "Gemini": "Gemini are mostly very lively people who are interested in a wide variety of subjects. Despite their mental agility, they are said to be somewhat superficial. However, this alleged superficiality is only due to the fact that their sheer inexhaustible drive makes them want to explore new things all the time",
+          "Cancer": "Cancer is a great conversationalist and listener. He gives comfort and always has a helpful tip ready. In critical situations, Cancer appears very strong, but it also has its weak side. Cancers take many things to heart and find it difficult to forgive. Even after a reconciliation, the events of the past are not forgotten. After a confrontation, the Cancer needs a lot of love, encouragement and confirmation.",
+          "Leo": "No one is likely to overlook a lion. No matter which room he enters, he automatically attracts attention. Sometimes this glamorous appearance is also intentional. People with the zodiac sign Leo usually have many friends who are infected by their sunny disposition and bask in their popularity",
+          "Virgo": "Virgos have their goals firmly in mind and already have several strategies in place to achieve them. They are often very successful professionally and also have their private life firmly under control. If you have a date with a Virgo-born person, you will never have to wait half an hour for your date. Because Virgos are almost always on time and always well organised.",
+          "Libra": "Libra-born people do not like conflicts and are always concerned about balance. Conversely, however, this also means that Libra have difficulty saying no and thus repeatedly find themselves in situations in which they feel very uncomfortable. Libra's sometimes ambiguous behaviour causes misunderstandings, which only complicate their lives unnecessarily",
+          "Scorpio": "Scorpio-born people want to get to the bottom of things, be it in the professional or private sphere. They won't be fobbed off with half-cooked answers and results. They want to know what is behind things and are also very ambitious",
+          "Sagittarius": "People with this zodiac sign are freedom-loving, optimistic and have high ideals. Sagittarians are very honest and open people who sometimes overshoot the mark with their honesty. Since Sagittarians don't mince their words, they can sometimes offend those around them",
+          "Capricorn": "People with the zodiac sign Capricorn are very hard-working and never shirk a challenge, no matter how demanding it may be. Even if it takes many months or years to reach their goal, Capricorns persevere. Capricorns define themselves by their tasks and by being problem solvers. People with this zodiac sign do not shy away from responsibility and often work in leadership positions.",
+          "Aquarius": "Those born under this zodiac sign are extremely imaginative and have alert minds.",
+          "Pisces": "People with this zodiac sign are literally elusive and try to avoid confrontation. This is due on the one hand to their great need for harmony and on the other hand to their sometimes weakly developed self-confidence. Therefore they react very sensitively to any form of criticism. Once a Pisces' feelings have been hurt, they find it difficult to regain trust."
+        }
+      }
+    },
+    "bday_next": {
+      "help": "Outputs the next birthday!",
+      "embed": {
+        "description_pl": "<@%0> next birthday is in **%1** days and will be **%2** years old.\nThe date of birth is **%3**!",
+        "description_sg": "<@%0> birthday is **tomorrow** next and will be **%1** years old.\nThe date of birth is **%2**!"
+      },
+      "fail": {
+        "nothing_found": "I could not find a next birthday!"
+      }
+    },
+    "bday_all": {
+      "help": "Outputs all registered birthdays!",
+      "embed": {
+        "title": "List of all birthdays",
+        "bday_entry": "%0 - <@%1>"
+      },
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
+    "bday_disable": {
+      "help": "Deactivate the birthday updates.",
+      "success": "The birthday updates have been successfully deactivated!"
+    },
+    "bday_enable": {
+      "help": "Activate the birthday updates.\nNote that the birthday channel must be set using the `bday_set_channel` command!",
+      "success": "The birthday updates have been successfully activated!",
+      "fail": {
+        "channel_not_set": "The birthday update channel has not been set yet!\nPlease use the command `bday_set_channel` for this.!"
+      }
+    },
+    "bday_opt_in": {
+      "help": "Opt in to the birthday list. Whoever is opt in, agrees that other members of this server get access to the name in connection with the given date of birth. In addition, on the day of the birthday (if activated by the admin and you are still a server member) a small congratulatory message will be sent on this server.",
+      "usage": "[DD.MM.YYYY]",
+      "success": "Success!",
+      "fail": {
+        "wrong_format": "You have entered the wrong format for the date!",
+        "in_future": "The specified time format must be in the past!"
+      }
+    },
+    "bday_opt_out": {
+      "help": "Opt out of the birthday list. Your birthday is deleted from the list and can no longer be found. There will also no longer be a congratulatory message on your birthday!",
+      "success": "Success!",
+      "fail": {
+        "not_opt_in": "You are already opt out!"
+      }
+    },
+    "bday_set_channel": {
+      "help": "Set the channel in which you want to receive birthday updates.\nThe specified channel must be in this server.!",
+      "usage": "[Channel-Id]",
+      "success": "The channel was set successfully!",
+      "fail": {
+        "no_number": "The passed argument is not a number!",
+        "wrong_id": "The transferred channel ID does not correspond to any channel on this server.!"
+      }
     }
   }
 }

@@ -56,6 +56,7 @@ async function send_all_success(client, guild_ids, embed) {
 // ---------------------------------
 // Embeds
 // ---------------------------------
+// TODO: Text in lang file
 function generate_embed_fail(client) {
     return new MessageEmbed()
         .setColor(client.config.embed.color)

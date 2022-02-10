@@ -136,15 +136,137 @@
       }
     },
     "mensa_enable": {
-      "help": "Aktiviere die Mensa-Updates.\nBeachte dabei, dass der Mensa Kanal mithilfe des Befehls `mensa_set_channel` gesetzt sein muss!",
+      "help": "Aktiviere die Mensa-Updates.\nBeachte dabei, dass der Mensa-Kanal mithilfe des Befehls `mensa_set_channel` gesetzt sein muss!",
       "success": "Die Mensa-Updates wurden erfolgreich aktiviert!",
       "fail": {
-        "channel_not_set": "Der Mensa-Update-Kanal wurde noch mit gesetzt!\nBenutzte dafür bitte den Befehl `mensa_set_channel`!"
+        "channel_not_set": "Der Mensa-Update-Kanal wurde noch nicht gesetzt!\nBenutzte dafür bitte den Befehl `mensa_set_channel`!"
       }
     },
     "mensa_disable": {
       "help": "Deaktiviere die Mensa-Updates.",
       "success": "Die Mensa-Updates wurden erfolgreich deaktiviert!"
+    },
+    "bday": {
+      "help": "Zeigt dir Interessantes zu deinem Geburtstag oder Geburtstagen der Server-Mitglieder. Gib kein Argument an für nur deinen Geburtstag oder eine user_ids für einen bestimmten Benutzer!",
+      "usage": "[user_id] oder [@User]",
+      "success": "<@%0> hat am **%1** Geburtstag und ist **%2** Jahre alt!",
+      "fail": {
+        "wrong_format": "Dein Argument hat das falsche Format!",
+        "unknown_user": "Dieser User ist nicht auf diesem Server!",
+        "user_opt_out": "Dieser User ist nicht opt in!"
+      },
+      "embed": {
+        "title": "Bday Infos",
+        "fields": {
+          "general": "Allgemeines",
+          "zodiac": "Sternzeichen: %0",
+          "time_calcs": {
+            "title": "Zeitrechnungen",
+            "value": "<@%0> lebt schon:\n%1",
+            "days": "`%0d`",
+            "h": "`%0h`",
+            "ms": "`%0ms`",
+            "or": " bzw.\n"
+          }
+        }
+      },
+      "zodiac": {
+        "signs": {
+          "Aries": "Widder",
+          "Taurus": "Stier",
+          "Gemini": "Zwillinge",
+          "Cancer": "Krebs",
+          "Leo": "Löwe",
+          "Virgo": "Jungfrau",
+          "Libra": "Waage",
+          "Scorpio": "Skorpion",
+          "Sagittarius": "Schütze",
+          "Capricorn": "Steinbock",
+          "Aquarius": "Wassermann",
+          "Pisces": "Fische"
+        },
+        "sign_descriptions": {
+          "Aries": "Der Widder ist voller Energie und verdankt diese durch seine impulsive, spontane und zeitweise etwas vorschnelle Natur.",
+          "Taurus": "Der Stier ist ein sehr bodenständiges Sternzeichen, das für seine Zuverlässigkeit bekannt ist. Stiere gehören zu den geduldigsten Sternzeichen, doch sieht er sich in seiner Gutmütigkeit ausgenutzt oder seine Art zu leben bedroht, kann er auch sehr ungemütlich werden.",
+          "Gemini": "Zwillinge sind zumeist sehr lebhafte Menschen, die an den unterschiedlichsten Themenbereichen interessiert sind. Trotz ihrer geistigen Beweglichkeit wird ihnen eine gewisse Oberflächlichkeit nachgesagt. Diese angebliche Oberflächlichkeit ist aber nur der Tatsache geschuldet, dass ihr schier unerschöpflicher Antrieb sie dazu bringt, immer neue Dinge erforschen zu wollen.",
+          "Cancer": "Der Krebs ist ein toller Gesprächspartner und Zuhörer. Er spendet Trost und hat immer einen hilfreichen Tipp parat. In kritischen Situationen wirkt der Krebs sehr stark, doch er hat auch seine schwache Seite. Krebse nehmen sich vieles zu Herzen und können nur schwer verzeihen. Selbst nach einer Versöhnung werden die Ereignisse der Vergangenheit nicht vergessen. Nach einer Auseinandersetzung braucht der Krebs sehr viel Liebe, Zuspruch und Bestätigung.",
+          "Leo": "Einen Löwen übersieht so schnell niemand. Egal welchen Raum er betritt, er zieht automatisch die Aufmerksamkeit auf sich. Manchmal ist dieser glanzvolle Auftritt auch beabsichtigt. Menschen mit dem Sternzeichen Löwen haben in der Regel viele Freunde, die sich von ihrem sonnigen Gemüt anstecken lassen und sich in ihrer Popularität sonnen.",
+          "Virgo": "Jungfrauen haben ihre Ziele fest im Blick und sich bereits mehrere Strategien zurecht gelegt, mit denen sie diese Ziele erreichen können. Sie sind häufig beruflich sehr erfolgreich und haben auch ihr Privatleben fest im Griff. Wer mit einem Jungfrau-Geborenen verabredet ist, der wird niemals eine halbe Stunde auf seine Verabredung warten müssen. Denn Jungfrauen sind fast immer pünktlich und stets gut organisiert.",
+          "Libra": "Waage-Geborene mögen keine Konflikte und sind stets um Ausgewogenheit bedacht. Das bedeutet im Umkehrschluss jedoch auch, dass Waagen nur schlecht Nein sagen können und so immer wieder in Situationen geraten, in denen sie sich sehr unwohl fühlen. Waagen rufen durch ihr teils uneindeutiges Verhalten Missverständnisse hervor, durch die sie ihr Leben nur unnötig kompliziert machen.",
+          "Scorpio": "Skorpion-Geborene möchten den Dingen auf den Grund gehen, sei es im beruflichen oder im privaten Bereich. Mit halb garen Antworten und Ergebnissen lassen sie sich nicht abspeisen. Sie möchten wissen, was hinter den Dingen steckt und sind zudem noch sehr ehrgeizig.",
+          "Sagittarius": "Menschen mit diesem Sternzeichen sind freiheitsliebend, optimistisch und haben hohe Ideale. Schützen sind sehr ehrliche und offene Menschen, die mit ihrer Ehrlichkeit jedoch manchmal über das Ziel hinaus schießen. Da Schütze-Geborene kein Blatt vor den Mund nehmen, stoßen sie ihre Mitmenschen schon mal vor den Kopf.",
+          "Capricorn": "Menschen mit dem Sternzeichen Steinbock sind sehr fleißig und drücken sich nie vor einer Herausforderung, so anspruchsvoll sie auch sein mag. Selbst wenn es viele Monate oder Jahre dauern sollte ihr Ziel zu erreichen, Steinböcke beißen sich durch. Steinböcke definieren sich durch ihre Aufgaben und dadurch, dass sie Problemlöser sind. Menschen mit diesem Sternzeichen scheuen sich nicht vor Verantwortung und arbeiten häufig in Führungspositionen.",
+          "Aquarius": "Die in diesem Sternzeichen geborenen Personen sind äußerst ideenreich und haben einen wachen Verstand.",
+          "Pisces": "Menschen mit diesem Sternzeichen sind im wahrsten Sinne des Wortes schwer zu fassen und versuchen Konfrontationen auszuweichen. Das liegt zum einen an ihrem großen Bedürfnis nach Harmonie und zum anderen an ihrem teils schwach ausgeprägten Selbstbewusstsein. Daher reagieren sie sehr empfindlich auf jede Form von Kritik. Wurden die Gefühle eines Fischs erst einmal verletzt, fassen sie nur schwer wieder Vertrauen."
+        }
+      }
+    },
+    "bday_next": {
+      "help": "Gibt den nächsten Geburtstag aus!",
+      "embed": {
+        "description_pl": "<@%0> hat in **%1** Tagen als nächstes Geburtstag und wird **%2** Jahre alt.\nDas Geburtsdatum ist der **%3**!",
+        "description_sg": "<@%0> hat **morgen** als nächstes Geburtstag und wird **%1** Jahre alt.\nDas Geburtsdatum ist der **%2**!"
+      },
+      "fail": {
+        "nothing_found": "Ich konnte keinen nächsten Geburtstag finden!"
+      }
+    },
+    "bday_all": {
+      "help": "Gibt alle eingetragenen Geburtstage aus!",
+      "embed": {
+        "title": "Liste aller Geburtstage",
+        "bday_entry": "%0 - <@%1>"
+      },
+      "months": [
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Dezember"
+      ]
+    },
+    "bday_disable": {
+      "help": "Deaktiviert die Geburtstags-Updates.",
+      "success": "Die Geburtstags-Updates wurden erfolgreich deaktiviert!"
+    },
+    "bday_enable": {
+      "help": "Aktiviert die Geburtstags-Updates.\nBeachte dabei, dass der Geburtstags-Kanal mithilfe des Befehls `bday_set_channel` gesetzt sein muss!",
+      "success": "Die Geburtstags-Updates wurden erfolgreich aktiviert!",
+      "fail": {
+        "channel_not_set": "Der Geburtstags-Update-Kanal wurde noch nicht gesetzt!\nBenutzte dafür bitte den Befehl `bday_set_channel`!"
+      }
+    },
+    "bday_opt_in": {
+      "help": "Opt in die Geburtstagsliste. Wer opt in ist, willigt ein, dass andere Mitglieder dieses Servers Zugriff auf den Namen in Verbindung mit dem angegebenen Geburtsdatum erhalten. Zudem wird am Tag des Geburtstags (sofern vom Admin aktiviert und man noch Servermitglied) eine kleine Glückwunschs-Nachricht auf diesem Server verschickt.",
+      "usage": "[DD.MM.YYYY]",
+      "success": "Erfolg!",
+      "fail": {
+        "wrong_format": "Du hast das falsche Format für das Datum abgegeben!",
+        "in_future": "Das angegebene Zeitformat muss in der Vergangenheit liegen!"
+      }
+    },
+    "bday_opt_out": {
+      "help": "Opt aus der Geburtstagsliste. Dein Geburtstag wird aus der Liste gelöscht und ist nicht mehr auffindbar. Es gibt auch keine Glückwunschs-Nachricht an deinem Geburtstag mehr!",
+      "success": "Erfolg!",
+      "fail": {
+        "not_opt_in": "Du bist bereits opt out!"
+      }
+    },
+    "bday_set_channel": {
+      "help": "Setzte den Kanal, in dem du Geburtstags-Updates erhalten möchtest.\nDer angegebene Kanal muss dabei in diesem Server liegen!",
+      "usage": "[Kanal-Id]",
+      "success": "Der Kanal wurde erfolgreich gesetzt!",
+      "fail": {
+        "no_number": "Das übergebene Argument ist keine Zahl!",
+        "wrong_id": "Die übergebene Kanal-Id entspricht keinem Kanal auf diesem Server!"
+      }
     }
   }
 }
