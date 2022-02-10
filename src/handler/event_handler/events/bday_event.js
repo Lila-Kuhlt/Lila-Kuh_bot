@@ -1,21 +1,41 @@
 const { MessageEmbed } = require('discord.js')
 const dayjs = require('dayjs')
+const duration = require('dayjs/plugin/duration')
+dayjs.extend(duration)
+const isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
+dayjs.extend(isSameOrBefore)
+const objectSupport = require("dayjs/plugin/objectSupport")
+dayjs.extend(objectSupport)
+
 
 // ---------------------------------
 // Export
 // ---------------------------------
 async function post_bday(client) {
-    const guild_ids = await client.DB.Guild.get_guild_ids(client)
-    if (!guild_ids.length) return
+    const now = dayjs()
+    const tags = await client.DB["Bday"].get_guild_user_ids_and_year(client, now.month(), now.date())
+    if (tags.length === 0) return
 
-    for (const guild_id of guild_ids) {
-        const enabled = await client.DB.Guild.get_bday_enabled(client, guild_id)
+    for (const tag of tags) {
+        // -------------------------
+        // Checks
+        // -------------------------
+        const enabled = await client.DB.Guild.get_bday_enabled(client, tag.guild_id)
         if (!enabled) continue
 
-        const bday_channel_id = await client.DB.Guild.get_bday_channel_id(client, guild_id)
+        const bday_channel_id = await client.DB.Guild.get_bday_channel_id(client, tag.guild_id)
         if (!bday_channel_id) continue
 
-        const embed = generate_embed_success(client, bday_channel_id, format_bdates_to_fields(client, guild_id))
+        try {
+            const member = await ((await client.guilds.fetch(tag.guild_id)).members.fetch(tag.user_id))
+            console.log(member)
+        } catch (e) {
+            client.DB.Bday.remove(client, tag.guild_id, tag.client_id)
+            continue
+        }
+        // -------------------------
+
+        const embed = generate_embed_success(client, format_bdates(tag))
         await send_success(client, bday_channel_id, embed)
     }
 }
@@ -26,11 +46,10 @@ async function post_bday(client) {
 // Send
 // ---------------------------------
 async function send_success(client, bday_channel_id, embed) {
-    if (!bday_channel_id) return
-
     try {
         const bday_channel = await client.channels.fetch(bday_channel_id)
-        bday_channel.send({ embeds: [embed] })
+        const new_msg = await bday_channel.send({ embeds: [embed] })
+        await new_msg.react('🎉')
     } catch (e) {
         client.output.log('error', 'Could not send bday-event success')
     }
@@ -41,13 +60,10 @@ async function send_success(client, bday_channel_id, embed) {
 // ---------------------------------
 // Embeds
 // ---------------------------------
-function generate_embed_success(client, fields) {
+function generate_embed_success(client, description) {
     return new MessageEmbed()
         .setColor(client.config.embed.color)
-        .setAuthor({ name: client.config.embed.author_name, iconURL: client.config.embed.avatar_url })
-        .setTitle("Bday Update für " + get_today())
-        .addFields(fields)
-        .setFooter({ text: "Update immer um Mitternacht im Falle eines Geburtstags!" })
+        .setDescription(description)
 }
 // ---------------------------------
 
@@ -55,17 +71,10 @@ function generate_embed_success(client, fields) {
 // ---------------------------------
 // Format
 // ---------------------------------
-function format_bdates_to_fields(client, guild_id) {
-    return ""
-}
-// ---------------------------------
-
-
-// ---------------------------------
-// Date
-// ---------------------------------
-function get_today() {
-    return dayjs().format('YYYY-MM-DD')
+function format_bdates(tag) {
+    const new_age = dayjs().year() - tag.year - dayjs().isSameOrBefore({ month: tag.month, day: tag.day })
+    return `<@${tag.user_id}> hat **heute Geburtstag** und wird **${new_age}** Jahre alt!
+            Gratuliere, indem du auf :tada: reagierst!`
 }
 // ---------------------------------
 

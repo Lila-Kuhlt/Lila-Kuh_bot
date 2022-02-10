@@ -49,11 +49,7 @@ async function get_user_ids(client, guild_id) {
 async function get_guild_user_ids_and_year(client, month, day) {
     const tag = await client.DB["Bday"].TABLE.findAll({attributes: ["guild_id", "user_id", "year"], where: { "month": month, "day": day }})
     return (tag) ? tag.map(function (e) {
-        return {
-            guild_id: e.dataValues.guild_id,
-            channel_id: e.dataValues.user_id,
-            year: e.dataValues.year
-        }
+        return e.dataValues
     }) : []
 }
 
