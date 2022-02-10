@@ -233,11 +233,11 @@
       ]
     },
     "bday_disable": {
-      "help": "Deaktiviere die Geburtstags-Updates.",
+      "help": "Deaktiviert die Geburtstags-Updates.",
       "success": "Die Geburtstags-Updates wurden erfolgreich deaktiviert!"
     },
     "bday_enable": {
-      "help": "Aktiviere die Geburtstags-Updates.\nBeachte dabei, dass der Geburtstags-Kanal mithilfe des Befehls `bday_set_channel` gesetzt sein muss!",
+      "help": "Aktiviert die Geburtstags-Updates.\nBeachte dabei, dass der Geburtstags-Kanal mithilfe des Befehls `bday_set_channel` gesetzt sein muss!",
       "success": "Die Geburtstags-Updates wurden erfolgreich aktiviert!",
       "fail": {
         "channel_not_set": "Der Geburtstags-Update-Kanal wurde noch nicht gesetzt!\nBenutzte dafür bitte den Befehl `bday_set_channel`!"
