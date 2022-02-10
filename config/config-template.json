@@ -17,7 +17,7 @@
   },
 
   "help": {
-    "show_only_permitted_commands": false,
+    "show_only_permitted_commands": true,
     "send_to_dm": false,
     "show_cmd_modifications": true
   },
@@ -37,7 +37,7 @@
 
   "enable_standard_commands": true,
   "enable_slash_commands": true,
-  "auto_slash_options": false,
+  "auto_slash_options": true,
 
   "date": {
     "localisation": "de",
