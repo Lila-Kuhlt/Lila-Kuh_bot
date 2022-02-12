@@ -20,12 +20,16 @@ module.exports = {
     async generate_embed(msg) {
         return msg.client.helper.create_default_embed_big(msg.client)
             .setTitle(await gt(msg, `${s}embed.title`))
-            .setFields(//await this.generate_general_field(msg),
-                await this.generate_server_field(msg))
+            .setFields(await this.generate_server_field(msg),
+                await this.generate_general_field(msg))
     },
     async generate_general_field(msg) {
+        const values = []
 
-        return { name: "", value: "" }
+        values.push(await gt(msg, `${s}embed.general.servers`, (await msg.client.DB.Guild.get_guild_ids(msg.client)).length))
+        values.push(await gt(msg, `${s}embed.general.users`, (await msg.client.DB.User_Lang.get_user_ids(msg.client)).length))
+
+        return { name: await gt(msg, `${s}embed.general.name`), value: values.join("\n") }
     },
     async generate_server_field(msg) {
         const values = []

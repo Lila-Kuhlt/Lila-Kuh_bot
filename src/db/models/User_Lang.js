@@ -18,6 +18,14 @@ const _TABLE = (sequelize, Sequelize) => {
 // ---------------------------------------------
 // Helper
 // ---------------------------------------------
+// get all guild_ids
+async function get_user_ids(client) {
+    const tag = await client.DB.User_Lang.TABLE.findAll({attributes: ["user_id"]})
+    return (tag) ? tag.map(function (e) {
+        return e.dataValues.guild_id
+    }) : []
+}
+
 // add the author from message in the database 'User_Lang'. Also set lang to config.default_lang
 async function add(msg) {
     msg.client.logger.log("info", `try to add user ${msg.author.username} to database 'User_Lang' (id: ${msg.author.id})`)
@@ -75,4 +83,4 @@ async function remove(msg, guild_id) {
 // ---------------------------------------------
 
 
-module.exports = { _TABLE, add, get, set, remove }
+module.exports = { _TABLE, add, get, set, remove, get_user_ids }

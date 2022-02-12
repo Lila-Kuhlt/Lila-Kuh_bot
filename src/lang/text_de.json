@@ -91,7 +91,9 @@
       "embed": {
         "title": "Infos",
         "general": {
-
+          "name": "Allgemeine Infos",
+          "servers": "Ich bin auf **%0** Servern!",
+          "users": "Schon **%0** Benutzer haben mit mir interagiert!"
         },
         "server": {
           "name": "Server Infos",
