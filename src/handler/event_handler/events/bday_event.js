@@ -28,7 +28,6 @@ async function post_bday(client) {
 
         try {
             const member = await ((await client.guilds.fetch(tag.guild_id)).members.fetch(tag.user_id))
-            console.log(member)
         } catch (e) {
             client.DB.Bday.remove(client, tag.guild_id, tag.client_id)
             continue
