@@ -2,8 +2,10 @@
 // This file provides different useful methods, which are used by commands or index
 // ===============================
 
+const { MessageEmbed } = require('discord.js')
+
 // ----------------------------
-// Check Msg
+// Helper
 // ----------------------------
 const Discord = require("discord.js");
 const {get_text: gt} = require("../lang/lang_man");
@@ -75,6 +77,16 @@ async function create_embed_to_dm(msg) {
         .setDescription(`<@${msg.author.id}> ${await gt(msg, s + "dm.success")} ${msg.client.helper.link_to_dm(msg, await gt(msg, s + "jump_to_dm"))}!`)
         .setColor(msg.client.config.embed.color)
         .setAuthor({ name: msg.client.config.embed.author_name, iconURL: msg.client.config.embed.avatar_url})
+}
+
+function create_default_embed_small(client) {
+    return new MessageEmbed().setColor(client.config.embed.color)
+}
+
+function create_default_embed_big(client) {
+    return new MessageEmbed()
+        .setAuthor({ name: client.config.embed.author_name, iconURL: client.config.embed.avatar_url })
+        .setColor(client.config.embed.color)
 }
 
 function check_interaction_custom_id(interaction, custom_id) {
@@ -159,4 +171,5 @@ function is_admin_from_guild(msg) {
 
 
 module.exports = { from_guild, from_dm, is_nsfw_channel, is_admin, has_permission, is_permitted,
-    commands_to_string, link_to_dm, link_to_message, create_embed_to_dm, check_interaction_custom_id, trim_text }
+    commands_to_string, link_to_dm, link_to_message, create_embed_to_dm, check_interaction_custom_id, trim_text,
+    create_default_embed_big, create_default_embed_small }
