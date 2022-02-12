@@ -88,17 +88,15 @@
     "info": {
       "help": "Shows useful infos about the server settings and beyond",
       "embed": {
-        "title": {
-          "info": "Infos",
-          "general": {
-            "name": "General Info",
-            "servers": "I am on **%0** servers!",
-            "users": "Already **%0** users have interacted with me!"
-          },
-          "server": {
-          },
+        "title": "info",
+        "general": {
+          "name": "General Info",
+          "servers": "I am on **%0** servers!",
+          "users": "Already **%0** users have interacted with me!"
+        },
+        "server": {
           "name": "Server Info",
-          "prefix": "server prefix: `%0`",
+          "prefix": "Server-Prefix: `%0`",
           "mensa_enabled": "Mensa-Updates are **enabled**\n%0",
           "mensa_disabled": "Mensa-Updates are **disabled**",
           "mensa_channel_id": "Mensa-Update-Channel: <#%0>",
