@@ -85,6 +85,29 @@
       "get": "The prefix of this server is: %0",
       "set": "The prefix of this server has been set to: %0"
     },
+    "info": {
+      "help": "Shows useful infos about the server settings and beyond",
+      "embed": {
+        "title": {
+          "info": "Infos",
+          "general": {
+            "name": "General Info",
+            "servers": "I am on **%0** servers!",
+            "users": "Already **%0** users have interacted with me!"
+          },
+          "server": {
+          },
+          "name": "Server Info",
+          "prefix": "server prefix: `%0`",
+          "mensa_enabled": "Mensa-Updates are **enabled**\n%0",
+          "mensa_disabled": "Mensa-Updates are **disabled**",
+          "mensa_channel_id": "Mensa-Update-Channel: <#%0>",
+          "bday_enabled": "Birthday-Updates are **enabled**\n%0",
+          "bday_disabled": "Birthday-Updates are **disabled**",
+          "bday_channel_id": "Birthday-Updates-Channel: <#%0>"
+        }
+      }
+    },
     "poll": {
       "help": "Create a poll in a beautiful embed style. Reactions are automatically generated so others can use them to vote.\nHint: You can write words in \"\", then it counts as one argument (instead of the space) (e.g. \"I am the title\")",
       "usage": "[Title] [Option1] [Option2] ...",

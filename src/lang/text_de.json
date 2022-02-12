@@ -86,8 +86,7 @@
       "set": "Der Prefix dieses Server wurde gesetzt auf: %0"
     },
     "info": {
-      "help": "",
-      "usage": "",
+      "help": "Zeigt nützliche Infos über die Servereinstellungen und darüber hinaus",
       "embed": {
         "title": "Infos",
         "general": {
