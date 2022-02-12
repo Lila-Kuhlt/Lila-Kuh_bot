@@ -85,6 +85,26 @@
       "get": "Der Prefix dieses Servers ist: %0",
       "set": "Der Prefix dieses Server wurde gesetzt auf: %0"
     },
+    "info": {
+      "help": "",
+      "usage": "",
+      "embed": {
+        "title": "Infos",
+        "general": {
+
+        },
+        "server": {
+          "name": "Server Infos",
+          "prefix": "Prefix des Servers: `%0`",
+          "mensa_enabled": "Die Mensa-Updates sind **aktiviert**\n%0",
+          "mensa_disabled": "Die Mensa-Updates sind **deaktiviert**",
+          "mensa_channel_id": "Mensa-Update-Channel: <#%0>",
+          "bday_enabled": "Die Geburtstags-Updates sind **aktiviert**\n%0",
+          "bday_disabled": "Die Geburtstags-Updates sind **deaktiviert**",
+          "bday_channel_id": "Geburtstags-Update-Channel: <#%0>"
+        }
+      }
+    },
     "poll": {
       "help": "Erstelle eine Umfrage im schönen Embed-Stil. Passend dazu werden automatisch Reaktionen erzeugt, mit denen andere dann abstimmten können.\nTipp: Du kannst Wörter in \"\" schreiben, dann zählt es als ein Argument (statt dem Leerzeichen) (z.B. \"Ich bin der Titel\")",
       "usage": "[Title] [Option1] [Option2] ...",
