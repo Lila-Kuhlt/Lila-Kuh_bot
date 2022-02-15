@@ -16,6 +16,7 @@ export function generate_accordion_elements(lang_json) {
 function create_accordion_element(name, description) {
     const element_div = document.createElement("div")
     element_div.setAttribute("class", "accordion-item")
+    element_div.setAttribute("id", name)
 
     // head
     const h2 = document.createElement("h2")

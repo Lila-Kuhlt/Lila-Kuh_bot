@@ -6,8 +6,5 @@ document.body.onload = main()
 async function main() {
     const config = await get_config()
     const langs = await get_lang_jsons(config)
-
     generate_accordion_elements(langs.de)
-    console.log(config)
-    console.log(langs)
 }
