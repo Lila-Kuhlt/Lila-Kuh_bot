@@ -8,7 +8,6 @@ export function set_langs(langs) {
 
 function create_lang_element(name) {
     const href = window.location.origin + window.location.pathname + "?lang=" + name
-    console.log(href)
     const li = document.createElement("li")
     const a = document.createElement("a")
     a.setAttribute("class", "dropdown-item")
@@ -21,7 +20,6 @@ function create_lang_element(name) {
 
 export function choose_lang(langs) {
     const lang = (new URL(window.location.href)).searchParams.get("lang")
-    console.log(lang)
 
     if (langs.includes(lang)) return lang
     else if (langs.includes("en")) return "en"

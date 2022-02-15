@@ -5,7 +5,6 @@ import { set_langs, choose_lang } from './lang.js'
 document.body.onload = main()
 
 async function main() {
-    console.log(window.location)
     const config = await get_config()
     const langs = await get_lang_jsons(config)
     set_langs(Object.keys(langs))

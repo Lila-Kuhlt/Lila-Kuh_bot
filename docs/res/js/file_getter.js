@@ -15,7 +15,7 @@ export async function get_lang_jsons(config_json) {
         try {
             lang_jsons[lang_path_key] = (await (await fetch(links.github_base + links.lang_base + config_json.lang_paths[lang_path_key])).json())
         } catch (e) {
-            console.log("[Error] Could not get lang_file for lang " + lang_path_key)
+            console.error("[Error] Could not get lang_file for lang " + lang_path_key)
             console.error(e)
         }
     }
