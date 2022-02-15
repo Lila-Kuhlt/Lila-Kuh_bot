@@ -53,7 +53,7 @@ function create_accordion_element(name, description) {
     // body
     const collapse_div = document.createElement("div")
     collapse_div.setAttribute("id", `${id_body_base}${name}`)
-    collapse_div.setAttribute("class", "accordion-collapse collapse")
+    collapse_div.setAttribute("class", "accordion-collapse collapse show")
     collapse_div.setAttribute("aria-labelledby", `#${id_head_base}${name}`)
     collapse_div.setAttribute("data-bs-parent", accordion_base_id)
 
