@@ -4,14 +4,12 @@ function search_command() {
     let commands = document.getElementById('commands')
     const input = search_bar.value.toLowerCase()
 
-    console.log(commands.children)
-
     for (let i = 0; i < commands.children.length; i++) {
         if (!commands.children[i].id.toLowerCase().includes(input)) {
-            commands.children[i].style.display="none";
+            commands.children[i].style.display = "none";
         }
         else {
-            commands.children[i].style.display="";
+            commands.children[i].style.display = "";
         }
     }
 }
