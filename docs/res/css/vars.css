@@ -1,0 +1,21 @@
+:root {
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    --color-html-background: #5e5e5e;
+    --color-main-background: var(--color-background-dark);
+    --color-background-light: #ffffff;
+    --color-background-dark: #1e152a;
+
+    --color-main-text: var(--color-text-dark);
+    --color-text-light: var(--color-white);
+    --color-text-dark: var(--color-white);
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-main-background: var(--color-background-light);
+        --color-main-text: var(--color-text-light);
+    }
+}
+

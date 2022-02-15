@@ -1,0 +1,12 @@
+body {
+    padding: 20px;
+    background-color: var(--color-main-background);
+}
+
+html {
+    background-color: var(--color-html-background);
+}
+
+nav {
+    border-radius: 5px;
+}
