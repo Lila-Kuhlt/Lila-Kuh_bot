@@ -10,3 +10,8 @@ html {
 nav {
     border-radius: 5px;
 }
+
+body ::selection {
+    color: var(--color-white);
+    background-color:var(--color-purple);
+}
