@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lila-Kuh_bot</title>
+    <meta name="description" content="Official Discord-Bot of the KIT's Info/Math O-Phase Group 'Lila Pause'">
+    <meta name="keywords" content="kit, kuhlt, lila-pause, discord">
+    <link rel="icon" href="res/img/favicon.png">
+    <link rel="shortcut icon" href="res/img/favicon.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="res/css/main.css">
+    <script type="module" src="res/js/main.js" rel="script"></script>
+    <script src="res/js/search.js" rel="script"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white">Lila-Kuh_bot</a>
+
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Language
+            </a>
+            <ul id="lang-dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
+        </div>
+
+        <div class="d-flex">
+            <input id="search_text" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" onkeyup="search_command()">
+            <button class="btn btn-outline-success" type="button" onclick="rick()">Search</button>
+        </div>
+    </div>
+</nav>
+
+<script>function rick() { window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank") }</script>
+<div id="commands"></div>
+</body>
+</html>
