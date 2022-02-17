@@ -170,7 +170,7 @@
     "bday": {
       "help": "Shows you interesting things about your birthday or the birthdays of server members. Do not give an argument for only your birthday or a user_ids for a specific user!",
       "usage": "[user_id] oder [@User]",
-      "success": "<@%0> has birthday on **%1** and he is **%2** years old!",
+      "success": "<@!%0> has birthday on **%1** and he is **%2** years old!",
       "fail": {
         "wrong_format": "Your argument has the wrong format!",
         "unknown_user": "This user is not on this server!",
@@ -183,7 +183,7 @@
           "zodiac": "Zodiac-Sign: %0",
           "time_calcs": {
             "title": "Time-Calculations",
-            "value": "<@%0> already lives:\n%1",
+            "value": "<@!%0> already lives:\n%1",
             "days": "`%0d`",
             "h": "`%0h`",
             "ms": "`%0ms`",
@@ -225,8 +225,8 @@
     "bday_next": {
       "help": "Outputs the next birthday!",
       "embed": {
-        "description_pl": "<@%0> next birthday is in **%1** days and will be **%2** years old.\nThe date of birth is **%3**!",
-        "description_sg": "<@%0> birthday is **tomorrow** next and will be **%1** years old.\nThe date of birth is **%2**!"
+        "description_pl": "<@!%0> next birthday is in **%1** days and will be **%2** years old.\nThe date of birth is **%3**!",
+        "description_sg": "<@!%0> birthday is **tomorrow** next and will be **%1** years old.\nThe date of birth is **%2**!"
       },
       "fail": {
         "nothing_found": "I could not find a next birthday!"
@@ -236,7 +236,7 @@
       "help": "Outputs all registered birthdays!",
       "embed": {
         "title": "List of all birthdays",
-        "bday_entry": "%0 - <@%1>"
+        "bday_entry": "%0 - <@!%1>"
       },
       "months": [
         "January",
