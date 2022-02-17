@@ -288,6 +288,22 @@
         "no_number": "The passed argument is not a number!",
         "wrong_id": "The transferred channel ID does not correspond to any channel on this server.!"
       }
+    },
+    "template": {
+      "help": "",
+      "usage": ""
+    },
+    "template_add": {
+      "help": "",
+      "usage": ""
+    },
+    "template_remove": {
+      "help": "",
+      "usage": ""
+    },
+    "template_post": {
+      "help": "",
+      "usage": ""
     }
   }
 }

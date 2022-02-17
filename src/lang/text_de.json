@@ -288,6 +288,22 @@
         "no_number": "Das übergebene Argument ist keine Zahl!",
         "wrong_id": "Die übergebene Kanal-Id entspricht keinem Kanal auf diesem Server!"
       }
+    },
+    "template": {
+      "help": "",
+      "usage": ""
+    },
+    "template_add": {
+      "help": "",
+      "usage": ""
+    },
+    "template_remove": {
+      "help": "",
+      "usage": ""
+    },
+    "template_post": {
+      "help": "",
+      "usage": ""
     }
   }
 }
