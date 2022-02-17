@@ -10,4 +10,5 @@ async function main() {
     set_langs(Object.keys(langs))
     const chosen_lang = choose_lang(Object.keys(langs))
     generate_accordion_elements(langs[chosen_lang])
+    document.getElementById("page_spinner").style.display = "none"
 }
