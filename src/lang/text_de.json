@@ -294,12 +294,16 @@
       "usage": ""
     },
     "template_add": {
-      "help": "",
-      "usage": ""
+      "help": "Fügt ein neues Template hinzu. Falls du schon ein Template mit gleichem übergebenen Titel hast, wird dieser überschrieben!",
+      "usage": "[Titel] [Wert]",
+      "success": "Erfolg!",
+      "fail": {
+        "to_long": "Deine Argumente dürfen nicht länger als als 2000 Zeichen sein!"
+      }
     },
     "template_remove": {
-      "help": "",
-      "usage": ""
+      "help": "Entfernt ein gespeichertes Template via Angabe eines gültigen Titels",
+      "usage": "[Titel]"
     },
     "template_post": {
       "help": "",

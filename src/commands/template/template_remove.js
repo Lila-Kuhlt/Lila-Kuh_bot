@@ -12,8 +12,16 @@ module.exports = {
     args_max_length: 1,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
-    enable_slash: true,
+    enable_slash: false,
     async execute(msg, args) {
+        const key = args.shift()
 
+        if (await msg.client.DB.Template.get(msg.client, msg.author.id, key) !== null) {
+            await msg.client.DB.Template.remove(msg.client, msg.author.id, key)
+            msg.client.output.send(msg, await gt(msg, `${s}success`))
+
+        } else {
+            msg.client.output.reply(msg, await gt(msg, `${s}fail.key_not_found`))
+        }
     },
 };

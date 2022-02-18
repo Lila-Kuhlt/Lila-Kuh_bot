@@ -27,5 +27,7 @@ module.exports = {
         } else {
             await msg.client.DB.Template.add(msg.client, msg.author.id, key, value)
         }
+
+        msg.client.output.send(msg, await gt(msg, `${s}success`))
     },
 };
