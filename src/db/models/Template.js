@@ -51,9 +51,9 @@ async function get(client, user_id, key) {
 
 // get all entries related to a user_id
 async function get_user_entries(client, user_id) {
-    const tag = await client.DB[NAME].TABLE.findAll({ where: { "user_id": user_id } })
+    const tags = await client.DB[NAME].TABLE.findAll({ where: { "user_id": user_id } })
 
-    return (tag) ? tag.map(function (e) {
+    return (tags.length !== 0) ? tags.map(function (e) {
         return e.dataValues
     }) : []
 }

@@ -12,8 +12,21 @@ module.exports = {
     args_max_length: 1,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
-    enable_slash: true,
+    enable_slash: false,
     async execute(msg, args) {
+        if (args.length === 0) await this.post_all_templates(msg)
+        else await this.post_given_template(msg, args.shift())
+    },
+    async post_all_templates(msg) {
+        const tags = await msg.client.DB.Template.get_user_entries(msg.client, msg.author.id)
+
+        for (const tag of tags) {
+
+
+        }
 
     },
+    async post_given_template(msg, key) {
+
+    }
 };

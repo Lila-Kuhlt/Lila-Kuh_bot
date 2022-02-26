@@ -12,8 +12,18 @@ module.exports = {
     args_max_length: 3,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
-    enable_slash: true,
+    enable_slash: false,
     async execute(msg, args) {
+        const webhook = await msg.channel.createWebhook(msg.member.displayName, {
+            avatar: msg.member.displayAvatarURL()
+        })
+        await webhook.send("hello")
+        setTimeout(function () {
+            try {
+                webhook.delete()
+            } catch (e) {
 
+            }
+        }, 5000)
     },
 };
