@@ -1,5 +1,6 @@
 // See also: https://github.com/EliasSchaut/Discord-Bot-Template/wiki/How-to-command
 
+const { MessageEmbed } = require('discord.js');
 const { get_text: gt } = require("../../lang/lang_man")
 const s = "commands.template."
 
@@ -19,14 +20,24 @@ module.exports = {
     },
     async post_all_templates(msg) {
         const tags = await msg.client.DB.Template.get_user_entries(msg.client, msg.author.id)
+        const description = tags.map(tag => `\`${tag.key}\``).join("\n")
 
-        for (const tag of tags) {
+        const embed = new MessageEmbed()
+            .setTitle(await gt(msg, s + "embed.all.title"))
+            .setDescription(description)
+            .setColor(msg.client.config.color)
 
-
-        }
-
+        msg.client.output.send(msg, { embeds: [embed] })
     },
     async post_given_template(msg, key) {
+        const value = await msg.client.DB.Template.get(msg.client, msg.author.id, key)
+        if (!value) return msg.client.output.reply(msg, await gt(msg, s + "error.no_tag"))
 
+        const embed = new MessageEmbed()
+            .setTitle(await gt(msg, s + "embed.single.title", key))
+            .setDescription(value)
+            .setColor(msg.client.config.color)
+
+        await msg.client.output.send(msg, { embeds: [embed] })
     }
 };
