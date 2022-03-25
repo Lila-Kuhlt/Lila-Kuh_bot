@@ -299,19 +299,31 @@
         "single": {
           "title": "template \"%0\""
         }
+      },
+      "fail": {
+        "not_found": "Template `%0` was not found!"
       }
     },
     "template_add": {
-      "help": "",
-      "usage": ""
+      "help": "Add a new template. If you already have a template with the same passed title, it will be overwritten!",
+      "usage": "[title] [value]",
+      "success": "Success!",
+      "fail": {
+        "to_long": "Your arguments must not be longer than 2000 characters!"
+      }
     },
     "template_remove": {
-      "help": "",
-      "usage": ""
+      "help": "Removes a saved template via specification of a valid title",
+      "usage": "[title]"
     },
     "template_post": {
-      "help": "",
-      "usage": ""
+      "help": "Sends a message with a template.\nTo do this, you must first specify the channel Id of the channel in which the message is to be sent. This channel must exist in this server! The 2nd argument is the key of the template you want to send.",
+      "usage": "[Channel_Id] [Template-Key]",
+      "fail": {
+        "channel_not_found": "The specified channel does not exist in this server!",
+        "tag_not_found": "The specified template key does not exist!",
+        "no_permission": "You do not have permission to send a message into channel <#%0>!"
+      }
     }
   }
 }
