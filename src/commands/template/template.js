@@ -13,7 +13,7 @@ module.exports = {
     args_max_length: 1,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
-    enable_slash: false,
+    enable_slash: true,
     async execute(msg, args) {
         if (args.length === 0) await this.post_all_templates(msg)
         else await this.post_given_template(msg, args.shift())

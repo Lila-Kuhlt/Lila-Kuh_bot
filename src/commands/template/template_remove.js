@@ -12,7 +12,7 @@ module.exports = {
     args_max_length: 1,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
-    enable_slash: false,
+    enable_slash: true,
     async execute(msg, args) {
         const key = args.shift()
 
