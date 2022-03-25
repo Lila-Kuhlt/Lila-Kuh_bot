@@ -30,12 +30,12 @@ module.exports = {
         msg.client.output.send(msg, { embeds: [embed] })
     },
     async post_given_template(msg, key) {
-        const value = await msg.client.DB.Template.get(msg.client, msg.author.id, key)
-        if (!value) return msg.client.output.reply(msg, await gt(msg, s + "error.no_tag"))
+        const tag = await msg.client.DB.Template.get(msg.client, msg.author.id, key)
+        if (!tag) return msg.client.output.reply(msg, await gt(msg, s + "fail.not_found", key))
 
         const embed = new MessageEmbed()
             .setTitle(await gt(msg, s + "embed.single.title", key))
-            .setDescription(value)
+            .setDescription(`\`\`\`${tag.value}\`\`\``)
             .setColor(msg.client.config.color)
 
         await msg.client.output.send(msg, { embeds: [embed] })

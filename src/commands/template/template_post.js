@@ -14,15 +14,30 @@ module.exports = {
     disabled: false,
     enable_slash: false,
     async execute(msg, args) {
-        const webhook = await msg.channel.createWebhook(msg.member.displayName, {
+        const channel_id = args.shift()
+        const template_key = args.shift()
+
+        // check, if channel_id exists
+        const channel = msg.guild.channels.cache.find(c => c.id === channel_id)
+        if (!channel) return await msg.client.output.reply(msg, await gt(msg, s + "fail.channel_not_found"))
+
+        // check, if member has permission to send messages in channel
+        if (!channel.permissionsFor(msg.member).has("SEND_MESSAGES")) return await msg.client.output.reply(msg, await gt(msg, s + "fail.no_permission"), channel.id)
+
+        // check, if template_key exists
+        const tag = await msg.client.DB.Template.get(msg.client, msg.author.id, template_key)
+        if (!tag) return await msg.client.output.reply(msg, await gt(msg, s + "fail.tag_not_found"))
+
+        // send webhook
+        const webhook = await channel.createWebhook(msg.member.displayName, {
             avatar: msg.member.displayAvatarURL()
         })
-        await webhook.send("hello")
+        await webhook.send(tag.value)
         setTimeout(function () {
             try {
                 webhook.delete()
             } catch (e) {
-
+                msg.client.logger.log("error", e)
             }
         }, 5000)
     },

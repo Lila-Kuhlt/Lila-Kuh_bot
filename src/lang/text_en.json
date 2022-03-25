@@ -290,8 +290,16 @@
       }
     },
     "template": {
-      "help": "",
-      "usage": ""
+      "help": "Without arguments, a list of all templates is output.\nWith an argument, a template is output.",
+      "usage": "[template key]",
+      "embed": {
+        "all": {
+          "title": "List of all templates"
+        },
+        "single": {
+          "title": "template \"%0\""
+        }
+      }
     },
     "template_add": {
       "help": "",

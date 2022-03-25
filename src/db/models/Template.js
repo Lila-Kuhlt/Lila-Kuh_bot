@@ -42,10 +42,10 @@ async function add(client, user_id, key, value) {
 }
 
 
-// get value on user_id x key
+// get tag on user_id x key
 async function get(client, user_id, key) {
     const tag = await client.DB[NAME].TABLE.findOne({ where: { "user_id": user_id, "key": key } })
-    return (tag) ? tag.value : null
+    return (tag) ? tag : null
 }
 
 

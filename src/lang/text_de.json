@@ -290,8 +290,19 @@
       }
     },
     "template": {
-      "help": "",
-      "usage": ""
+      "help": "Ohne Argumente wird eine Liste aller Templates ausgegeben.\nMit einem Argument wird ein Template ausgegeben.",
+      "usage": "[Template-Key]",
+      "embed": {
+        "all": {
+          "title": "Liste aller Templates"
+        },
+        "single": {
+          "title": "Template \"%0\""
+        }
+      },
+      "fail": {
+        "not_found": "Das Template `%0` wurde nicht gefunden!"
+      }
     },
     "template_add": {
       "help": "Fügt ein neues Template hinzu. Falls du schon ein Template mit gleichem übergebenen Titel hast, wird dieser überschrieben!",
@@ -306,8 +317,13 @@
       "usage": "[Titel]"
     },
     "template_post": {
-      "help": "",
-      "usage": ""
+      "help": "Sendet eine Nachricht mit einem Template.\nDu musst dafür zunächst die Kanal Id des Kanals angeben, in dem die Nachricht gesendet werden soll. Dieser Kanal muss in diesem Server existieren! Das 2. Argument ist der Schlüssel des Templates, dass du senden möchtest.",
+      "usage": "[Kanal_Id] [Template-Key]",
+      "fail": {
+        "channel_not_found": "Der angegebene Kanal existiert nicht in diesem Server!",
+        "tag_not_found": "Der angegebene Template-Schlüssel existiert nicht!",
+        "no_permission": "Du hast nicht die Berechtigung, eine Nachricht in den Kanal <#%0> zu senden!"
+      }
     }
   }
 }
