@@ -288,6 +288,42 @@
         "no_number": "Das übergebene Argument ist keine Zahl!",
         "wrong_id": "Die übergebene Kanal-Id entspricht keinem Kanal auf diesem Server!"
       }
+    },
+    "template": {
+      "help": "Ohne Argumente wird eine Liste aller Templates ausgegeben.\nMit einem Argument wird ein Template ausgegeben.\nTemplates unterstützten dabei, bewusst Lücken zu setzten, die man später mit Argumenten füllen kann. Eine Lücke setzt man dabei mit `%<index>` (z.B. `%0`) in seinem Template. Mit `tmp <id> <gap_0> ... <gap_n>` kann man dann seine Lücken zu den passenden Indexen füllen!",
+      "usage": "[Template-Key]",
+      "embed": {
+        "all": {
+          "title": "Liste aller Templates"
+        },
+        "single": {
+          "title": "Template \"%0\""
+        }
+      },
+      "fail": {
+        "not_found": "Das Template `%0` wurde nicht gefunden!"
+      }
+    },
+    "template_add": {
+      "help": "Fügt ein neues Template hinzu. Falls du schon ein Template mit gleichem übergebenen Titel hast, wird dieser überschrieben!",
+      "usage": "[Titel] [Wert]",
+      "success": "Erfolg!",
+      "fail": {
+        "to_long": "Deine Argumente dürfen nicht länger als als 2000 Zeichen sein!"
+      }
+    },
+    "template_remove": {
+      "help": "Entfernt ein gespeichertes Template via Angabe eines gültigen Titels",
+      "usage": "[Titel]"
+    },
+    "template_post": {
+      "help": "Sendet eine Nachricht mit einem Template.\nDu musst dafür zunächst die Kanal Id des Kanals angeben, in dem die Nachricht gesendet werden soll. Dieser Kanal muss in diesem Server existieren! Das 2. Argument ist der Schlüssel des Templates, dass du senden möchtest.",
+      "usage": "[Kanal_Id] [Template-Key]",
+      "fail": {
+        "channel_not_found": "Der angegebene Kanal existiert nicht in diesem Server!",
+        "tag_not_found": "Der angegebene Template-Schlüssel existiert nicht!",
+        "no_permission": "Du hast nicht die Berechtigung, eine Nachricht in den Kanal <#%0> zu senden!"
+      }
     }
   }
 }
