@@ -290,7 +290,7 @@
       }
     },
     "template": {
-      "help": "Ohne Argumente wird eine Liste aller Templates ausgegeben.\nMit einem Argument wird ein Template ausgegeben.",
+      "help": "Ohne Argumente wird eine Liste aller Templates ausgegeben.\nMit einem Argument wird ein Template ausgegeben.\nTemplates unterstützten dabei, bewusst Lücken zu setzten, die man später mit Argumenten füllen kann. Eine Lücke setzt man dabei mit `%<index>` (z.B. `%0`) in seinem Template. Mit `tmp <id> <gap_0> ... <gap_n>` kann man dann seine Lücken zu den passenden Indexen füllen!",
       "usage": "[Template-Key]",
       "embed": {
         "all": {

@@ -290,7 +290,7 @@
       }
     },
     "template": {
-      "help": "Without arguments, a list of all templates is output.\nWith an argument, a template is output.",
+      "help": "Without arguments, a list of all templates is output.\nWith an argument, a template is output.\nTemplates provides to set gaps that can later be filled with arguments. A gap is set with `%<index>` (e.g. `%0`) in your template. With `tmp <id> <gap_0> ... <gap_n>` you can then fill your gaps to the appropriate indexes!",
       "usage": "[template key]",
       "embed": {
         "all": {
