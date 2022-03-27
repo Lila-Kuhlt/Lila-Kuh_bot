@@ -9,7 +9,6 @@ module.exports = {
     aliases: ['tmp_post', 'tmpp'],
     args_needed: true,
     args_min_length: 2,
-    args_max_length: 3,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
     enable_slash: true,
@@ -32,7 +31,7 @@ module.exports = {
         const webhook = await channel.createWebhook(msg.member.displayName, {
             avatar: msg.member.displayAvatarURL()
         })
-        await webhook.send(tag.value)
+        await webhook.send(msg.client.commands.get("template").set_gaps(tag.value, args))
         setTimeout(function () {
             try {
                 webhook.delete()

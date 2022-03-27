@@ -10,13 +10,12 @@ module.exports = {
     aliases: ['tmp'],
     args_needed: false,
     args_min_length: 0,
-    args_max_length: 1,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
     enable_slash: true,
     async execute(msg, args) {
         if (args.length === 0) await this.post_all_templates(msg)
-        else await this.post_given_template(msg, args.shift())
+        else await this.post_given_template(msg, args.shift(), args)
     },
     async post_all_templates(msg) {
         const tags = await msg.client.DB.Template.get_user_entries(msg.client, msg.author.id)
@@ -29,15 +28,22 @@ module.exports = {
 
         msg.client.output.send(msg, { embeds: [embed] })
     },
-    async post_given_template(msg, key) {
+    async post_given_template(msg, key, args) {
         const tag = await msg.client.DB.Template.get(msg.client, msg.author.id, key)
         if (!tag) return msg.client.output.reply(msg, await gt(msg, s + "fail.not_found", key))
 
         const embed = new MessageEmbed()
             .setTitle(await gt(msg, s + "embed.single.title", key))
-            .setDescription(`\`\`\`${tag.value}\`\`\``)
+            .setDescription(`\`\`\`${this.set_gaps(tag.value, args)}\`\`\``)
             .setColor(msg.client.config.color)
 
         await msg.client.output.send(msg, { embeds: [embed] })
+    },
+    // This function is used to replace the gaps in the template
+    set_gaps(text, args) {
+        for (let i = 0; i < args.length; i++) {
+            text = text.replaceAll(`%${i}`, args[i])
+        }
+        return text
     }
 };
