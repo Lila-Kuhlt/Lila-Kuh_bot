@@ -9,6 +9,7 @@ module.exports = {
     aliases: ['tmp_post', 'tmpp'],
     args_needed: true,
     args_min_length: 2,
+    args_max_length: 22,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
     enable_slash: true,

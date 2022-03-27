@@ -10,6 +10,7 @@ module.exports = {
     aliases: ['tmp'],
     args_needed: false,
     args_min_length: 0,
+    args_max_length: 21,
     usage: async function (msg) { return await gt(msg, s + "usage") },
     disabled: false,
     enable_slash: true,
