@@ -44,7 +44,7 @@ function set_inserts(msg, text, ...inserts) {
             msg.client.logger.log('error', `Can't find gap-index %${i} in lang_text:\n${text}`)
 
         } else {
-            text = text.substring(0, index) + `${inserts[i]}` + text.substring(index + `%${i}`.length, text.length)
+            text = text.replaceAll(`%${i}`, inserts[i])
         }
     }
 
