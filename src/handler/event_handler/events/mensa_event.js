@@ -23,7 +23,7 @@ async function post_mensa_plan(client) {
 
     const data = await get_meal_json(client, get_meal_api_link())
     let embed
-    if (data === null) embed = generate_embed_fail(client)
+    if (data === null) return // embed = generate_embed_fail(client)
     else {
         const fields = formatted_meals_to_fields(format_meals(data))
         embed = generate_embed_success(client, fields)
